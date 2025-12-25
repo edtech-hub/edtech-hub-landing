@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ed-Astra - Software Development Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 cursor-pointer" onclick="showPage('home')">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        Ed-Astra
+                    </span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" onclick="showPage('home')" class="hover:text-blue-400 transition">Home</a>
+                    <a href="#" onclick="showPage('portfolio')" class="hover:text-blue-400 transition">Our Work</a>
+                    <a href="#" onclick="showPage('about')" class="hover:text-blue-400 transition">About Us</a>
+                    <a href="#" onclick="openContactForm()" class="hover:text-blue-400 transition">Contact</a>
+                </div>
+
+                <button class="md:hidden" onclick="toggleMenu()">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 space-y-4">
+                <a href="#" onclick="showPage('home')" class="block hover:text-blue-400 transition">Home</a>
+                <a href="#" onclick="showPage('portfolio')" class="block hover:text-blue-400 transition">Our Work</a>
+                <a href="#" onclick="showPage('about')" class="block hover:text-blue-400 transition">About Us</a>
+                <a href="#" onclick="openContactForm()" class="block hover:text-blue-400 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page">
+        <!-- Hero Section -->
+        <section class="pt-32 pb-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center space-y-8 animate-fade-in">
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                        Build Your Vision
+                        <br />
+                        <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            With Expert Developers
+                        </span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
+                        Transform your ideas into powerful mobile apps and web applications. 
+                        We craft digital solutions that drive results.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                        <button onclick="openContactForm()" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/50">
+                            Start Your Project
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        <button onclick="showPage('portfolio')" class="border-2 border-blue-400 hover:bg-blue-400/10 px-8 py-4 rounded-lg font-semibold text-lg transition-all">
+                            View Our Work
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="py-20 px-6 bg-slate-900/50">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">What We Build</h2>
+                    <p class="text-xl text-slate-300">End-to-end software development services</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105 backdrop-blur-sm">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-xl flex items-center justify-center mb-6 text-blue-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Mobile Apps</h3>
+                        <p class="text-slate-300 leading-relaxed">Native and cross-platform mobile applications that deliver exceptional user experiences on iOS and Android.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105 backdrop-blur-sm">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-xl flex items-center justify-center mb-6 text-blue-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+                        <p class="text-slate-300 leading-relaxed">Responsive, scalable web applications built with modern frameworks and best practices for optimal performance.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105 backdrop-blur-sm">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-xl flex items-center justify-center mb-6 text-blue-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Custom Software</h3>
+                        <p class="text-slate-300 leading-relaxed">Tailored software solutions designed to solve your unique business challenges and drive growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="py-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                            Why Choose Ed-Astra?
+                        </h2>
+                        <p class="text-xl text-slate-300 mb-8">
+                            We're not just developers—we're your technology partners. Our team combines technical excellence 
+                            with business acumen to deliver solutions that truly move the needle.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span class="text-lg text-slate-200">Expert development team with proven track record</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span class="text-lg text-slate-200">Agile methodology for faster delivery</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span class="text-lg text-slate-200">Transparent communication throughout the project</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span class="text-lg text-slate-200">Post-launch support and maintenance</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span class="text-lg text-slate-200">Scalable architecture for future growth</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span class="text-lg text-slate-200">Security-first approach</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl p-8 backdrop-blur-sm border border-slate-700/50">
+                            <svg class="w-16 h-16 text-blue-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                            <h3 class="text-3xl font-bold mb-4">Client-Focused Approach</h3>
+                            <p class="text-slate-300 text-lg leading-relaxed">
+                                Every project starts with understanding your goals. We work closely with you throughout 
+                                the development process to ensure the final product exceeds expectations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 px-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+            <div class="max-w-4xl mx-auto text-center space-y-8">
+                <h2 class="text-4xl md:text-5xl font-bold">
+                    Ready to Build Something Amazing?
+                </h2>
+                <p class="text-xl text-slate-300">
+                    Let's discuss your project and create a solution that drives your business forward.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                    <button onclick="openContactForm()" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/50">
+                        Get a Free Consultation
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PORTFOLIO PAGE -->
+    <div id="portfolioPage" class="page hidden">
+        <!-- Hero Section -->
+        <section class="pt-32 pb-16 px-6">
+            <div class="max-w-7xl mx-auto text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    Our Work
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
+                    Real projects. Real impact. See how we've helped businesses transform their digital presence.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="pb-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div onclick="showProjectDetail(0)" class="group cursor-pointer bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 overflow-hidden">
+                        <div class="bg-gradient-to-br from-blue-500 to-cyan-500 p-8 text-white">
+                            <div class="flex items-center justify-between mb-4">
+                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                </svg>
+                                <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold opacity-90 mb-2">Enterprise Software</p>
+                            <h3 class="text-2xl font-bold">Enterprise ERP System</h3>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-slate-300 mb-4">Complete business management solution</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">Flutter</span>
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">Node.js</span>
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div onclick="showProjectDetail(1)" class="group cursor-pointer bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 overflow-hidden">
+                        <div class="bg-gradient-to-br from-purple-500 to-pink-500 p-8 text-white">
+                            <div class="flex items-center justify-between mb-4">
+                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold opacity-90 mb-2">Event Tech</p>
+                            <h3 class="text-2xl font-bold">Event Management & Ticketing Platform</h3>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-slate-300 mb-4">Seamless event experiences from start to finish</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">Flutter</span>
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">Node.js</span>
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div onclick="showProjectDetail(2)" class="group cursor-pointer bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 overflow-hidden">
+                        <div class="bg-gradient-to-br from-orange-500 to-red-500 p-8 text-white">
+                            <div class="flex items-center justify-between mb-4">
+                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                </svg>
+                                <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold opacity-90 mb-2">Marketplace Platform</p>
+                            <h3 class="text-2xl font-bold">Interior Design Marketplace</h3>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-slate-300 mb-4">Connecting homeowners with design professionals</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">Flutter</span>
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">Node.js</span>
+                                <span class="text-xs px-3 py-1 bg-slate-800 rounded-full text-slate-300">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 px-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+            <div class="max-w-4xl mx-auto text-center space-y-8">
+                <h2 class="text-4xl md:text-5xl font-bold">
+                    Ready to Create Something Great?
+                </h2>
+                <p class="text-xl text-slate-300">
+                    Let's discuss how we can bring your vision to life with cutting-edge technology.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                    <button onclick="openContactForm()" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/50">
+                        Get a Free Consultation
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="aboutPage" class="page hidden">
+        <!-- Hero Section -->
+        <section class="pt-32 pb-16 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center space-y-6 mb-16">
+                    <h1 class="text-5xl md:text-6xl font-bold">
+                        Our Story
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
+                        From dorm room side projects to a growing software agency—here's how two college students turned their passion into a business.
+                    </p>
+                </div>
+
+                <!-- Main Story -->
+                <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-8 md:p-12 backdrop-blur-sm">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">Founded by Passion</h2>
+                            <p class="text-slate-400">Est. December 2023</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6 text-lg text-slate-300 leading-relaxed">
+                        <p>
+                            Ed-Astra started in December 2023 when two college friends realized they shared more than just classes—they shared a vision. While juggling assignments and exams, we spent late nights building apps, experimenting with new frameworks, and dreaming about creating something meaningful.
+                        </p>
+                        <p>
+                            By November 2024, what began as side projects evolved into something real. Our first client took a chance on us, and we delivered an enterprise ERP system that exceeded expectations. That success gave us the confidence to dream bigger.
+                        </p>
+                        <p>
+                            In November 2025, we made the boldest decision of our lives: going full-time. We traded the safety of traditional career paths for the excitement of building our own company. Today, Ed-Astra is scaling, our client base is growing, and we're proof that age is just a number when you combine skill, dedication, and hunger to succeed.
+                        </p>
+                        <p class="text-xl font-semibold text-blue-400">
+                            We're not just building software. We're building a legacy—one line of code at a time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="py-16 px-6 bg-slate-900/50">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">3+</div>
+                        <div class="text-slate-400 text-sm md:text-base">Major Projects</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">2</div>
+                        <div class="text-slate-400 text-sm md:text-base">Years in Business</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">100%</div>
+                        <div class="text-slate-400 text-sm md:text-base">Client Satisfaction</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">2</div>
+                        <div class="text-slate-400 text-sm md:text-base">Passionate Founders</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-20 px-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+            <div class="max-w-4xl mx-auto text-center space-y-8">
+                <h2 class="text-4xl md:text-5xl font-bold">Let's Build Something Together</h2>
+                <p class="text-xl text-slate-300">Whether you're a startup or an established business, we bring the same passion and dedication to every project.</p>
+                <button onclick="openContactForm()" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg shadow-blue-500/50">
+                    Start a Project
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Form Modal -->
+    <div id="contactModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-2xl max-w-md w-full p-8 relative border border-slate-700 shadow-2xl">
+            <button onclick="closeContactForm()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            
+            <h3 class="text-3xl font-bold mb-2">Get Free Consultation</h3>
+            <p class="text-slate-400 mb-6">Tell us about your project and we'll get back to you soon.</p>
+            
+            <div id="successMessage" class="hidden text-center py-8">
+                <svg class="w-16 h-16 text-green-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-xl text-green-400">Thank you! We'll be in touch soon.</p>
+            </div>
+            
+            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Name</label>
+                    <input type="text" id="name" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="Your name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="your@email.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Project Details</label>
+                    <textarea id="message" required rows="4" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition resize-none text-white" placeholder="Tell us about your project..."></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-6 py-3 rounded-lg font-semibold transition-all">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-slate-900 rounded-2xl max-w-4xl w-full my-8 relative border border-slate-700 shadow-2xl">
+            <button onclick="closeProjectDetail()" class="absolute top-6 right-6 w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-full flex items-center justify-center transition z-10">
+                <span class="text-2xl">×</span>
+            </button>
+            <div id="projectDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto text-center text-slate-400">
+            <p>&copy; 2024 Ed-Astra. Building the future, one line of code at a time.</p>
+        </div>
+    </footer>
+
+    <script>
+        const projects = [
+            {
+                title: "Enterprise ERP System",
+                category: "Enterprise Software",
+                tagline: "Complete business management solution",
+                description: "A comprehensive end-to-end ERP system that streamlines business operations across departments. From inventory management to financial reporting, this platform provides real-time insights and automation for growing enterprises.",
+                features: [
+                    "Inventory & Supply Chain Management",
+                    "Financial Accounting & Reporting",
+                    "HR & Payroll Integration",
+                    "Real-time Analytics Dashboard",
+                    "Multi-location Support",
+                    "Role-based Access Control"
+                ],
+                tech: ["Flutter", "Node.js", "MongoDB", "AWS"],
+                impact: [
+                    "40% reduction in operational costs",
+                    "Real-time visibility across all departments",
+                    "Automated workflows saving 20+ hours weekly"
+                ],
+                gradient: "from-blue-500 to-cyan-500"
+            },
+            {
+                title: "Event Management & Ticketing Platform",
+                category: "Event Tech",
+                tagline: "Seamless event experiences from start to finish",
+                description: "A powerful platform that handles everything from event creation to ticket sales and attendee management. Features include QR code check-ins, real-time analytics, and integrated payment processing.",
+                features: [
+                    "Custom Event Pages & Branding",
+                    "Secure Payment Processing",
+                    "QR Code Ticket Generation",
+                    "Real-time Sales Analytics",
+                    "Attendee Management System",
+                    "Email & SMS Notifications"
+                ],
+                tech: ["Flutter", "Node.js", "MongoDB", "Stripe"],
+                impact: [
+                    "100,000+ tickets sold successfully",
+                    "99.9% uptime during major events",
+                    "Reduced check-in time by 70%"
+                ],
+                gradient: "from-purple-500 to-pink-500"
+            },
+            {
+                title: "Interior Design Marketplace",
+                category: "Marketplace Platform",
+                tagline: "Connecting homeowners with design professionals",
+                description: "An innovative marketplace that matches homeowners with talented interior designers based on style preferences, budget, and project requirements. Features portfolio showcases, secure messaging, and project management tools.",
+                features: [
+                    "Smart Designer Matching Algorithm",
+                    "Portfolio & Review System",
+                    "In-app Messaging & Collaboration",
+                    "Project Milestone Tracking",
+                    "Secure Payment Escrow",
+                    "3D Room Visualization Tools"
+                ],
+                tech: ["Flutter", "Node.js", "MongoDB", "WebGL"],
+                impact: [
+                    "500+ successful projects completed",
+                    "Average designer rating of 4.8/5",
+                    "30% faster project completion time"
+                ],
+                gradient: "from-orange-500 to-red-500"
+            }
+        ];
+
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.getElementById(pageName + 'Page').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openContactForm() {
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+
+        function closeContactForm() {
+            document.getElementById('contactModal').classList.add('hidden');
+            document.getElementById('contactForm').classList.remove('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            const mailtoLink = `mailto:lehans@edastra.in?subject=Free Consultation Request from ${encodeURIComponent(name)}&body=Name: ${encodeURIComponent(name)}%0D%0AEmail: ${encodeURIComponent(email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+            
+            window.location.href = mailtoLink;
+            
+            setTimeout(() => {
+                document.getElementById('contactForm').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+                setTimeout(() => {
+                    closeContactForm();
+                    document.getElementById('contactForm').reset();
+                }, 2000);
+            }, 500);
+        }
+
+        function showProjectDetail(index) {
+            const project = projects[index];
+            const content = `
+                <div class="bg-gradient-to-br ${project.gradient} p-8 md:p-12 rounded-t-2xl">
+                    <p class="text-sm font-semibold opacity-90 mb-2">${project.category}</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">${project.title}</h2>
+                    <p class="text-xl opacity-90">${project.tagline}</p>
+                </div>
+                <div class="p-8 md:p-12 space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Overview</h3>
+                        <p class="text-slate-300 text-lg leading-relaxed">${project.description}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Key Features</h3>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            ${project.features.map(f => `
+                                <div class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <span class="text-slate-300">${f}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Technology Stack</h3>
+                        <div class="flex flex-wrap gap-3">
+                            ${project.tech.map(t => `
+                                <span class="px-4 py-2 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg text-blue-300 font-semibold border border-slate-600">${t}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Impact & Results</h3>
+                        <div class="space-y-3">
+                            ${project.impact.map(i => `
+                                <div class="flex items-start gap-3 p-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-lg border border-blue-800/30">
+                                    <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                                    <span class="text-slate-200 text-lg">${i}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800">
+                        <button onclick="closeProjectDetail();openContactForm();" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
+                            Start Your Project
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('projectDetailContent').innerHTML = content;
+            document.getElementById('projectModal').classList.remove('hidden');
+        }
+
+        function closeProjectDetail() {
+            document.getElementById('projectModal').classList.add('hidden');
+        }
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-slate-950/95', 'backdrop-blur-lg', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-slate-950/95', 'backdrop-blur-lg', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+    </script>
+</body>
+</html>
