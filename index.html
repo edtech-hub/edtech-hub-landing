@@ -14,6 +14,63 @@
             animation: fadeIn 0.8s ease-out;
         }
         .hidden { display: none; }
+        
+        /* Timeline animations */
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease-out;
+        }
+        .timeline-item.right {
+            transform: translateX(50px);
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .timeline-line {
+            height: 0;
+            transition: height 0.8s ease-out;
+        }
+        .timeline-line.visible {
+            height: 100%;
+        }
+        .timeline-dot {
+            transform: scale(0);
+            transition: transform 0.4s ease-out;
+        }
+        .timeline-dot.visible {
+            transform: scale(1);
+        }
+        
+        /* Scroll reveal animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scroll-reveal-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white">
@@ -23,11 +80,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2 cursor-pointer" onclick="showPage('home')">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
-                    </div>
+                    <img src="https://raw.githubusercontent.com/edtech-hub/edtech-hub-landing/main/Untitled_design__1_-removebg-preview.png" alt="Ed-Astra Logo" class="w-10 h-10 object-contain">
                     <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                         Ed-Astra
                     </span>
@@ -134,7 +187,7 @@
         <section class="py-20 px-6">
             <div class="max-w-7xl mx-auto">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
+                    <div class="scroll-reveal-left">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6">
                             Why Choose Ed-Astra?
                         </h2>
@@ -181,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="relative">
+                    <div class="relative scroll-reveal-right">
                         <div class="bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl p-8 backdrop-blur-sm border border-slate-700/50">
                             <svg class="w-16 h-16 text-blue-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -191,6 +244,139 @@
                                 Every project starts with understanding your goals. We work closely with you throughout 
                                 the development process to ensure the final product exceeds expectations.
                             </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Process Section -->
+        <section class="py-20 px-6 bg-slate-900/50">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Design Process</h2>
+                    <p class="text-xl text-slate-300">A proven methodology that delivers exceptional results</p>
+                </div>
+
+                <div class="relative max-w-5xl mx-auto">
+                    <!-- Vertical Timeline Line -->
+                    <div class="absolute left-8 md:left-1/2 top-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-green-500 timeline-line md:transform md:-translate-x-1/2 rounded-full"></div>
+
+                    <!-- Timeline Items -->
+                    <div class="space-y-16">
+                        <!-- Step 1: Discovery -->
+                        <div class="relative timeline-item">
+                            <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
+                                <div class="flex-1 md:text-right md:pr-16 ml-20 md:ml-0">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all">
+                                        <div class="flex items-center gap-3 mb-3 md:justify-end">
+                                            <h3 class="text-2xl font-bold">Discovery & Research</h3>
+                                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p class="text-slate-300 leading-relaxed">We dive deep into understanding your business goals, target audience, and technical requirements. This phase includes stakeholder interviews, competitor analysis, and feasibility studies.</p>
+                                    </div>
+                                </div>
+                                <div class="absolute left-8 md:left-1/2 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full border-4 border-slate-900 timeline-dot md:transform md:-translate-x-1/2 flex items-center justify-center shadow-lg shadow-blue-500/50">
+                                    <span class="text-2xl font-bold">1</span>
+                                </div>
+                                <div class="flex-1 md:pl-16"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Planning -->
+                        <div class="relative timeline-item right">
+                            <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
+                                <div class="flex-1 md:pr-16"></div>
+                                <div class="absolute left-8 md:left-1/2 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full border-4 border-slate-900 timeline-dot md:transform md:-translate-x-1/2 flex items-center justify-center shadow-lg shadow-purple-500/50">
+                                    <span class="text-2xl font-bold">2</span>
+                                </div>
+                                <div class="flex-1 md:pl-16 ml-20 md:ml-0">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-2xl border border-slate-700/50 hover:border-purple-500/50 transition-all">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                                </svg>
+                                            </div>
+                                            <h3 class="text-2xl font-bold">Planning & Architecture</h3>
+                                        </div>
+                                        <p class="text-slate-300 leading-relaxed">We create detailed project roadmaps, technical architecture diagrams, and user flow maps. Clear milestones and timelines ensure everyone stays aligned throughout the development process.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Design -->
+                        <div class="relative timeline-item">
+                            <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
+                                <div class="flex-1 md:text-right md:pr-16 ml-20 md:ml-0">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-2xl border border-slate-700/50 hover:border-pink-500/50 transition-all">
+                                        <div class="flex items-center gap-3 mb-3 md:justify-end">
+                                            <h3 class="text-2xl font-bold">UI/UX Design</h3>
+                                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p class="text-slate-300 leading-relaxed">Our designers craft beautiful, intuitive interfaces with wireframes, mockups, and interactive prototypes. Every design decision is backed by user experience best practices and your brand identity.</p>
+                                    </div>
+                                </div>
+                                <div class="absolute left-8 md:left-1/2 w-16 h-16 bg-gradient-to-br from-pink-500 to-orange-500 rounded-full border-4 border-slate-900 timeline-dot md:transform md:-translate-x-1/2 flex items-center justify-center shadow-lg shadow-pink-500/50">
+                                    <span class="text-2xl font-bold">3</span>
+                                </div>
+                                <div class="flex-1 md:pl-16"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Development -->
+                        <div class="relative timeline-item right">
+                            <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
+                                <div class="flex-1 md:pr-16"></div>
+                                <div class="absolute left-8 md:left-1/2 w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full border-4 border-slate-900 timeline-dot md:transform md:-translate-x-1/2 flex items-center justify-center shadow-lg shadow-orange-500/50">
+                                    <span class="text-2xl font-bold">4</span>
+                                </div>
+                                <div class="flex-1 md:pl-16 ml-20 md:ml-0">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                                </svg>
+                                            </div>
+                                            <h3 class="text-2xl font-bold">Development & Testing</h3>
+                                        </div>
+                                        <p class="text-slate-300 leading-relaxed">Our developers bring designs to life with clean, scalable code. Continuous integration, automated testing, and regular code reviews ensure high quality at every stage of development.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Launch -->
+                        <div class="relative timeline-item">
+                            <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
+                                <div class="flex-1 md:text-right md:pr-16 ml-20 md:ml-0">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-2xl border border-slate-700/50 hover:border-green-500/50 transition-all">
+                                        <div class="flex items-center gap-3 mb-3 md:justify-end">
+                                            <h3 class="text-2xl font-bold">Launch & Support</h3>
+                                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p class="text-slate-300 leading-relaxed">We handle deployment, monitoring, and provide comprehensive training for your team. Post-launch, we offer ongoing maintenance and support to ensure your application continues to perform flawlessly.</p>
+                                    </div>
+                                </div>
+                                <div class="absolute left-8 md:left-1/2 w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full border-4 border-slate-900 timeline-dot md:transform md:-translate-x-1/2 flex items-center justify-center shadow-lg shadow-green-500/50">
+                                    <span class="text-2xl font-bold">5</span>
+                                </div>
+                                <div class="flex-1 md:pl-16"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -424,7 +610,7 @@
             </button>
             
             <h3 class="text-3xl font-bold mb-2">Get Free Consultation</h3>
-            <p class="text-slate-400 mb-6">Tell us about your project and we'll get back to you soon.</p>
+            <p class="text-slate-400 mb-6">Tell us about your project and we'll get back to you within 24 hours.</p>
             
             <div id="successMessage" class="hidden text-center py-8">
                 <svg class="w-16 h-16 text-green-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -433,25 +619,61 @@
                 <p class="text-xl text-green-400">Thank you! We'll be in touch soon.</p>
             </div>
             
-            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-4">
+            <form id="contactForm" action="https://formspree.io/f/xqekpejg" method="POST" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium mb-2">Name</label>
-                    <input type="text" id="name" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="Your name">
+                    <label class="block text-sm font-medium mb-2">Name *</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="Your name">
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-medium mb-2">Email</label>
-                    <input type="email" id="email" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="your@email.com">
+                    <label class="block text-sm font-medium mb-2">Company</label>
+                    <input type="text" name="company" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="Company name (optional)">
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-medium mb-2">Project Details</label>
-                    <textarea id="message" required rows="4" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition resize-none text-white" placeholder="Tell us about your project..."></textarea>
+                    <label class="block text-sm font-medium mb-2">Email *</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="your@email.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Phone</label>
+                    <div class="flex gap-2">
+                        <select name="country_code" class="px-3 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white">
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+91" selected>🇮🇳 +91</option>
+                            <option value="+61">🇦🇺 +61</option>
+                            <option value="+81">🇯🇵 +81</option>
+                            <option value="+86">🇨🇳 +86</option>
+                            <option value="+49">🇩🇪 +49</option>
+                            <option value="+33">🇫🇷 +33</option>
+                            <option value="+65">🇸🇬 +65</option>
+                            <option value="+971">🇦🇪 +971</option>
+                            <option value="+966">🇸🇦 +966</option>
+                            <option value="+7">🇷🇺 +7</option>
+                            <option value="+82">🇰🇷 +82</option>
+                            <option value="+62">🇮🇩 +62</option>
+                            <option value="+60">🇲🇾 +60</option>
+                            <option value="+66">🇹🇭 +66</option>
+                            <option value="+84">🇻🇳 +84</option>
+                            <option value="+63">🇵🇭 +63</option>
+                            <option value="+234">🇳🇬 +234</option>
+                            <option value="+27">🇿🇦 +27</option>
+                        </select>
+                        <input type="tel" name="phone" class="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="123 456 7890">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Project Details *</label>
+                    <textarea name="message" required rows="4" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 transition resize-none text-white" placeholder="Tell us about your project, timeline, and any specific requirements..."></textarea>
                 </div>
                 
                 <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-6 py-3 rounded-lg font-semibold transition-all">
                     Send Message
                 </button>
+                
+                <p class="text-xs text-slate-500 text-center">We typically respond within 24 hours</p>
             </form>
         </div>
     </div>
@@ -559,26 +781,12 @@
             document.getElementById('contactModal').classList.add('hidden');
             document.getElementById('contactForm').classList.remove('hidden');
             document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('contactForm').reset();
         }
 
         function handleSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            const mailtoLink = `mailto:lehans@edastra.in?subject=Free Consultation Request from ${encodeURIComponent(name)}&body=Name: ${encodeURIComponent(name)}%0D%0AEmail: ${encodeURIComponent(email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
-            
-            window.location.href = mailtoLink;
-            
-            setTimeout(() => {
-                document.getElementById('contactForm').classList.add('hidden');
-                document.getElementById('successMessage').classList.remove('hidden');
-                setTimeout(() => {
-                    closeContactForm();
-                    document.getElementById('contactForm').reset();
-                }, 2000);
-            }, 500);
+            // Formspree handles the submission now
+            // This function is no longer needed but keeping for compatibility
         }
 
         function showProjectDetail(index) {
@@ -653,6 +861,28 @@
                 navbar.classList.remove('bg-slate-950/95', 'backdrop-blur-lg', 'shadow-lg');
                 navbar.classList.add('bg-transparent');
             }
+            
+            // Scroll reveal animations
+            revealOnScroll();
+        });
+        
+        // Intersection Observer for scroll animations
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .timeline-item, .timeline-dot, .timeline-line');
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Initial check on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            revealOnScroll();
         });
     </script>
 </body>
