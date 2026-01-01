@@ -110,8 +110,8 @@
         /* Horizontal timeline animations - show one at a time */
         .timeline-milestone {
             opacity: 0;
-            transform: translateY(30px) scale(0.9);
-            transition: all 0.6s ease-out;
+            transform: translateY(50px) scale(0.8);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .timeline-milestone.visible {
             opacity: 1;
@@ -123,24 +123,97 @@
         .timeline-milestone:nth-child(4) { transition-delay: 0.45s; }
         .timeline-milestone:nth-child(5) { transition-delay: 0.6s; }
         .timeline-milestone:nth-child(6) { transition-delay: 0.75s; }
-        
+
+        /* Desktop timeline - slide from sides */
+        @media (min-width: 768px) {
+            .timeline-milestone:nth-child(odd) {
+                transform: translateX(-100px) translateY(30px) scale(0.8);
+            }
+            .timeline-milestone:nth-child(even) {
+                transform: translateX(100px) translateY(30px) scale(0.8);
+            }
+            .timeline-milestone.visible {
+                transform: translateX(0) translateY(0) scale(1);
+            }
+        }
+
+        /* Animated timeline line growth */
+        .timeline-line-animated {
+            height: 0;
+            transition: height 2s ease-out;
+        }
+        .timeline-line-animated.visible {
+            height: 100%;
+        }
+
+        /* Timeline dot animations */
         .timeline-icon {
             transform: scale(0) rotate(-180deg);
-            transition: all 0.5s ease-out;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .timeline-milestone.visible .timeline-icon {
             transform: scale(1) rotate(0deg);
+            animation: dotPulse 2s infinite;
         }
-        
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(0deg); box-shadow: 0 0 20px currentColor; }
+        }
+
+        /* Timeline card animations */
         .timeline-card {
-            transform: translateY(20px);
+            transform: translateY(30px);
             opacity: 0;
-            transition: all 0.5s ease-out;
+            transition: all 0.6s ease-out;
         }
         .timeline-milestone.visible .timeline-card {
             transform: translateY(0);
             opacity: 1;
-            transition-delay: 0.2s;
+            transition-delay: 0.3s;
+        }
+
+        /* Hover effects for timeline cards */
+        .timeline-milestone .timeline-card-hover {
+            transition: all 0.3s ease;
+        }
+        .timeline-milestone .timeline-card-hover:hover {
+            transform: translateY(-5px);
+            border-color: currentColor !important;
+            box-shadow: 0 10px 40px -10px currentColor;
+        }
+
+        /* Central dot animations with pulse */
+        .timeline-central-dot {
+            animation: centralDotPulse 2s infinite;
+        }
+
+        @keyframes centralDotPulse {
+            0%, 100% {
+                transform: translate(-50%, 0) scale(1);
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+            }
+            50% {
+                transform: translate(-50%, 0) scale(1.05);
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .timeline-central-dot {
+                animation: centralDotPulseDesktop 2s infinite;
+            }
+
+            @keyframes centralDotPulseDesktop {
+                0%, 100% {
+                    transform: translate(-50%, 0) scale(1);
+                    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+                }
+                50% {
+                    transform: translate(-50%, 0) scale(1.05);
+                    box-shadow: 0 0 0 15px rgba(59, 130, 246, 0);
+                }
+            }
         }
     </style>
 </head>
@@ -664,7 +737,7 @@
                 <!-- Desktop Timeline -->
                 <div class="hidden md:block relative max-w-5xl mx-auto">
                     <!-- Vertical Timeline Line -->
-                    <div class="absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-blue-500 via-purple-500 via-pink-500 via-orange-500 via-amber-500 to-green-500 rounded-full transform -translate-x-1/2"></div>
+                    <div class="absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-blue-500 via-purple-500 via-pink-500 via-orange-500 via-amber-500 to-green-500 rounded-full transform -translate-x-1/2 timeline-line-animated"></div>
                     
                     <!-- Timeline Items -->
                     <div class="space-y-16">
@@ -672,7 +745,7 @@
                         <div class="relative timeline-milestone">
                             <div class="flex items-center gap-8">
                                 <div class="flex-1 text-right pr-16">
-                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-blue-500/50 transition-all">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-blue-500/50 transition-all timeline-card-hover">
                                         <div class="flex items-center gap-3 mb-3 justify-end">
                                             <h3 class="text-2xl font-bold">The Beginning</h3>
                                             <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -685,7 +758,7 @@
                                         <p class="text-slate-300 leading-relaxed">Two college students with a shared passion for technology decided to turn their side projects into a real business.</p>
                                     </div>
                                 </div>
-                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-blue-500/50">
+                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-blue-500/50 timeline-central-dot">
                                     <span class="text-2xl font-bold">1</span>
                                 </div>
                                 <div class="flex-1"></div>
@@ -696,11 +769,11 @@
                         <div class="relative timeline-milestone">
                             <div class="flex items-center gap-8">
                                 <div class="flex-1"></div>
-                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-purple-500/50">
+                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-purple-500/50 timeline-central-dot">
                                     <span class="text-2xl font-bold">2</span>
                                 </div>
                                 <div class="flex-1 pl-16">
-                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-purple-500/50 transition-all">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-purple-500/50 transition-all timeline-card-hover">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -720,7 +793,7 @@
                         <div class="relative timeline-milestone">
                             <div class="flex items-center gap-8">
                                 <div class="flex-1 text-right pr-16">
-                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-pink-500/50 transition-all">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-pink-500/50 transition-all timeline-card-hover">
                                         <div class="flex items-center gap-3 mb-3 justify-end">
                                             <h3 class="text-2xl font-bold">First Major Client</h3>
                                             <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -733,7 +806,7 @@
                                         <p class="text-slate-300 leading-relaxed">Landed our first enterprise ERP project, proving we could deliver at scale.</p>
                                     </div>
                                 </div>
-                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-pink-500/50">
+                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-pink-500/50 timeline-central-dot">
                                     <span class="text-2xl font-bold">3</span>
                                 </div>
                                 <div class="flex-1"></div>
@@ -744,11 +817,11 @@
                         <div class="relative timeline-milestone">
                             <div class="flex items-center gap-8">
                                 <div class="flex-1"></div>
-                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-orange-500/50">
+                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-orange-500/50 timeline-central-dot">
                                     <span class="text-2xl font-bold">4</span>
                                 </div>
                                 <div class="flex-1 pl-16">
-                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-orange-500/50 transition-all">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-orange-500/50 transition-all timeline-card-hover">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -768,7 +841,7 @@
                         <div class="relative timeline-milestone">
                             <div class="flex items-center gap-8">
                                 <div class="flex-1 text-right pr-16">
-                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-amber-500/50 transition-all">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-amber-500/50 transition-all timeline-card-hover">
                                         <div class="flex items-center gap-3 mb-3 justify-end">
                                             <h3 class="text-2xl font-bold">Going Full-Time</h3>
                                             <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -781,7 +854,7 @@
                                         <p class="text-slate-300 leading-relaxed">Made the leap to pursue Ed-Astra full-time, committing entirely to building excellence.</p>
                                     </div>
                                 </div>
-                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-amber-500/50">
+                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-amber-500/50 timeline-central-dot">
                                     <span class="text-2xl font-bold">5</span>
                                 </div>
                                 <div class="flex-1"></div>
@@ -792,11 +865,11 @@
                         <div class="relative timeline-milestone">
                             <div class="flex items-center gap-8">
                                 <div class="flex-1"></div>
-                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-green-500/50">
+                                <div class="absolute left-1/2 w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full border-4 border-slate-900 transform -translate-x-1/2 flex items-center justify-center shadow-lg shadow-green-500/50 timeline-central-dot">
                                     <span class="text-2xl font-bold">6</span>
                                 </div>
                                 <div class="flex-1 pl-16">
-                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-green-500/50 transition-all">
+                                    <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 p-6 hover:border-green-500/50 transition-all timeline-card-hover">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -817,15 +890,15 @@
                 <!-- Mobile Vertical Timeline -->
                 <div class="md:hidden relative max-w-md mx-auto">
                     <!-- Vertical Line -->
-                    <div class="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 via-pink-500 via-orange-500 via-amber-500 to-green-500 rounded-full"></div>
-                    
+                    <div class="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 via-pink-500 via-orange-500 via-amber-500 to-green-500 rounded-full timeline-line-animated"></div>
+
                     <div class="space-y-12">
                         <!-- Milestone 1 -->
                         <div class="relative timeline-milestone flex gap-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/50 flex-shrink-0 border-4 border-slate-900">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/50 flex-shrink-0 border-4 border-slate-900 timeline-icon">
                                 <span class="text-xl font-bold">1</span>
                             </div>
-                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1">
+                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1 timeline-card">
                                 <div class="text-blue-400 font-bold mb-2">Dec 2023</div>
                                 <h3 class="text-xl font-bold mb-2">The Beginning</h3>
                                 <p class="text-slate-300 text-sm">Two college students decided to turn their side projects into a real business.</p>
@@ -834,10 +907,10 @@
 
                         <!-- Milestone 2 -->
                         <div class="relative timeline-milestone flex gap-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/50 flex-shrink-0 border-4 border-slate-900">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/50 flex-shrink-0 border-4 border-slate-900 timeline-icon">
                                 <span class="text-xl font-bold">2</span>
                             </div>
-                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1">
+                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1 timeline-card">
                                 <div class="text-purple-400 font-bold mb-2">Sep 2024</div>
                                 <h3 class="text-xl font-bold mb-2">Product Ready</h3>
                                 <p class="text-slate-300 text-sm">Built and launched first production-ready products.</p>
@@ -846,10 +919,10 @@
 
                         <!-- Milestone 3 -->
                         <div class="relative timeline-milestone flex gap-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center shadow-lg shadow-pink-500/50 flex-shrink-0 border-4 border-slate-900">
+                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center shadow-lg shadow-pink-500/50 flex-shrink-0 border-4 border-slate-900 timeline-icon">
                                 <span class="text-xl font-bold">3</span>
                             </div>
-                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1">
+                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1 timeline-card">
                                 <div class="text-pink-400 font-bold mb-2">Nov 2024</div>
                                 <h3 class="text-xl font-bold mb-2">First Major Client</h3>
                                 <p class="text-slate-300 text-sm">Landed first enterprise ERP project at scale.</p>
@@ -858,10 +931,10 @@
 
                         <!-- Milestone 4 -->
                         <div class="relative timeline-milestone flex gap-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/50 flex-shrink-0 border-4 border-slate-900">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/50 flex-shrink-0 border-4 border-slate-900 timeline-icon">
                                 <span class="text-xl font-bold">4</span>
                             </div>
-                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1">
+                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1 timeline-card">
                                 <div class="text-orange-400 font-bold mb-2">Oct 2025</div>
                                 <h3 class="text-xl font-bold mb-2">Agency Model</h3>
                                 <p class="text-slate-300 text-sm">Pivoted to web development agency model.</p>
@@ -870,10 +943,10 @@
 
                         <!-- Milestone 5 -->
                         <div class="relative timeline-milestone flex gap-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/50 flex-shrink-0 border-4 border-slate-900">
+                            <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/50 flex-shrink-0 border-4 border-slate-900 timeline-icon">
                                 <span class="text-xl font-bold">5</span>
                             </div>
-                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1">
+                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1 timeline-card">
                                 <div class="text-amber-400 font-bold mb-2">Nov 2025</div>
                                 <h3 class="text-xl font-bold mb-2">Going Full-Time</h3>
                                 <p class="text-slate-300 text-sm">Committed entirely to building excellence.</p>
@@ -882,10 +955,10 @@
 
                         <!-- Milestone 6 -->
                         <div class="relative timeline-milestone flex gap-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/50 flex-shrink-0 border-4 border-slate-900">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/50 flex-shrink-0 border-4 border-slate-900 timeline-icon">
                                 <span class="text-xl font-bold">6</span>
                             </div>
-                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1">
+                            <div class="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/50 p-6 flex-1 timeline-card">
                                 <div class="text-green-400 font-bold mb-2">Now</div>
                                 <h3 class="text-xl font-bold mb-2">Scaling Up</h3>
                                 <p class="text-slate-300 text-sm">Growing team and client base with quality.</p>
