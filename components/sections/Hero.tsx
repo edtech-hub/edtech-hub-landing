@@ -233,10 +233,10 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold text-white leading-[1.08] tracking-tight mb-7"
           >
-            Transform Ideas Into{" "}
+            Empowering the ideas that{" "}
             <span className="relative inline-block">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-300">
-                Real Products
+                shape your vision
               </span>
               <span className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-emerald-400/0 via-emerald-400/60 to-emerald-400/0" />
             </span>

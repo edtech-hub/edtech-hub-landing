@@ -2,14 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-
-const JOURNEY = [
-  { date: "Dec 2023", title: "Ed-Astra founded to redefine web development." },
-  { date: "Sept 2024", title: "Second major project launched in the Indian market." },
-  { date: "Nov 2024", title: "International expansion to Dubai & Singapore." },
-  { date: "Nov 2024", title: "Team doubled to take on bigger client projects." },
-  { date: "2026", title: "Going from one country to many — scaling your journey." },
-]
+import { useConsultation } from "@/components/ui/ConsultationProvider"
 
 const STATS = [
   {
@@ -316,13 +309,14 @@ export default function AboutUs() {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] })
   const orbY = useTransform(scrollYProgress, [0, 1], [0, -120])
+  const { openModal } = useConsultation()
 
   return (
     <section
       ref={sectionRef}
       id="about"
       style={{
-        background: "#070b12",
+        background: "transparent",
         color: "#fff",
         position: "relative",
         overflow: "hidden",
@@ -530,8 +524,8 @@ export default function AboutUs() {
             <p style={{ fontSize: "clamp(22px,2.6vw,38px)", fontWeight: 700, color: "rgba(255,255,255,0.88)", marginBottom: 20, lineHeight: 1.3 }}>
               Let&apos;s give meaning to your ideas
             </p>
-            <motion.a
-              href="#contact"
+            <motion.button
+              onClick={openModal}
               whileHover={{ scale: 1.06, boxShadow: `0 0 56px ${EMERALD_DIM}0.4)` }}
               whileTap={{ scale: 0.97 }}
               style={{
@@ -559,7 +553,7 @@ export default function AboutUs() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
               </motion.svg>
-            </motion.a>
+            </motion.button>
           </motion.div>
 
         </div>

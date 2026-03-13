@@ -12,7 +12,7 @@ const projects = [
     results: ["Centralized data management", "Real-time collaboration tools", "Custom reporting dashboards"],
     color: "emerald",
     logo: "RR",
-    image: "/projects/RenoResearch.png",
+    image: "/projects/renoproject.png",
   },
   {
     title: "Reno Research Interiors",
@@ -52,7 +52,7 @@ const projects = [
     results: ["60% reduction in manual work", "Automated reports & invoicing", "Scalable multi-branch backend"],
     color: "cyan",
     logo: "ERP",
-    image: "/projects/renoproject.png",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fit=crop",
   },
   {
     title: "Add Flow",

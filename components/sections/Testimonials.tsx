@@ -43,7 +43,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24 bg-gray-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,8 +60,9 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+        {/* First row - 3 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {testimonials.slice(0, 3).map((t, i) => (
             <motion.div
               key={t.name}
               initial={{ opacity: 0, y: 30 }}
@@ -85,6 +86,54 @@ export default function Testimonials() {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.35 + i * 0.15 + j * 0.07, type: "spring" }}
+                    className="text-yellow-400 text-lg"
+                  >
+                    ★
+                  </motion.span>
+                ))}
+              </motion.div>
+              <p className="text-gray-300 text-base leading-relaxed flex-1 mb-6">
+                &quot;{t.quote}&quot;
+              </p>
+              <div className="flex items-center gap-4 pt-5 border-t border-gray-800/60">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-base flex-shrink-0">
+                  {t.name[0]}
+                </div>
+                <div>
+                  <p className="text-base font-semibold text-white">{t.name}</p>
+                  <p className="text-sm text-gray-400">{t.role}, {t.company}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Second row - 2 cards centered */}
+        <div className="flex justify-center gap-6">
+          {testimonials.slice(3, 5).map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.75, delay: (i + 3) * 0.15, ease: "easeOut" }}
+              className="p-7 rounded-2xl bg-gray-900/60 border border-gray-800/60 hover:border-emerald-500/30 transition-all duration-300 flex flex-col w-full max-w-sm"
+            >
+              {/* Stars */}
+              <motion.div
+                className="flex gap-1 mb-5"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 + (i + 3) * 0.15 }}
+              >
+                {Array.from({ length: t.rating }).map((_, j) => (
+                  <motion.span
+                    key={j}
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: 0.35 + (i + 3) * 0.15 + j * 0.07, type: "spring" }}
                     className="text-yellow-400 text-lg"
                   >
                     ★

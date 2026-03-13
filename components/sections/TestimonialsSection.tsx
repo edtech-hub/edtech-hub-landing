@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ImageWithFallback } from "@/components/ui/ImageWithFallback"
+import { useConsultation } from "@/components/ui/ConsultationProvider"
 
 const TESTIMONIALS = [
   {
@@ -149,6 +150,7 @@ export function TestimonialsSection() {
   const [active, setActive] = useState(0)
   const [elapsed, setElapsed] = useState(0)
   const activeRef = useRef(0)
+  const { openModal } = useConsultation()
   const startRef = useRef(Date.now())
   const rafRef = useRef<number | null>(null)
 
@@ -270,6 +272,7 @@ export function TestimonialsSection() {
 
               <div style={{ padding: "16px 20px 20px" }}>
                 <motion.button
+                  onClick={openModal}
                   whileHover={{ background: `${EMERALD_DIM}0.1)`, borderColor: `${EMERALD_DIM}0.65)`, boxShadow: `0 0 22px ${EMERALD_DIM}0.13)` }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ duration: 0.2 }}
@@ -331,10 +334,10 @@ export function TestimonialsSection() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.55, delay: 0.12 }}
               >
-                <div style={{ fontFamily: "Georgia, serif", fontSize: "clamp(44px,7vw,100px)", color: "rgba(255,255,255,0.08)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em" }}>
+                <div style={{ fontFamily: "Georgia, serif", fontSize: "clamp(44px,7vw,100px)", color: EMERALD, fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em", opacity: 0.85 }}>
                   {t.stat}
                 </div>
-                <div style={{ fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(255,255,255,0.28)", letterSpacing: "0.26em", marginTop: 3 }}>
+                <div style={{ fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(16,185,129,0.6)", letterSpacing: "0.26em", marginTop: 3 }}>
                   {t.statLabel}
                 </div>
               </motion.div>

@@ -183,7 +183,7 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
   }
 
   const inputClass =
-    "w-full px-4 py-3.5 rounded-xl bg-gray-800/80 border border-gray-700/60 text-white text-base placeholder-gray-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/20 transition-all"
+    "w-full px-5 py-4 rounded-xl bg-gray-800/80 border border-gray-700/60 text-white text-lg placeholder-gray-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/20 transition-all"
 
   return (
     <AnimatePresence>
@@ -204,62 +204,62 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl shadow-black/50"
+              className="relative w-full max-w-xl bg-gray-900 border border-gray-800 rounded-3xl shadow-2xl shadow-black/50"
             >
               {/* Header */}
-              <div className="px-6 pt-6 pb-5 border-b border-gray-800/60 flex items-start justify-between">
+              <div className="px-8 pt-8 pb-6 border-b border-gray-800/60 flex items-start justify-between">
                 <div>
-                  <h2 className="text-xl font-bold text-white">Book a Free Consultation</h2>
-                  <p className="text-sm text-gray-400 mt-1">We&apos;ll reach out within 24 hours</p>
+                  <h2 className="text-2xl font-bold text-white">Book a Free Consultation</h2>
+                  <p className="text-base text-gray-400 mt-2">We&apos;ll reach out within 24 hours</p>
                 </div>
                 <button
                   onClick={handleClose}
-                  className="w-8 h-8 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white flex items-center justify-center transition-colors ml-4 flex-shrink-0"
+                  className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white flex items-center justify-center transition-colors ml-4 flex-shrink-0"
                   aria-label="Close"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
               {/* Body */}
-              <div className="px-6 py-6">
+              <div className="px-8 py-8">
                 {status === "success" ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="py-10 text-center"
+                    className="py-14 text-center"
                   >
-                    <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-20 h-20 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-5">
+                      <svg className="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">Got it!</h3>
-                    <p className="text-gray-400 mb-6">We&apos;ll get back to you within 24 hours.</p>
+                    <h3 className="text-2xl font-bold text-white mb-3">Got it!</h3>
+                    <p className="text-lg text-gray-400 mb-8">We&apos;ll get back to you within 24 hours.</p>
                     <button
                       onClick={handleClose}
-                      className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold text-sm"
+                      className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold text-base"
                     >
                       Done
                     </button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-5">
                     {/* Mobile Number */}
                     <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">Mobile Number *</label>
-                      <div className="flex gap-2">
+                      <label className="block text-base text-gray-400 mb-2">Mobile Number *</label>
+                      <div className="flex gap-3">
                         {/* Country code dropdown */}
                         <div className="relative" ref={dropdownRef}>
                           <button
                             type="button"
                             onClick={() => { setDropdownOpen(!dropdownOpen); setSearch("") }}
-                            className="h-full px-3 py-3.5 rounded-xl bg-gray-800/80 border border-gray-700/60 text-white text-sm flex items-center gap-1.5 hover:border-emerald-500/40 transition-all whitespace-nowrap focus:outline-none focus:border-emerald-500/60"
+                            className="h-full px-4 py-4 rounded-xl bg-gray-800/80 border border-gray-700/60 text-white text-base flex items-center gap-2 hover:border-emerald-500/40 transition-all whitespace-nowrap focus:outline-none focus:border-emerald-500/60"
                           >
-                            <span className="font-medium">{dialCode}</span>
-                            <svg className={`w-3.5 h-3.5 text-gray-400 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <span className="font-medium text-base">{dialCode}</span>
+                            <svg className={`w-4 h-4 text-gray-400 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                           </button>
@@ -271,30 +271,30 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -4 }}
                                 transition={{ duration: 0.15 }}
-                                className="absolute top-full left-0 mt-1 w-64 bg-gray-900 border border-gray-700 rounded-xl shadow-xl z-[80] overflow-hidden"
+                                className="absolute top-full left-0 mt-1 w-72 bg-gray-900 border border-gray-700 rounded-xl shadow-xl z-[80] overflow-hidden"
                               >
                                 {/* Search */}
-                                <div className="p-2 border-b border-gray-800">
+                                <div className="p-3 border-b border-gray-800">
                                   <input
                                     autoFocus
                                     type="text"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     placeholder="Search country..."
-                                    className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-emerald-500/50"
+                                    className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-base placeholder-gray-500 focus:outline-none focus:border-emerald-500/50"
                                   />
                                 </div>
                                 {/* List */}
-                                <div className="max-h-52 overflow-y-auto">
+                                <div className="max-h-60 overflow-y-auto">
                                   {filtered.length === 0 ? (
-                                    <div className="px-4 py-3 text-sm text-gray-500">No results</div>
+                                    <div className="px-4 py-3 text-base text-gray-500">No results</div>
                                   ) : (
                                     filtered.map((c) => (
                                       <button
                                         key={`${c.country}-${c.code}`}
                                         type="button"
                                         onClick={() => { setDialCode(c.code); setDropdownOpen(false); setSearch("") }}
-                                        className={`w-full text-left px-4 py-2.5 flex items-center justify-between text-sm hover:bg-gray-800 transition-colors ${dialCode === c.code && c.name === countryCodes.find(x => x.code === dialCode)?.name ? "text-emerald-400" : "text-gray-300"}`}
+                                        className={`w-full text-left px-4 py-3 flex items-center justify-between text-base hover:bg-gray-800 transition-colors ${dialCode === c.code && c.name === countryCodes.find(x => x.code === dialCode)?.name ? "text-emerald-400" : "text-gray-300"}`}
                                       >
                                         <span>{c.name}</span>
                                         <span className="text-gray-500 ml-2 font-mono">{c.code}</span>
@@ -314,14 +314,14 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="XXXXX XXXXX"
-                          className="flex-1 px-4 py-3.5 rounded-xl bg-gray-800/80 border border-gray-700/60 text-white text-base placeholder-gray-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/20 transition-all"
+                          className="flex-1 px-5 py-4 rounded-xl bg-gray-800/80 border border-gray-700/60 text-white text-lg placeholder-gray-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/20 transition-all"
                         />
                       </div>
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">Email Address *</label>
+                      <label className="block text-base text-gray-400 mb-2">Email Address *</label>
                       <input
                         required
                         type="email"
@@ -333,7 +333,7 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                     </div>
 
                     {status === "error" && (
-                      <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+                      <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-base">
                         Something went wrong. Email us at contact@edastra.in
                       </div>
                     )}
@@ -341,11 +341,11 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 disabled:opacity-50 text-white text-base font-semibold transition-all duration-200 shadow-lg shadow-emerald-500/20 mt-2"
+                      className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 disabled:opacity-50 text-white text-lg font-semibold transition-all duration-200 shadow-lg shadow-emerald-500/20 mt-3"
                     >
                       {status === "loading" ? (
                         <span className="flex items-center justify-center gap-2">
-                          <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                          <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                           </svg>
