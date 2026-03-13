@@ -4,24 +4,38 @@ import { motion } from "framer-motion"
 
 const testimonials = [
   {
-    quote: "Ed-Astra built our ERP platform in record time. The quality exceeded our expectations and the team was incredibly professional throughout.",
-    name: "Rajesh Kumar",
-    role: "CEO",
-    company: "Logistics Company",
-    rating: 5,
-  },
-  {
-    quote: "Their AI-powered development approach saved us months of development time and significant costs. The final product was exactly what we envisioned.",
-    name: "Priya Sharma",
-    role: "CTO",
-    company: "Tech Startup",
-    rating: 5,
-  },
-  {
-    quote: "Professional team, transparent communication, and delivered exactly what we needed on time and within budget. Highly recommend.",
-    name: "Arun Patel",
+    quote: "I needed a website that would match the premium quality of my photography work, and what was delivered completely blew me away. The landing page for WeddingClickz is sleek, cinematic, and instantly gives potential clients in India and Dubai the confidence that they're dealing with a high-end studio. Since launching, my inquiry rate has gone up significantly and couples regularly tell me the website was what convinced them to reach out. It's not just a website — it's my best salesperson.",
+    name: "Karthik",
     role: "Founder",
-    company: "E-commerce Platform",
+    company: "WeddingClickz",
+    rating: 5,
+  },
+  {
+    quote: "We were launching a new hydration brand in India and needed an e-commerce site that looked clean, premium, and converted visitors into buyers. The final product was exactly that — a sharp, modern storefront with seamless product pages, a smooth checkout flow, and a design that makes our brand look like it belongs next to the biggest names in the wellness space. Couldn't have asked for a better launch partner.",
+    name: "Aditya",
+    role: "Founder",
+    company: "Flow Hydration",
+    rating: 5,
+  },
+  {
+    quote: "Building a ticketing platform from scratch is no joke — there are a hundred moving parts. But the team took my vision for Ticgetz and turned it into a fully functional event booking platform that is intuitive for both event organizers and attendees. The UI is clean, the booking flow is frictionless, and it just works. We went from an idea to a live product faster than I ever expected.",
+    name: "Trishar",
+    role: "Founder",
+    company: "Ticgetz",
+    rating: 5,
+  },
+  {
+    quote: "The quotation tool has been a total game-changer for our wedding photography business. Couples can now select their events, pick their services, and get a professional quote emailed to them instantly — no back-and-forth, no manual calculations. We have generated over 400 quotes through this tool already, and it has dramatically reduced the time I spend on inquiries while actually increasing our conversion rate.",
+    name: "Yashas",
+    role: "Co-Founder",
+    company: "WeddingClickz",
+    rating: 5,
+  },
+  {
+    quote: "Reno Research needed a platform that could intelligently match homeowners in Singapore with the right interior designers — not just a random directory, but something algorithm-driven and genuinely useful. What was delivered is a comprehensive platform with hundreds of verified vendors, project showcases, and a smart quote-request system. The site has become a trusted name in Singapore's renovation space.",
+    name: "Zeon",
+    role: "Founder",
+    company: "Reno Research",
     rating: 5,
   },
 ]
@@ -46,11 +60,11 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, x: i === 0 ? -40 : i === 2 ? 40 : 0, y: i === 1 ? 40 : 0 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.75, delay: i * 0.15, ease: "easeOut" }}

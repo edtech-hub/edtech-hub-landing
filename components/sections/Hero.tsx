@@ -43,12 +43,12 @@ function HeroCanvas() {
         const y = Math.random() * canvas.height
         return {
           x, y,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: (Math.random() - 0.5) * 0.18,
+          vx: (Math.random() - 0.5) * 0.07,
+          vy: (Math.random() - 0.5) * 0.07,
           r: Math.random() * 1.8 + 0.8,
           opacity: Math.random() * 0.45 + 0.2,
           pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: Math.random() * 0.018 + 0.006,
+          pulseSpeed: Math.random() * 0.006 + 0.002,
         }
       })
     }
@@ -93,12 +93,12 @@ function HeroCanvas() {
         p.pulse += p.pulseSpeed
 
         // Tiny organic nudge
-        p.vx += (Math.random() - 0.5) * 0.003
-        p.vy += (Math.random() - 0.5) * 0.003
+        p.vx += (Math.random() - 0.5) * 0.001
+        p.vy += (Math.random() - 0.5) * 0.001
 
         // Cap speed
         const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy)
-        if (speed > 0.3) { p.vx = (p.vx / speed) * 0.3; p.vy = (p.vy / speed) * 0.3 }
+        if (speed > 0.12) { p.vx = (p.vx / speed) * 0.12; p.vy = (p.vy / speed) * 0.12 }
 
         p.x += p.vx
         p.y += p.vy
@@ -220,7 +220,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-8 tracking-wide"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-medium mb-8 tracking-wide"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             AI-Powered Development Agency
@@ -231,7 +231,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-[82px] font-extrabold text-white leading-[1.08] tracking-tight mb-7"
+            className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold text-white leading-[1.08] tracking-tight mb-7"
           >
             Transform Ideas Into{" "}
             <span className="relative inline-block">
@@ -247,7 +247,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.22 }}
-            className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-400 mb-10 leading-relaxed"
+            className="max-w-2xl mx-auto text-base sm:text-lg text-gray-400 mb-10 leading-relaxed"
           >
             We combine deep technical expertise with AI-accelerated workflows to ship production-ready mobile apps, web applications and scalable software —{" "}
             <span className="text-emerald-400 font-medium">in weeks, not months.</span>
@@ -262,7 +262,7 @@ export default function Hero() {
           >
             <button
               onClick={openModal}
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 text-base rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold transition-all duration-200 shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-9 py-4 text-sm rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold transition-all duration-200 shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-0.5"
             >
               Book Free Consultation
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,7 +271,7 @@ export default function Hero() {
             </button>
             <Link
               href="/our-work"
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 text-base rounded-xl border border-gray-700 hover:border-emerald-500/50 text-gray-300 hover:text-white font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-500/5"
+              className="inline-flex items-center justify-center gap-2 px-9 py-4 text-sm rounded-xl border border-gray-700 hover:border-emerald-500/50 text-gray-300 hover:text-white font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-500/5"
             >
               View Our Work
             </Link>

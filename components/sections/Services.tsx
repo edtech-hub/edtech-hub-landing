@@ -123,14 +123,14 @@ export default function Services() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <span className="text-sm sm:text-base text-emerald-400 font-medium uppercase tracking-widest">What We Build</span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+          <span className="text-xs sm:text-sm text-emerald-400 font-medium uppercase tracking-widest">What We Build</span>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
             Services That Drive{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">
               Results
             </span>
           </h2>
-          <p className="mt-5 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
             From concept to deployment — we build production-ready software that scales with your business.
           </p>
         </motion.div>
@@ -151,15 +151,15 @@ export default function Services() {
             <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: `inset 0 0 60px ${services[0].glow}` }} />
             <div className="relative flex flex-col sm:flex-row gap-0">
               {/* SVG side */}
-              <div className="relative sm:w-72 h-56 sm:h-auto flex-shrink-0 flex items-center justify-center overflow-hidden border-b sm:border-b-0 sm:border-r border-gray-800/40">
+              <div className="relative sm:w-80 h-72 sm:h-auto sm:min-h-[320px] flex-shrink-0 flex items-center justify-center overflow-hidden border-b sm:border-b-0 sm:border-r border-gray-800/40">
                 <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
-                <motion.div initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }} className="w-56 h-36 text-cyan-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300 p-4">
+                <motion.div initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }} className="w-64 h-44 text-cyan-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300 p-4">
                   {services[0].svg}
                 </motion.div>
               </div>
               {/* Text side */}
-              <div className="relative p-8 flex flex-col justify-center min-h-[220px]">
-                <h3 className="text-2xl font-bold text-white mb-3">{services[0].title}</h3>
+              <div className="relative p-8 flex flex-col justify-center items-center text-center min-h-[280px]">
+                <h3 className="text-xl font-bold text-white mb-3">{services[0].title}</h3>
                 <p className="text-gray-400 leading-relaxed mb-5">{services[0].description}</p>
                 <div className="flex flex-wrap gap-2">
                   {services[0].tags.map((tag) => (
@@ -187,7 +187,7 @@ export default function Services() {
               </motion.div>
             </div>
             <div className="relative p-7">
-              <h3 className="text-xl font-bold text-white mb-2">{services[1].title}</h3>
+              <h3 className="text-lg font-bold text-white mb-2">{services[1].title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed mb-4">{services[1].description}</p>
               <div className="flex flex-wrap gap-2">
                 {services[1].tags.map((tag) => (
@@ -215,7 +215,7 @@ export default function Services() {
               </motion.div>
             </div>
             <div className="relative p-7">
-              <h3 className="text-xl font-bold text-white mb-2">{services[3].title}</h3>
+              <h3 className="text-lg font-bold text-white mb-2">{services[3].title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed mb-4">{services[3].description}</p>
               <div className="flex flex-wrap gap-2">
                 {services[3].tags.map((tag) => (
@@ -236,14 +236,14 @@ export default function Services() {
             <motion.div className={`absolute inset-0 bg-gradient-to-br ${services[2].gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
             <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: `inset 0 0 60px ${services[2].glow}` }} />
             <div className="relative flex flex-col sm:flex-row gap-0">
-              <div className="relative sm:w-72 h-56 sm:h-auto flex-shrink-0 flex items-center justify-center overflow-hidden border-b sm:border-b-0 sm:border-r border-gray-800/40">
+              <div className="relative sm:w-80 h-72 sm:h-auto sm:min-h-[320px] flex-shrink-0 flex items-center justify-center overflow-hidden border-b sm:border-b-0 sm:border-r border-gray-800/40">
                 <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
-                <motion.div initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.5 }} className="w-56 h-36 text-cyan-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300 p-4">
+                <motion.div initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.5 }} className="w-64 h-44 text-cyan-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300 p-4">
                   {services[2].svg}
                 </motion.div>
               </div>
-              <div className="relative p-8 flex flex-col justify-center min-h-[220px]">
-                <h3 className="text-2xl font-bold text-white mb-3">{services[2].title}</h3>
+              <div className="relative p-8 flex flex-col justify-center items-center text-center min-h-[280px]">
+                <h3 className="text-xl font-bold text-white mb-3">{services[2].title}</h3>
                 <p className="text-gray-400 leading-relaxed mb-5">{services[2].description}</p>
                 <div className="flex flex-wrap gap-2">
                   {services[2].tags.map((tag) => (
@@ -266,7 +266,7 @@ export default function Services() {
         >
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 px-7 py-3.5 text-base rounded-xl border border-gray-700 hover:border-emerald-500/50 text-gray-300 hover:text-white transition-all duration-200"
+            className="inline-flex items-center gap-2 px-7 py-3.5 text-sm rounded-xl border border-gray-700 hover:border-emerald-500/50 text-gray-300 hover:text-white transition-all duration-200"
           >
             Explore All Services
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

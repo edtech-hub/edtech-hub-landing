@@ -42,12 +42,12 @@ export default function BackgroundAnimation() {
       particlesRef.current = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.18,  // very slow free drift
-        vy: (Math.random() - 0.5) * 0.18,
+        vx: (Math.random() - 0.5) * 0.07,  // very slow free drift
+        vy: (Math.random() - 0.5) * 0.07,
         radius: Math.random() * 1.8 + 0.8,
         opacity: Math.random() * 0.4 + 0.15,
         pulse: Math.random() * Math.PI * 2,
-        pulseSpeed: Math.random() * 0.015 + 0.005,
+        pulseSpeed: Math.random() * 0.006 + 0.002,
       }))
     }
 
@@ -91,14 +91,14 @@ export default function BackgroundAnimation() {
         }
 
         // Free movement — tiny random nudge to keep it organic
-        p.vx += (Math.random() - 0.5) * 0.003
-        p.vy += (Math.random() - 0.5) * 0.003
+        p.vx += (Math.random() - 0.5) * 0.001
+        p.vy += (Math.random() - 0.5) * 0.001
 
         // Cap speed so they stay slow
         const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy)
-        if (speed > 0.3) {
-          p.vx = (p.vx / speed) * 0.3
-          p.vy = (p.vy / speed) * 0.3
+        if (speed > 0.12) {
+          p.vx = (p.vx / speed) * 0.12
+          p.vy = (p.vy / speed) * 0.12
         }
 
         p.x += p.vx

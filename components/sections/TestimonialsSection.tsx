@@ -8,58 +8,72 @@ const TESTIMONIALS = [
   {
     id: "01",
     quote:
-      "After the website launch, client engagement surged. Visitors spent significantly more time exploring the platform, and demo requests doubled within the first month. Ed-Astra delivered on time, within budget, and with a level of craft that elevated our entire brand.",
-    name: "Daria Naumova",
-    role: "Product Manager",
-    company: "ValidSoft",
-    image: "https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1702479744062-1880502275b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBhcHAlMjBkYXNoYm9hcmQlMjBVSSUyMGRhcmslMjBzY3JlZW58ZW58MXx8fHwxNzczMTI4MjE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    cardTitle: "ValidSoft — Analytics Dashboard",
-    cardType: "WEB PLATFORM",
-    stat: "400+",
-    statLabel: "SATISFIED CLIENTS",
+      "I needed a website that would match the premium quality of my photography work, and what was delivered completely blew me away. The landing page for WeddingClickz is sleek, cinematic, and instantly gives potential clients in India and Dubai the confidence that they're dealing with a high-end studio. Since launching, my inquiry rate has gone up significantly and couples regularly tell me the website was what convinced them to reach out. It's not just a website — it's my best salesperson.",
+    name: "Karthik",
+    role: "Founder",
+    company: "WeddingClickz",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+    cardImage: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1080&q=80&fit=crop",
+    cardTitle: "WeddingClickz — Premium Studio Website",
+    cardType: "WEB DESIGN",
+    stat: "↑ Inquiry Rate",
+    statLabel: "SINCE LAUNCH",
   },
   {
     id: "02",
     quote:
-      "The team's ability to translate complex ideas into elegant digital solutions was remarkable. The interactive animations and attention to micro-detail made our product feel alive. Working with Ed-Astra was a transformative experience for our entire team.",
-    name: "Marcus Elliot",
-    role: "CTO",
-    company: "Nexus Labs",
-    image: "https://images.unsplash.com/photo-1769636929261-e913ed023c83?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1642132652806-8aa09801c2ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxTYWFTJTIwcHJvZHVjdCUyMGxhbmRpbmclMjBwYWdlJTIwd2Vic2l0ZSUyMG1vY2t1cHxlbnwxfHx8fDE3NzMxMjgyMTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    cardTitle: "Nexus Labs — SaaS Platform",
-    cardType: "SAAS PRODUCT",
-    stat: "98%",
-    statLabel: "ON-TIME DELIVERY",
+      "We were launching a new hydration brand in India and needed an e-commerce site that looked clean, premium, and converted visitors into buyers. The final product was exactly that — a sharp, modern storefront with seamless product pages, a smooth checkout flow, and a design that makes our brand look like it belongs next to the biggest names in the wellness space. From the ingredient breakdowns to the shop experience, every detail was thought through. Couldn't have asked for a better launch partner.",
+    name: "Aditya",
+    role: "Founder",
+    company: "Flow Hydration",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
+    cardImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1080&q=80&fit=crop",
+    cardTitle: "Flow Hydration — E-Commerce Store",
+    cardType: "E-COMMERCE",
+    stat: "Premium",
+    statLabel: "BRAND LAUNCH",
   },
   {
     id: "03",
     quote:
-      "From concept to launch, the collaboration felt seamless. Ed-Astra brought not just technical excellence, but genuine creative vision. Our bounce rate dropped by 40% and conversions climbed. The results speak for themselves.",
-    name: "Sophia Reyes",
-    role: "Head of Design",
-    company: "Orbis Studio",
-    image: "https://images.unsplash.com/photo-1770364022652-f3af53a889d0?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1764406562219-105937cc3f95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBVSSUyMGRlc2lnbiUyMHNjcmVlbiUyMHByZXZpZXd8ZW58MXx8fHwxNzczMTI4MjIxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    cardTitle: "Orbis Studio — Mobile App",
-    cardType: "MOBILE APP",
-    stat: "4.9★",
-    statLabel: "AVERAGE RATING",
+      "Building a ticketing platform from scratch is no joke — there are a hundred moving parts. But the team took my vision for Ticgetz and turned it into a fully functional event booking platform that is intuitive for both event organizers and attendees. The UI is clean, the booking flow is frictionless, and it just works. We went from an idea to a live product faster than I ever expected, and the feedback from our early users has been overwhelmingly positive.",
+    name: "Trishar",
+    role: "Founder",
+    company: "Ticgetz",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
+    cardImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1080&q=80&fit=crop",
+    cardTitle: "Ticgetz — Event Booking Platform",
+    cardType: "WEB PLATFORM",
+    stat: "Idea → Live",
+    statLabel: "FASTER THAN EXPECTED",
   },
   {
     id: "04",
     quote:
-      "We approached Ed-Astra with a rough idea and left with a polished, world-class platform. Their process is thorough, their communication excellent, and their output extraordinary. They've become our go-to partner for all things digital.",
-    name: "James Okafor",
+      "The quotation tool has been a total game-changer for our wedding photography business. Couples can now select their events, pick their services, and get a professional quote emailed to them instantly — no back-and-forth, no manual calculations. We have generated over 400 quotes through this tool already, and it has dramatically reduced the time I spend on inquiries while actually increasing our conversion rate. It's the single most impactful tool we've added to our business.",
+    name: "Yashas",
+    role: "Co-Founder",
+    company: "WeddingClickz",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face",
+    cardImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1080&q=80&fit=crop",
+    cardTitle: "WeddingClickz — Quotation Tool",
+    cardType: "SAAS TOOL",
+    stat: "400+",
+    statLabel: "QUOTES GENERATED",
+  },
+  {
+    id: "05",
+    quote:
+      "Reno Research needed a platform that could intelligently match homeowners in Singapore with the right interior designers — not just a random directory, but something algorithm-driven and genuinely useful. What was delivered is a comprehensive platform with hundreds of verified vendors, project showcases, and a smart quote-request system that connects the right designers to the right customers. The site has become a trusted name in Singapore's renovation space, and the tech behind it is rock-solid.",
+    name: "Zeon",
     role: "Founder",
-    company: "Pulsar Ventures",
-    image: "https://images.unsplash.com/photo-1769636929261-e913ed023c83?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1579642984094-5be053d579b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjB3ZWJzaXRlJTIwcHJvZHVjdCUyMGludGVyZmFjZSUyMGRlc2lnbnxlbnwxfHx8fDE3NzMxMjgyMjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    cardTitle: "Pulsar Ventures — E-Commerce",
-    cardType: "E-COMMERCE",
-    stat: "150+",
-    statLabel: "GLOBAL PROJECTS",
+    company: "Reno Research",
+    image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=200&h=200&fit=crop&crop=face",
+    cardImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1080&q=80&fit=crop",
+    cardTitle: "Reno Research — Marketplace Platform",
+    cardType: "MARKETPLACE",
+    stat: "100s",
+    statLabel: "VERIFIED VENDORS",
   },
 ]
 
@@ -75,7 +89,7 @@ function TickBar({ progress, onSelect }: { progress: number; onSelect: (i: numbe
   const TICKS = N * 28
 
   return (
-    <div style={{ padding: "8px 0 0", userSelect: "none" }}>
+    <div style={{ padding: "0", userSelect: "none" }}>
       <div style={{ position: "relative", height: 36, display: "flex", alignItems: "flex-end" }}>
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "rgba(255,255,255,0.08)" }} />
         <motion.div
@@ -169,7 +183,7 @@ export function TestimonialsSection() {
   return (
     <section
       style={{
-        height: "100vh",
+        height: "clamp(600px, 85vh, 900px)",
         background: "#070b12",
         display: "flex",
         flexDirection: "column",
@@ -198,7 +212,7 @@ export function TestimonialsSection() {
           style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "clamp(14px,2vh,24px)" }}
         >
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: EMERALD, boxShadow: `0 0 10px ${EMERALD}` }} />
-          <span style={{ fontSize: 16, color: "rgba(255,255,255,0.65)", letterSpacing: "0.2em", fontWeight: 600 }}>
+          <span style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", letterSpacing: "0.2em", fontWeight: 600 }}>
             CLIENT TESTIMONIALS
           </span>
           <span style={{ fontSize: 14, color: `${EMERALD_DIM}0.7)`, letterSpacing: "0.1em", marginLeft: "auto" }}>
@@ -213,7 +227,6 @@ export function TestimonialsSection() {
             gridTemplateColumns: "1fr 1fr",
             gap: "clamp(24px,4vw,64px)",
             alignItems: "start",
-            flex: 1, minHeight: 0,
           }}
         >
           {/* Left: project card */}
@@ -249,7 +262,7 @@ export function TestimonialsSection() {
                   </span>
                 </div>
                 <div style={{ position: "absolute", bottom: 18, left: 18, right: 18 }}>
-                  <p style={{ fontSize: "clamp(14px,1.6vw,19px)", color: "#fff", fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
+                  <p style={{ fontSize: "clamp(13px,1.3vw,16px)", color: "#fff", fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
                     {t.cardTitle}
                   </p>
                 </div>
@@ -284,7 +297,7 @@ export function TestimonialsSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                style={{ margin: 0, fontSize: "clamp(13px,1.2vw,16px)", color: "rgba(255,255,255,0.76)", lineHeight: 1.82 }}
+                style={{ margin: 0, fontSize: "clamp(12px,1.1vw,15px)", color: "rgba(255,255,255,0.76)", lineHeight: 1.82 }}
               >
                 {t.quote}
               </motion.blockquote>
@@ -318,7 +331,7 @@ export function TestimonialsSection() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.55, delay: 0.12 }}
               >
-                <div style={{ fontFamily: "Georgia, serif", fontSize: "clamp(52px,8vw,118px)", color: "rgba(255,255,255,0.08)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em" }}>
+                <div style={{ fontFamily: "Georgia, serif", fontSize: "clamp(44px,7vw,100px)", color: "rgba(255,255,255,0.08)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em" }}>
                   {t.stat}
                 </div>
                 <div style={{ fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(255,255,255,0.28)", letterSpacing: "0.26em", marginTop: 3 }}>
@@ -330,7 +343,7 @@ export function TestimonialsSection() {
         </div>
 
         {/* Tick bar */}
-        <div style={{ paddingTop: 4, paddingBottom: "clamp(8px,1.2vh,14px)" }}>
+        <div style={{ paddingTop: "clamp(12px,1.5vh,20px)", paddingBottom: "clamp(8px,1.2vh,14px)" }}>
           <TickBar progress={progress} onSelect={handleSelect} />
         </div>
       </div>

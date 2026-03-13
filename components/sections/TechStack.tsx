@@ -1,101 +1,272 @@
 "use client"
 
+import { useRef, useState, useEffect, useCallback } from "react"
 import { motion } from "framer-motion"
 
-const categories = [
+const TECH_CATEGORIES = [
   {
-    label: "Frontend",
-    color: "blue",
-    techs: ["React", "Next.js", "Flutter", "TypeScript", "Tailwind CSS"],
+    label: "FRONTEND",
+    items: [
+      { name: "React",        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "Next.js",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { name: "Flutter",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+      { name: "TypeScript",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+    ],
   },
   {
-    label: "Backend",
-    color: "purple",
-    techs: ["Node.js", "Express", "Python", "FastAPI", "REST APIs"],
+    label: "BACKEND",
+    items: [
+      { name: "Node.js",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Express",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+      { name: "Python",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "FastAPI",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+      { name: "REST APIs", icon: null },
+    ],
   },
   {
-    label: "Database",
-    color: "cyan",
-    techs: ["MongoDB", "PostgreSQL", "Redis", "Mongoose"],
+    label: "DATABASE",
+    items: [
+      { name: "MongoDB",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+      { name: "Redis",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+      { name: "Mongoose",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg" },
+    ],
   },
   {
-    label: "Cloud",
-    color: "green",
-    techs: ["AWS EC2", "AWS S3", "CloudFront", "Docker", "GitHub Actions"],
+    label: "UI/UX",
+    items: [
+      { name: "Figma",          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+      { name: "Miro",           icon: null },
+      { name: "Adobe Creative", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
+      { name: "Framer",         icon: null },
+    ],
   },
   {
-    label: "Mobile",
-    color: "orange",
-    techs: ["Flutter", "React Native", "iOS", "Android"],
+    label: "CLOUD & DEVOPS",
+    items: [
+      { name: "AWS",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" },
+      { name: "Docker",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "GitHub CI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "Vercel",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
+      { name: "Nginx",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
+    ],
+  },
+  {
+    label: "TESTING",
+    items: [
+      { name: "Jest",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" },
+      { name: "Cypress",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cypressio/cypressio-original.svg" },
+      { name: "Playwright", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" },
+      { name: "Postman",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+      { name: "Vitest",     icon: null },
+    ],
   },
 ]
 
-const colorMap: Record<string, { bg: string; text: string; border: string }> = {
-  blue: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/30" },
-  purple: { bg: "bg-teal-500/10", text: "text-teal-400", border: "border-teal-500/30" },
-  cyan: { bg: "bg-cyan-500/10", text: "text-cyan-400", border: "border-cyan-500/30" },
-  green: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/30" },
-  orange: { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/30" },
+function TechPill({ name, icon }: { name: string; icon: string | null }) {
+  const [errored, setErrored] = useState(false)
+  return (
+    <div
+      className="flex items-center gap-3 px-5 py-3 rounded-xl w-fit transition-all duration-150 cursor-default group"
+      style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.18)" }}
+      onMouseEnter={e => {
+        const el = e.currentTarget as HTMLDivElement
+        el.style.background = "rgba(16,185,129,0.15)"
+        el.style.borderColor = "rgba(16,185,129,0.35)"
+      }}
+      onMouseLeave={e => {
+        const el = e.currentTarget as HTMLDivElement
+        el.style.background = "rgba(16,185,129,0.08)"
+        el.style.borderColor = "rgba(16,185,129,0.18)"
+      }}
+    >
+      {icon && !errored ? (
+        <img
+          src={icon}
+          alt={name}
+          className="w-6 h-6 flex-shrink-0 object-contain"
+          onError={() => setErrored(true)}
+          style={{
+            filter:
+              name === "Express" || name === "Next.js" || name === "GitHub CI" || name === "Vercel"
+                ? "invert(1)"
+                : "none",
+          }}
+        />
+      ) : (
+        <span className="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+        </span>
+      )}
+      <span className="text-sm font-semibold text-emerald-100 group-hover:text-white transition-colors">
+        {name}
+      </span>
+    </div>
+  )
 }
 
+function TechCard({ cat }: { cat: typeof TECH_CATEGORIES[0] }) {
+  return (
+    <div
+      className="rounded-2xl p-10 flex flex-col gap-5 h-full min-h-[500px]"
+      style={{ background: "rgba(15,20,30,0.92)", border: "1px solid rgba(255,255,255,0.08)" }}
+    >
+      <p className="text-xs font-bold tracking-[0.2em] text-emerald-500 uppercase mb-2">{cat.label}</p>
+      {cat.items.map((item) => (
+        <TechPill key={item.name} name={item.name} icon={item.icon} />
+      ))}
+    </div>
+  )
+}
+
+const totalPages = 2
+const PAGE_SLICES = [
+  TECH_CATEGORIES.slice(0, 3), // Frontend, Backend, Database
+  TECH_CATEGORIES.slice(3, 6), // UI/UX, Cloud & DevOps, Testing
+]
 
 export default function TechStack() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [page, setPage] = useState(0)
+  const pageRef = useRef(0)
+  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const goTo = useCallback((p: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    el.scrollTo({ left: p * el.clientWidth, behavior: "smooth" })
+    setPage(p)
+    pageRef.current = p
+  }, [])
+
+  const stepForward = useCallback(() => {
+    goTo((pageRef.current + 1) % totalPages)
+  }, [goTo])
+
+  // Auto-play
+  useEffect(() => {
+    autoRef.current = setInterval(stepForward, 4000)
+    return () => { if (autoRef.current) clearInterval(autoRef.current) }
+  }, [stepForward])
+
+  // Sync dot on manual scroll
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const onScroll = () => {
+      const p = Math.round(el.scrollLeft / el.clientWidth)
+      setPage(p)
+      pageRef.current = p
+    }
+    el.addEventListener("scroll", onScroll, { passive: true })
+    return () => el.removeEventListener("scroll", onScroll)
+  }, [])
+
+  const handleArrow = (dir: 1 | -1) => {
+    const next = (pageRef.current + dir + totalPages) % totalPages
+    goTo(next)
+    if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 4000) }
+  }
+
   return (
-    <section className="py-24 bg-[#070b12]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="pt-4 pb-20 bg-[#070b12]" id="technology">
+      <div className="w-full max-w-[80rem] mx-auto" style={{ padding: "0 clamp(24px,4vw,64px)" }}>
+
+        {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-center mb-16"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          <span className="text-sm sm:text-base text-emerald-400 font-medium uppercase tracking-widest">Technology</span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+          <p className="text-xs font-bold tracking-[0.2em] text-emerald-500 uppercase mb-3">Technology</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
             Our Technology{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">
               Expertise
             </span>
           </h2>
-          <p className="mt-5 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            We use best-in-class tools and frameworks to build software that lasts.
-          </p>
+          <p className="text-gray-400 text-base">The tools we trust to bring your vision to life</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((cat, i) => {
-            const c = colorMap[cat.color]
-            return (
-              <motion.div
-                key={cat.label}
-                initial={{ opacity: 0, y: 40, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.65, delay: i * 0.12 }}
-                className={`p-7 rounded-2xl border ${c.border} bg-gray-900/40`}
-              >
-                <h3 className={`text-base font-bold uppercase tracking-widest ${c.text} mb-5`}>
-                  {cat.label}
-                </h3>
-                <div className="flex flex-wrap gap-2.5">
-                  {cat.techs.map((tech, j) => (
-                    <motion.span
-                      key={tech}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+        {/* Scroll container */}
+        <div className="relative px-12">
+
+          {/* Left arrow */}
+          <button
+            onClick={() => handleArrow(-1)}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors shadow-xl"
+            style={{ background: "rgba(15,20,30,0.95)", border: "1px solid rgba(255,255,255,0.12)" }}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Right arrow */}
+          <button
+            onClick={() => handleArrow(1)}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors shadow-xl"
+            style={{ background: "rgba(15,20,30,0.95)", border: "1px solid rgba(255,255,255,0.12)" }}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Horizontal scroll track */}
+          <div
+            ref={scrollRef}
+            className="overflow-x-hidden"
+            style={{ scrollSnapType: "x mandatory" }}
+          >
+            <div className="flex" style={{ width: `${totalPages * 100}%` }}>
+              {PAGE_SLICES.map((group, slideIdx) => (
+                <div
+                  key={slideIdx}
+                  className="grid gap-5"
+                  style={{
+                    width: `${100 / totalPages}%`,
+                    gridTemplateColumns: "repeat(3, 1fr)",
+                    scrollSnapAlign: "start",
+                    flexShrink: 0,
+                  }}
+                >
+                  {group.map((cat, i) => (
+                    <motion.div
+                      key={cat.label}
+                      initial={{ opacity: 0, y: 22 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: i * 0.12 + j * 0.06, type: "spring", stiffness: 200 }}
-                      whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
-                      className={`px-4 py-2 rounded-lg text-base font-medium ${c.bg} ${c.text} border ${c.border} cursor-default`}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
                     >
-                      {tech}
-                    </motion.span>
+                      <TechCard cat={cat} />
+                    </motion.div>
                   ))}
                 </div>
-              </motion.div>
-            )
-          })}
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mt-8">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                goTo(i)
+                if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 4000) }
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === page ? "w-6 bg-emerald-400" : "w-1.5 bg-gray-600 hover:bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
+
       </div>
     </section>
   )

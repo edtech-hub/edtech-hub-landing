@@ -12,6 +12,7 @@ const projects = [
     results: ["Centralized data management", "Real-time collaboration tools", "Custom reporting dashboards"],
     color: "emerald",
     logo: "RR",
+    image: "/projects/RenoResearch.png",
   },
   {
     title: "Reno Research Interiors",
@@ -21,6 +22,7 @@ const projects = [
     results: ["200+ designers onboarded", "3D portfolio visualization", "In-app project management"],
     color: "cyan",
     logo: "RI",
+    image: "/projects/renoproject2.png",
   },
   {
     title: "Wedding Cliqz",
@@ -30,6 +32,7 @@ const projects = [
     results: ["Streamlined vendor booking", "Live event timeline", "In-app messaging & payments"],
     color: "teal",
     logo: "WC",
+    image: "/projects/weddingclickzproject.png",
   },
   {
     title: "Event Ticketing",
@@ -39,6 +42,7 @@ const projects = [
     results: ["10K+ tickets sold", "QR code check-in system", "Real-time analytics dashboard"],
     color: "emerald",
     logo: "ET",
+    image: "/projects/ticgetz_project.jpg",
   },
   {
     title: "Enterprise ERP System",
@@ -48,6 +52,7 @@ const projects = [
     results: ["60% reduction in manual work", "Automated reports & invoicing", "Scalable multi-branch backend"],
     color: "cyan",
     logo: "ERP",
+    image: "/projects/renoproject.png",
   },
   {
     title: "Add Flow",
@@ -57,6 +62,7 @@ const projects = [
     results: ["Unified campaign dashboard", "Automated budget allocation", "Cross-channel performance analytics"],
     color: "teal",
     logo: "AF",
+    image: "/projects/flowproject.jpg",
   },
 ]
 
@@ -96,6 +102,7 @@ const colorImageBg: Record<string, string> = {
 
 export default function Portfolio() {
   const trackRef = useRef<HTMLDivElement>(null)
+  const [expanded, setExpanded] = useState<string | null>(null)
 
   const [trackIdx, setTrackIdx] = useState(1)
   const [transitioning, setTransitioning] = useState(true)
@@ -162,8 +169,8 @@ export default function Portfolio() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-14"
         >
-          <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-teal-400 tracking-tight">Our Work</span>
-          <p className="mt-5 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-400 tracking-tight">Our Work</span>
+          <p className="mt-5 text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Real products, real outcomes. Every project is built to solve a problem and scale a business.
           </p>
         </motion.div>
@@ -214,41 +221,75 @@ export default function Portfolio() {
                       />
 
                       {/* Image area */}
-                      <div className={`relative h-60 bg-gradient-to-br ${colorImageBg[project.color]} flex items-center justify-center overflow-hidden`}>
-                        <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
-                        <div className="relative flex flex-col items-center gap-3 opacity-40 group-hover:opacity-60 transition-opacity duration-300">
-                          <div className={`w-16 h-16 rounded-2xl ${colorLogoBg[project.color]} flex items-center justify-center text-xl font-bold`}>
-                            {project.logo}
+                      <div className={`relative bg-gradient-to-br ${colorImageBg[project.color]} overflow-hidden`} style={{ height: "28rem" }}>
+                        {project.image ? (
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+                            <div className="relative h-full flex flex-col items-center justify-center gap-3 opacity-40 group-hover:opacity-60 transition-opacity duration-300">
+                              <div className={`w-16 h-16 rounded-2xl ${colorLogoBg[project.color]} flex items-center justify-center text-xl font-bold`}>
+                                {project.logo}
+                              </div>
+                            </div>
+                          </>
+                        )}
+                        {/* Details overlay — slides up on title click */}
+                        <div
+                          className="absolute inset-0 flex flex-col justify-end transition-all duration-400"
+                          style={{
+                            background: expanded === project.title ? "rgba(7,11,18,0.93)" : "rgba(7,11,18,0)",
+                            opacity: expanded === project.title ? 1 : 0,
+                            pointerEvents: expanded === project.title ? "auto" : "none",
+                            backdropFilter: expanded === project.title ? "blur(4px)" : "none",
+                            transition: "opacity 0.3s ease, background 0.3s ease",
+                          }}
+                        >
+                          <div className="p-6">
+                            <p className="text-gray-300 text-sm leading-relaxed mb-4">{project.problem}</p>
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {project.stack.map((tech) => (
+                                <span key={tech} className={`px-2.5 py-1 rounded-lg text-xs font-medium ${colorTag[project.color]}`}>{tech}</span>
+                              ))}
+                            </div>
+                            <div className="space-y-1.5">
+                              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Outcomes</p>
+                              {project.results.map((r) => (
+                                <div key={r} className="flex items-start gap-2 text-sm text-gray-300">
+                                  <span className={`${colorAccent[project.color]} flex-shrink-0 font-bold`}>✓</span>
+                                  {r}
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                          <div className="w-32 h-1.5 rounded-full bg-current opacity-20" />
-                          <div className="w-24 h-1.5 rounded-full bg-current opacity-10" />
                         </div>
-                        <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-xl text-xs font-bold tracking-wide ${colorLogoBg[project.color]}`}>
+                        {/* Badges */}
+                        <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-xl text-xs font-bold tracking-wide ${colorLogoBg[project.color]} backdrop-blur-sm`}>
                           {project.logo}
                         </div>
-                        <span className={`absolute top-4 left-4 px-3 py-1 rounded-lg text-xs font-semibold ${colorTag[project.color]}`}>
+                        <span className={`absolute top-4 left-4 px-3 py-1 rounded-lg text-xs font-semibold ${colorTag[project.color]} backdrop-blur-sm`}>
                           {project.category}
                         </span>
                       </div>
 
                       {/* Content */}
                       <div className="relative p-8">
-                        <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                        <p className="text-gray-400 text-sm leading-relaxed mb-5">{project.problem}</p>
-                        <div className="flex flex-wrap gap-2 mb-5">
-                          {project.stack.map((tech) => (
-                            <span key={tech} className="px-2.5 py-1 rounded-lg bg-gray-800/80 border border-gray-700/50 text-gray-300 text-xs font-medium">{tech}</span>
-                          ))}
-                        </div>
-                        <div className="space-y-2 pt-5 border-t border-gray-800/60">
-                          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Outcomes</p>
-                          {project.results.map((r) => (
-                            <div key={r} className="flex items-start gap-2.5 text-sm text-gray-300">
-                              <span className={`${colorAccent[project.color]} mt-0.5 flex-shrink-0 font-bold text-base leading-none`}>✓</span>
-                              {r}
-                            </div>
-                          ))}
-                        </div>
+                        <button
+                          onClick={() => setExpanded(expanded === project.title ? null : project.title)}
+                          className="text-left w-full group/title"
+                        >
+                          <h3 className={`text-lg font-bold mb-1 transition-colors duration-200 ${expanded === project.title ? "text-emerald-400" : "text-white group-hover/title:text-emerald-300"}`}>
+                            {project.title}
+                            <span className="ml-2 text-xs font-normal text-gray-500 group-hover/title:text-emerald-500 transition-colors">
+                              {expanded === project.title ? "▲ hide" : "▼ details"}
+                            </span>
+                          </h3>
+                        </button>
+                        <p className="text-gray-500 text-xs">{project.category}</p>
                       </div>
                     </div>
                   ))}
