@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef, useEffect, useState, useCallback } from "react"
-import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 
 const projects = [
@@ -80,11 +79,6 @@ const colorTag: Record<string, string> = {
   teal: "bg-teal-500/10 text-teal-400 border border-teal-500/20",
   cyan: "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20",
 }
-const colorGlow: Record<string, string> = {
-  emerald: "rgba(16,185,129,0.12)",
-  teal: "rgba(20,184,166,0.12)",
-  cyan: "rgba(6,182,212,0.12)",
-}
 const colorAccent: Record<string, string> = {
   emerald: "text-emerald-400",
   teal: "text-teal-400",
@@ -104,7 +98,6 @@ const colorImageBg: Record<string, string> = {
 export default function Portfolio() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [expanded, setExpanded] = useState<string | null>(null)
-  const pathname = usePathname()
 
   const [trackIdx, setTrackIdx] = useState(1)
   const [transitioning, setTransitioning] = useState(true)
