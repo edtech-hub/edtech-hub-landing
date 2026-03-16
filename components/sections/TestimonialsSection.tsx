@@ -14,8 +14,9 @@ const TESTIMONIALS = [
     role: "Founder",
     company: "WeddingClickz",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1080&q=80&fit=crop",
+    cardImage: "/assets/weddingclickzproject.png",
     cardTitle: "WeddingClickz — Premium Studio Website",
+    cardTagline: "Every frame tells a story. Every click, a memory.",
     cardType: "WEB DESIGN",
     stat: "↑ Inquiry Rate",
     statLabel: "SINCE LAUNCH",
@@ -28,8 +29,9 @@ const TESTIMONIALS = [
     role: "Founder",
     company: "Flow Hydration",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1080&q=80&fit=crop",
-    cardTitle: "Flow Hydration — E-Commerce Store",
+    cardImage: "/assets/flowproject.jpg",
+    cardTitle: "Flow Hydration — Website",
+    cardTagline: "One site. Every sip. Zero compromise.",
     cardType: "E-COMMERCE",
     stat: "Premium",
     statLabel: "BRAND LAUNCH",
@@ -42,8 +44,9 @@ const TESTIMONIALS = [
     role: "Founder",
     company: "Ticgetz",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1080&q=80&fit=crop",
+    cardImage: "/assets/ticgetz_project.jpg",
     cardTitle: "Ticgetz — Event Booking Platform",
+    cardTagline: "Browse, book, and go — it's all here.",
     cardType: "WEB PLATFORM",
     stat: "Idea → Live",
     statLabel: "FASTER THAN EXPECTED",
@@ -56,8 +59,9 @@ const TESTIMONIALS = [
     role: "Co-Founder",
     company: "WeddingClickz",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1080&q=80&fit=crop",
+    cardImage: "/assets/weddingclickztestimonials.jpg",
     cardTitle: "WeddingClickz — Quotation Tool",
+    cardTagline: "From inquiry to quote — painlessly simple.",
     cardType: "SAAS TOOL",
     stat: "400+",
     statLabel: "QUOTES GENERATED",
@@ -70,8 +74,9 @@ const TESTIMONIALS = [
     role: "Founder",
     company: "Reno Research",
     image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=200&h=200&fit=crop&crop=face",
-    cardImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1080&q=80&fit=crop",
-    cardTitle: "Reno Research — Marketplace Platform",
+    cardImage: "/assets/renoproject.png",
+    cardTitle: "Reno Research — Website",
+    cardTagline: "Less stress, better spaces — renovation done right in Singapore.",
     cardType: "MARKETPLACE",
     stat: "100s",
     statLabel: "VERIFIED VENDORS",
@@ -246,11 +251,11 @@ export function TestimonialsSection() {
                 boxShadow: "0 0 60px rgba(0,0,0,0.55)",
               }}
             >
-              <div style={{ position: "relative", height: "clamp(220px,30vh,360px)", overflow: "hidden" }}>
+              <div style={{ position: "relative", height: "clamp(220px,30vh,360px)", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: "#0a0f18" }}>
                 <ImageWithFallback
                   src={t.cardImage}
                   alt={t.cardTitle}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(9,16,26,0) 40%,rgba(9,16,26,0.94) 100%)" }} />
                 <div style={{ position: "absolute", top: 14, left: 14 }}>
@@ -264,8 +269,11 @@ export function TestimonialsSection() {
                   </span>
                 </div>
                 <div style={{ position: "absolute", bottom: 18, left: 18, right: 18 }}>
-                  <p style={{ fontSize: "clamp(13px,1.3vw,16px)", color: "#fff", fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
+                  <p style={{ fontSize: "clamp(20px,2vw,28px)", color: "#fff", fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
                     {t.cardTitle}
+                  </p>
+                  <p style={{ fontSize: "clamp(14px,1.3vw,18px)", color: "rgba(255,255,255,0.7)", fontWeight: 400, margin: "8px 0 0", lineHeight: 1.4 }}>
+                    {t.cardTagline}
                   </p>
                 </div>
               </div>

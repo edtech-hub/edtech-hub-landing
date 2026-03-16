@@ -7,59 +7,59 @@ const TECH_CATEGORIES = [
   {
     label: "FRONTEND",
     items: [
-      { name: "React",        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "Next.js",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-      { name: "Flutter",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
-      { name: "TypeScript",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
       { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
     ],
   },
   {
     label: "BACKEND",
     items: [
-      { name: "Node.js",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Express",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
-      { name: "Python",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-      { name: "FastAPI",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
       { name: "REST APIs", icon: null },
     ],
   },
   {
     label: "DATABASE",
     items: [
-      { name: "MongoDB",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-      { name: "Redis",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
-      { name: "Mongoose",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg" },
+      { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+      { name: "Mongoose", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg" },
     ],
   },
   {
     label: "UI/UX",
     items: [
-      { name: "Figma",          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-      { name: "Miro",           icon: null },
+      { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+      { name: "Miro", icon: null },
       { name: "Adobe Creative", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
-      { name: "Framer",         icon: null },
+      { name: "Framer", icon: null },
     ],
   },
   {
     label: "CLOUD & DEVOPS",
     items: [
-      { name: "AWS",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" },
-      { name: "Docker",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
       { name: "GitHub CI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-      { name: "Vercel",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
-      { name: "Nginx",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
+      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
+      { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
     ],
   },
   {
     label: "TESTING",
     items: [
-      { name: "Jest",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" },
-      { name: "Cypress",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cypressio/cypressio-original.svg" },
+      { name: "Jest", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" },
+      { name: "Cypress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cypressio/cypressio-original.svg" },
       { name: "Playwright", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" },
-      { name: "Postman",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
-      { name: "Vitest",     icon: null },
+      { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+      { name: "Vitest", icon: null },
     ],
   },
 ]
@@ -68,7 +68,7 @@ function TechPill({ name, icon }: { name: string; icon: string | null }) {
   const [errored, setErrored] = useState(false)
   return (
     <div
-      className="flex items-center gap-3 px-5 py-3 rounded-xl w-fit transition-all duration-150 cursor-default group"
+      className="flex items-center gap-3 px-6 py-4 rounded-xl w-fit transition-all duration-150 cursor-default group"
       style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.18)" }}
       onMouseEnter={e => {
         const el = e.currentTarget as HTMLDivElement
@@ -85,7 +85,7 @@ function TechPill({ name, icon }: { name: string; icon: string | null }) {
         <img
           src={icon}
           alt={name}
-          className="w-6 h-6 flex-shrink-0 object-contain"
+          className="w-7 h-7 flex-shrink-0 object-contain"
           onError={() => setErrored(true)}
           style={{
             filter:
@@ -99,7 +99,7 @@ function TechPill({ name, icon }: { name: string; icon: string | null }) {
           <span className="w-2 h-2 rounded-full bg-emerald-400" />
         </span>
       )}
-      <span className="text-sm font-semibold text-emerald-100 group-hover:text-white transition-colors">
+      <span className="text-base font-semibold text-emerald-100 group-hover:text-white transition-colors">
         {name}
       </span>
     </div>
@@ -109,10 +109,10 @@ function TechPill({ name, icon }: { name: string; icon: string | null }) {
 function TechCard({ cat }: { cat: typeof TECH_CATEGORIES[0] }) {
   return (
     <div
-      className="rounded-2xl p-10 flex flex-col gap-5 h-full min-h-[500px]"
+      className="rounded-2xl p-12 flex flex-col gap-6 h-full min-h-[580px]"
       style={{ background: "rgba(15,20,30,0.92)", border: "1px solid rgba(255,255,255,0.08)" }}
     >
-      <p className="text-xs font-bold tracking-[0.2em] text-emerald-500 uppercase mb-2">{cat.label}</p>
+      <p className="text-sm font-bold tracking-[0.2em] text-emerald-500 uppercase mb-3">{cat.label}</p>
       {cat.items.map((item) => (
         <TechPill key={item.name} name={item.name} icon={item.icon} />
       ))}
@@ -170,8 +170,8 @@ export default function TechStack() {
   }
 
   return (
-    <section className="pt-4 pb-20 bg-[#070b12]" id="technology">
-      <div className="w-full max-w-[80rem] mx-auto" style={{ padding: "0 clamp(24px,4vw,64px)" }}>
+    <section className="pt-8 pb-24 bg-[#070b12]" id="technology">
+      <div className="w-full max-w-[88rem] mx-auto" style={{ padding: "0 clamp(24px,4vw,64px)" }}>
 
         {/* Heading */}
         <motion.div
@@ -260,9 +260,8 @@ export default function TechStack() {
                 goTo(i)
                 if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 4000) }
               }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === page ? "w-6 bg-emerald-400" : "w-1.5 bg-gray-600 hover:bg-gray-400"
-              }`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === page ? "w-6 bg-emerald-400" : "w-1.5 bg-gray-600 hover:bg-gray-400"
+                }`}
             />
           ))}
         </div>

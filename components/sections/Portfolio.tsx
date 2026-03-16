@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useEffect, useState, useCallback } from "react"
+import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 
 const projects = [
@@ -103,6 +104,7 @@ const colorImageBg: Record<string, string> = {
 export default function Portfolio() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [expanded, setExpanded] = useState<string | null>(null)
+  const pathname = usePathname()
 
   const [trackIdx, setTrackIdx] = useState(1)
   const [transitioning, setTransitioning] = useState(true)
@@ -213,83 +215,121 @@ export default function Portfolio() {
                   {pair.map((project) => (
                     <div
                       key={project.title + slideIdx}
-                      className="group relative rounded-2xl bg-gray-900/80 border border-gray-800/60 overflow-hidden transition-colors duration-300 hover:border-gray-700"
+                      className="group relative rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02]"
+                      style={{ height: "28rem" }}
                     >
-                      <div
-                        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                        style={{ boxShadow: `inset 0 0 60px ${colorGlow[project.color]}` }}
-                      />
+                      {/* Full bleed image */}
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className={`absolute inset-0 bg-gradient-to-br ${colorImageBg[project.color]}`}>
+                          <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+                          <div className="h-full flex items-center justify-center">
+                            <div className={`w-20 h-20 rounded-2xl ${colorLogoBg[project.color]} flex items-center justify-center text-2xl font-bold`}>
+                              {project.logo}
+                            </div>
+                          </div>
+                        </div>
+                      )}
 
-                      {/* Image area */}
-                      <div className={`relative bg-gradient-to-br ${colorImageBg[project.color]} overflow-hidden`} style={{ height: "28rem" }}>
-                        {project.image ? (
-                          <img
-                            src={project.image}
-                            alt={project.title}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                        ) : (
-                          <>
-                            <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
-                            <div className="relative h-full flex flex-col items-center justify-center gap-3 opacity-40 group-hover:opacity-60 transition-opacity duration-300">
-                              <div className={`w-16 h-16 rounded-2xl ${colorLogoBg[project.color]} flex items-center justify-center text-xl font-bold`}>
-                                {project.logo}
-                              </div>
+                      {/* Bottom bar with black transparent background */}
+                      <div className="absolute inset-x-0 bottom-0 z-10">
+                        {/* Gradient fade from image to black bar */}
+                        <div className="h-16 bg-gradient-to-t from-black/90 to-transparent" />
+                        {/* Solid black transparent bar for text */}
+                        <div className="bg-black/85 backdrop-blur-sm px-6 py-5">
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-xl md:text-2xl font-semibold text-white truncate">
+                                {project.title} <span className="text-gray-400 font-normal">- {project.category}</span>
+                              </h3>
+                              <p className="text-gray-400 text-sm mt-1 line-clamp-1">
+                                {project.problem}
+                              </p>
                             </div>
-                          </>
-                        )}
-                        {/* Details overlay — slides up on title click */}
-                        <div
-                          className="absolute inset-0 flex flex-col justify-end transition-all duration-400"
-                          style={{
-                            background: expanded === project.title ? "rgba(7,11,18,0.93)" : "rgba(7,11,18,0)",
-                            opacity: expanded === project.title ? 1 : 0,
-                            pointerEvents: expanded === project.title ? "auto" : "none",
-                            backdropFilter: expanded === project.title ? "blur(4px)" : "none",
-                            transition: "opacity 0.3s ease, background 0.3s ease",
-                          }}
-                        >
-                          <div className="p-6">
-                            <p className="text-gray-300 text-sm leading-relaxed mb-4">{project.problem}</p>
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {project.stack.map((tech) => (
-                                <span key={tech} className={`px-2.5 py-1 rounded-lg text-xs font-medium ${colorTag[project.color]}`}>{tech}</span>
-                              ))}
-                            </div>
+                            {/* Arrow button - expands details inside the grid */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                if (expanded === project.title) {
+                                  setExpanded(null)
+                                  if (autoRef.current) clearInterval(autoRef.current)
+                                  autoRef.current = setInterval(stepForward, 3500)
+                                } else {
+                                  setExpanded(project.title)
+                                  if (autoRef.current) clearInterval(autoRef.current)
+                                }
+                              }}
+                              className="flex-shrink-0 w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all duration-200"
+                            >
+                              <svg className={`w-5 h-5 transition-transform duration-300 ${expanded === project.title ? "rotate-45" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Expanded details overlay */}
+                      <div
+                        className="absolute inset-0 flex flex-col justify-end transition-all duration-300 rounded-3xl z-20"
+                        style={{
+                          background: expanded === project.title ? "rgba(0,0,0,0.88)" : "rgba(0,0,0,0)",
+                          opacity: expanded === project.title ? 1 : 0,
+                          pointerEvents: expanded === project.title ? "auto" : "none",
+                          backdropFilter: expanded === project.title ? "blur(8px)" : "none",
+                        }}
+                      >
+                        <div className="p-6 flex flex-col h-full justify-end">
+                          {/* Title */}
+                          <h3 className="text-2xl font-semibold text-white mb-2">
+                            {project.title} <span className="text-gray-400 font-normal">- {project.category}</span>
+                          </h3>
+
+                          {/* Description in its own black bar */}
+                          <div className="bg-white/5 rounded-xl px-4 py-3 mb-4 border border-white/10">
+                            <p className="text-gray-300 text-sm leading-relaxed">{project.problem}</p>
+                          </div>
+
+                          {/* Tech stack */}
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {project.stack.map((tech) => (
+                              <span key={tech} className={`px-2.5 py-1 rounded-lg text-xs font-medium ${colorTag[project.color]}`}>{tech}</span>
+                            ))}
+                          </div>
+
+                          {/* Outcomes in its own black bar */}
+                          <div className="bg-white/5 rounded-xl px-4 py-3 border border-white/10">
+                            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Outcomes</p>
                             <div className="space-y-1.5">
-                              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Outcomes</p>
                               {project.results.map((r) => (
                                 <div key={r} className="flex items-start gap-2 text-sm text-gray-300">
-                                  <span className={`${colorAccent[project.color]} flex-shrink-0 font-bold`}>✓</span>
+                                  <span className={`${colorAccent[project.color]} flex-shrink-0 font-bold`}>&#10003;</span>
                                   {r}
                                 </div>
                               ))}
                             </div>
                           </div>
-                        </div>
-                        {/* Badges */}
-                        <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-xl text-xs font-bold tracking-wide ${colorLogoBg[project.color]} backdrop-blur-sm`}>
-                          {project.logo}
-                        </div>
-                        <span className={`absolute top-4 left-4 px-3 py-1 rounded-lg text-xs font-semibold ${colorTag[project.color]} backdrop-blur-sm`}>
-                          {project.category}
-                        </span>
-                      </div>
 
-                      {/* Content */}
-                      <div className="relative p-8">
-                        <button
-                          onClick={() => setExpanded(expanded === project.title ? null : project.title)}
-                          className="text-left w-full group/title"
-                        >
-                          <h3 className={`text-lg font-bold mb-1 transition-colors duration-200 ${expanded === project.title ? "text-emerald-400" : "text-white group-hover/title:text-emerald-300"}`}>
-                            {project.title}
-                            <span className="ml-2 text-xs font-normal text-gray-500 group-hover/title:text-emerald-500 transition-colors">
-                              {expanded === project.title ? "▲ hide" : "▼ details"}
-                            </span>
-                          </h3>
-                        </button>
-                        <p className="text-gray-500 text-xs">{project.category}</p>
+                          {/* Close button */}
+                          <button
+                            onClick={() => {
+                              setExpanded(null)
+                              if (autoRef.current) clearInterval(autoRef.current)
+                              autoRef.current = setInterval(stepForward, 3500)
+                            }}
+                            className="mt-4 self-start text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            Close
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}

@@ -24,11 +24,6 @@ const footerLinks = {
     { href: "/privacy-policy", label: "Privacy Policy" },
     { href: "/terms", label: "Terms of Service" },
   ],
-  Contact: [
-    { href: "mailto:contact@edastra.in", label: "contact@edastra.in" },
-    { href: "https://wa.me/917305716684", label: "WhatsApp" },
-    { href: "/contact", label: "Book Consultation" },
-  ],
 }
 
 const socials = [
@@ -73,63 +68,116 @@ const socials = [
 export default function Footer() {
   const { openModal } = useConsultation()
   return (
-    <footer className="bg-gray-950 border-t border-gray-800/50 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 lg:gap-8">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400 tracking-tight">
-                Ed-Astra
-              </span>
-            </Link>
-            <p className="text-sm text-gray-500 leading-relaxed mb-3">
-              AI-powered web & mobile development agency building production-ready software faster.
-            </p>
-            <div className="flex gap-3">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-8 h-8 rounded-lg bg-gray-800 hover:bg-emerald-500/20 hover:text-emerald-400 text-gray-400 flex items-center justify-center transition-all duration-200"
-                >
-                  {s.icon}
+    <footer className="bg-black relative">
+      <div className="border-t border-white/10">
+        <div className="w-full px-8 pt-[1.2rem] pb-8">
+
+          {/* Main grid: Brand+Contact left | Link columns right */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
+            {/* Left — Brand + Contact info */}
+            <div className="lg:col-span-4">
+              <Link href="/" className="inline-block mb-4">
+                <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400 tracking-tight">
+                  Ed-Astra
+                </span>
+              </Link>
+              <p className="text-base text-gray-400 leading-relaxed mb-5">
+                AI-powered web & mobile development agency building production-ready software faster.
+              </p>
+
+              {/* Contact details with icons */}
+              <div className="space-y-3">
+                {/* Address */}
+                <div className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <p className="text-base text-gray-400 leading-relaxed">
+                    Sai Ankura, 13/1, 2nd Cross Rd, IDBI Layout,<br />
+                    Sapthagiri Layout, Kalena Agrahara, Bengaluru,<br />
+                    Kothnur, Karnataka 560083
+                  </p>
+                </div>
+
+                {/* Email */}
+                <a href="mailto:contact@edastra.in" className="flex items-center gap-3 group">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span className="text-base text-gray-400 group-hover:text-white transition-colors">contact@edastra.in</span>
                 </a>
+
+                {/* Phone / WhatsApp */}
+                <a href="https://wa.me/917305716684" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span className="text-base text-gray-400 group-hover:text-white transition-colors">+91 73057 16684</span>
+                </a>
+
+                {/* Book Consultation */}
+                <button onClick={openModal} className="flex items-center gap-3 group">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span className="text-base text-gray-400 group-hover:text-white transition-colors">Book a Consultation</span>
+                </button>
+              </div>
+
+              {/* Socials */}
+              <div className="flex gap-3 mt-5">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 text-gray-400 flex items-center justify-center transition-all duration-200 border border-white/10 hover:border-emerald-500/30"
+                  >
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — Link columns */}
+            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-12">
+              {Object.entries(footerLinks).map(([section, links]) => (
+                <div key={section}>
+                  <h3 className="text-base font-semibold text-white mb-4 uppercase tracking-wider">
+                    {section}
+                  </h3>
+                  <ul className="space-y-2.5">
+                    {links.map((link) => (
+                      <li key={link.label}>
+                        <Link
+                          href={link.href}
+                          className="text-base text-gray-400 hover:text-white transition-colors duration-200"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
-
-          {/* Links */}
-          {Object.entries(footerLinks).map(([section, links]) => (
-            <div key={section}>
-              <h3 className="text-sm font-semibold text-white mb-3">{section}</h3>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
+      </div>
 
-        {/* Bottom bar */}
-        <div className="mt-6 pt-5 border-t border-gray-800/50 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-sm text-gray-600">
-            © 2024 Ed-Astra. Building the future, one line of code at a time.
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="w-full px-8 pt-[1.2rem] pb-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-base text-gray-500">
+            &copy; {new Date().getFullYear()} Ed-Astra. Building the future, one line of code at a time.
           </p>
-          <div className="flex gap-4 text-sm text-gray-600">
-            <Link href="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms</Link>
+          <div className="flex gap-5 text-base text-gray-500">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           </div>
         </div>
       </div>

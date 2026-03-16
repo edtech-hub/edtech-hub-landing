@@ -6,6 +6,19 @@ import { useConsultation } from "@/components/ui/ConsultationProvider"
 
 const EMERALD = "#10b981"
 
+const marqueeItems = [
+    "Strategy",
+    "Design",
+    "UI UX Design",
+    "User Understanding",
+    "Coding",
+    "Front-end Development",
+    "Back-end Development",
+    "Integration",
+    "App Development",
+    "Website Development",
+]
+
 // Services data
 const servicesData = [
     {
@@ -104,7 +117,7 @@ const faqData = [
 
 export default function ServicesPageContent() {
     const [activeService, setActiveService] = useState(0)
-    const [openFaq, setOpenFaq] = useState<number | null>(1)
+    const [openFaq, setOpenFaq] = useState<number | null>(null)
     const { openModal } = useConsultation()
 
     return (
@@ -112,15 +125,15 @@ export default function ServicesPageContent() {
             {/* ═══════════════════════════════════════════════════════════════════
           SECTION 1: Our Services
       ═══════════════════════════════════════════════════════════════════ */}
-            <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-6xl mx-auto">
+            <section className="pt-40 pb-32 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto">
                     {/* Header */}
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-12">
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-20">
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl sm:text-5xl lg:text-6xl font-bold"
+                            className="text-5xl sm:text-6xl lg:text-7xl font-bold"
                             style={{ color: EMERALD }}
                         >
                             Our Services
@@ -129,7 +142,7 @@ export default function ServicesPageContent() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.1 }}
-                            className="text-gray-400 max-w-md text-base lg:text-right"
+                            className="text-gray-400 max-w-lg text-lg lg:text-right"
                         >
                             We listen carefully, move swiftly, and deliver work that reflects exactly what you came here to build.
                         </motion.p>
@@ -148,9 +161,9 @@ export default function ServicesPageContent() {
                                 <button
                                     key={service.id}
                                     onClick={() => setActiveService(i)}
-                                    className={`relative px-4 py-4 text-sm font-medium transition-all duration-300 border-r border-gray-800/60 last:border-r-0 ${activeService === i
-                                            ? "text-white bg-gray-800/50"
-                                            : "text-gray-400 hover:text-white hover:bg-gray-800/30"
+                                    className={`relative px-6 py-6 text-base font-medium transition-all duration-300 border-r border-gray-800/60 last:border-r-0 ${activeService === i
+                                        ? "text-white bg-gray-800/50"
+                                        : "text-gray-400 hover:text-white hover:bg-gray-800/30"
                                         }`}
                                 >
                                     <span className="flex items-center gap-2">
@@ -174,7 +187,7 @@ export default function ServicesPageContent() {
                         {/* Content */}
                         <div className="grid grid-cols-1 lg:grid-cols-2">
                             {/* Images */}
-                            <div className="relative h-64 lg:h-80 overflow-hidden">
+                            <div className="relative h-80 lg:h-[480px] overflow-hidden">
                                 <AnimatePresence mode="wait">
                                     <motion.img
                                         key={activeService}
@@ -191,7 +204,7 @@ export default function ServicesPageContent() {
                             </div>
 
                             {/* Description */}
-                            <div className="p-8 flex flex-col justify-center">
+                            <div className="p-10 lg:p-14 flex flex-col justify-center">
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={activeService}
@@ -200,10 +213,10 @@ export default function ServicesPageContent() {
                                         exit={{ opacity: 0, x: -20 }}
                                         transition={{ duration: 0.4 }}
                                     >
-                                        <p className="text-gray-300 leading-relaxed mb-6">
+                                        <p className="text-gray-300 text-lg leading-relaxed mb-8">
                                             {servicesData[activeService].description}
                                         </p>
-                                        <p className="text-gray-500 text-sm">
+                                        <p className="text-gray-500 text-base">
                                             A fully customized design process encompassing all aspects of your product, ensuring everything is tailored and matched.
                                         </p>
                                     </motion.div>
@@ -217,8 +230,8 @@ export default function ServicesPageContent() {
             {/* ═══════════════════════════════════════════════════════════════════
           SECTION 2: Collaborative Image with Keywords
       ═══════════════════════════════════════════════════════════════════ */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-4xl mx-auto">
+            <section className="py-32 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-6xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -226,25 +239,35 @@ export default function ServicesPageContent() {
                         transition={{ duration: 0.7 }}
                         className="relative"
                     >
-                        {/* Keywords around image */}
-                        <div className="flex items-center justify-center gap-4 text-gray-500 text-sm tracking-wider mb-8">
-                            <span>Understanding</span>
-                            <span className="text-emerald-500">.</span>
-                            <span>Coding</span>
-                            <span className="text-emerald-500">.</span>
-                            <span className="text-gray-600">...</span>
-                            <span className="text-emerald-500">.</span>
-                            <span>Development</span>
-                            <span className="text-emerald-500">.</span>
-                            <span>Integration</span>
+                        {/* Scrolling marquee keywords */}
+                        <div className="relative w-full overflow-hidden py-8 mb-12">
+                            <div className="flex overflow-hidden">
+                                <motion.div
+                                    className="flex shrink-0 gap-6 pr-6"
+                                    animate={{ x: ["0%", "-50%"] }}
+                                    transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                                    style={{ willChange: "transform" }}
+                                >
+                                    {[...marqueeItems, ...marqueeItems].map((item, i) => (
+                                        <span
+                                            key={i}
+                                            className="flex items-center gap-6 shrink-0 text-sm font-medium whitespace-nowrap tracking-wider"
+                                            style={{ color: i % 2 === 0 ? "rgba(255,255,255,0.35)" : "rgba(16,185,129,0.5)" }}
+                                        >
+                                            {item}
+                                            <span className="text-emerald-500">.</span>
+                                        </span>
+                                    ))}
+                                </motion.div>
+                            </div>
                         </div>
 
                         {/* Image */}
-                        <div className="relative rounded-2xl overflow-hidden">
+                        <div className="relative rounded-3xl overflow-hidden">
                             <img
                                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80&fit=crop"
                                 alt="Team collaboration"
-                                className="w-full h-64 sm:h-80 object-cover"
+                                className="w-full h-80 sm:h-[500px] object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#070b12] via-transparent to-transparent opacity-60" />
                         </div>
@@ -255,16 +278,16 @@ export default function ServicesPageContent() {
             {/* ═══════════════════════════════════════════════════════════════════
           SECTION 3: Our Approach
       ═══════════════════════════════════════════════════════════════════ */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-6xl mx-auto">
+            <section className="py-40 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto">
                     {/* Header */}
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-16">
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-24">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl sm:text-5xl font-bold"
+                            className="text-5xl sm:text-6xl lg:text-7xl font-bold"
                             style={{ color: EMERALD }}
                         >
                             Our Approach
@@ -274,14 +297,14 @@ export default function ServicesPageContent() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.1 }}
-                            className="text-gray-400 max-w-sm text-base lg:text-right"
+                            className="text-gray-400 max-w-md text-lg lg:text-right"
                         >
                             Fast enough to keep up. Consistent enough to get it right. Always built around you.
                         </motion.p>
                     </div>
 
                     {/* Curved connection line + Icons */}
-                    <div className="relative mb-8">
+                    <div className="relative mb-16">
                         {/* SVG Curved Line */}
                         <svg
                             className="absolute top-10 left-0 w-full h-20 hidden lg:block"
@@ -316,18 +339,18 @@ export default function ServicesPageContent() {
                                     {/* Icon */}
                                     <motion.div
                                         whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(16, 185, 129, 0.3)" }}
-                                        className="w-16 h-16 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center text-emerald-400 mb-4 transition-all duration-300"
+                                        className="w-20 h-20 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center text-emerald-400 mb-6 transition-all duration-300"
                                     >
                                         {phase.icon}
                                     </motion.div>
-                                    <span className="text-white font-semibold text-sm">{phase.title}</span>
+                                    <span className="text-white font-semibold text-base">{phase.title}</span>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
 
                     {/* Items Grid */}
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                         {approachData.map((phase, phaseIndex) => (
                             <motion.div
                                 key={phase.title + "-items"}
@@ -345,12 +368,12 @@ export default function ServicesPageContent() {
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.3, delay: 0.4 + phaseIndex * 0.1 + itemIndex * 0.05 }}
                                         whileHover={{ x: 5, backgroundColor: "rgba(16, 185, 129, 0.08)" }}
-                                        className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-900/50 border border-gray-800/60 transition-all duration-200"
+                                        className="flex items-center gap-4 px-5 py-4 rounded-xl bg-gray-900/50 border border-gray-800/60 transition-all duration-200"
                                     >
-                                        <span className="text-xs font-bold text-emerald-500/70 min-w-[24px]">
+                                        <span className="text-sm font-bold text-emerald-500/70 min-w-[28px]">
                                             {String(itemIndex + 1).padStart(2, "0")}
                                         </span>
-                                        <span className="text-sm text-gray-300">{item}</span>
+                                        <span className="text-base text-gray-300">{item}</span>
                                     </motion.div>
                                 ))}
                             </motion.div>
@@ -362,20 +385,20 @@ export default function ServicesPageContent() {
             {/* ═══════════════════════════════════════════════════════════════════
           SECTION 4: FAQ's
       ═══════════════════════════════════════════════════════════════════ */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-6xl mx-auto">
+            <section className="py-40 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="text-4xl sm:text-5xl font-bold mb-12"
+                        className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-20"
                         style={{ color: EMERALD }}
                     >
                         FAQ&apos;s
                     </motion.h2>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                         {/* Left: Image + CTA */}
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
@@ -388,7 +411,7 @@ export default function ServicesPageContent() {
                                 <img
                                     src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80&fit=crop"
                                     alt="Contact us"
-                                    className="w-full h-80 object-cover"
+                                    className="w-full h-[480px] object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#070b12] via-[#070b12]/50 to-transparent" />
 
@@ -433,7 +456,7 @@ export default function ServicesPageContent() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="space-y-3"
+                            className="space-y-4"
                         >
                             {faqData.map((faq, i) => (
                                 <motion.div
@@ -446,9 +469,9 @@ export default function ServicesPageContent() {
                                 >
                                     <button
                                         onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                                        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-800/30 transition-colors"
+                                        className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-800/30 transition-colors"
                                     >
-                                        <span className="text-sm text-gray-300 pr-4">{faq.question}</span>
+                                        <span className="text-base text-gray-300 pr-4">{faq.question}</span>
                                         <motion.svg
                                             animate={{ rotate: openFaq === i ? 180 : 0 }}
                                             transition={{ duration: 0.2 }}
@@ -469,7 +492,7 @@ export default function ServicesPageContent() {
                                                 transition={{ duration: 0.3 }}
                                                 className="overflow-hidden"
                                             >
-                                                <div className="px-5 pb-4 text-sm text-gray-400 leading-relaxed border-t border-gray-800/40 pt-3">
+                                                <div className="px-6 pb-5 text-base text-gray-400 leading-relaxed border-t border-gray-800/40 pt-4">
                                                     {faq.answer}
                                                 </div>
                                             </motion.div>
