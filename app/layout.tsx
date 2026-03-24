@@ -48,6 +48,14 @@ export const metadata: Metadata = {
     description: "Build scalable web and mobile apps faster with Ed-Astra.",
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "b6uPOYbZRZwEMz_ag1IIsnIXCMaSLdVUdF13kA7AJ2s",
+    // Replace with actual codes from Google Search Console and Bing Webmaster Tools
+    other: { "msvalidate.01": "YOUR_BING_VERIFICATION_CODE" },
+  },
+  alternates: {
+    types: { "application/rss+xml": "https://edastra.in/feed.xml" },
+  },
 }
 
 export default function RootLayout({

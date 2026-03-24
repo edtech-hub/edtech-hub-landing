@@ -1,0 +1,59 @@
+[
+  {
+    "slug": "future-web-development-2026",
+    "title": "The Future of Web Development: What to Expect in 2026",
+    "excerpt": "Explore the cutting-edge trends shaping web development in 2026, from AI-powered tools to edge computing.",
+    "content": "",
+    "date": "2026-03-18T05:46:23.068Z",
+    "readTime": "1 min read",
+    "author": "EdAstra Team",
+    "tags": [
+      "Web Development",
+      "AI",
+      "Edge Computing",
+      "WebAssembly",
+      "Future Tech"
+    ],
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80&fit=crop",
+    "category": "Technology",
+    "featured": false
+  },
+  {
+    "slug": "building-scalable-applications-nextjs",
+    "title": "Building Scalable Applications with Next.js",
+    "excerpt": "Learn best practices for building scalable, production-ready applications with Next.js.",
+    "content": "",
+    "date": "2026-03-18T05:46:23.068Z",
+    "readTime": "1 min read",
+    "author": "EdAstra Team",
+    "tags": [
+      "Next.js",
+      "React",
+      "Scalability",
+      "Performance",
+      "Best Practices"
+    ],
+    "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&q=80&fit=crop",
+    "category": "Development",
+    "featured": false
+  },
+  {
+    "slug": "ui-ux-design-principles-modern-web",
+    "title": "UI/UX Design Principles for Modern Web Applications",
+    "excerpt": "Master the fundamental UI/UX design principles that make web applications truly stand out.",
+    "content": "",
+    "date": "2026-03-18T05:46:23.068Z",
+    "readTime": "1 min read",
+    "author": "EdAstra Team",
+    "tags": [
+      "UI/UX",
+      "Design",
+      "Accessibility",
+      "User Experience",
+      "Web Design"
+    ],
+    "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80&fit=crop",
+    "category": "Design",
+    "featured": false
+  }
+]

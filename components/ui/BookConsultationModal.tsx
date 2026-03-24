@@ -111,13 +111,25 @@ const countryCodes = [
 ]
 
 export default function BookConsultationModal({ isOpen, onClose }: Props) {
+  const [step, setStep] = useState<1 | 2>(1)
+  const [bookingId, setBookingId] = useState<string | null>(null)
+  const [name, setName] = useState("")
   const [dialCode, setDialCode] = useState("+91")
   const [phone, setPhone] = useState("")
   const [email, setEmail] = useState("")
   const [search, setSearch] = useState("")
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [selectedDate, setSelectedDate] = useState("")
+  const [selectedTime, setSelectedTime] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [confirmData, setConfirmData] = useState<{ date: string; time: string } | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const timeSlots = ["9:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"]
+  const formatTime = (t: string) => {
+    const [h] = t.split(":").map(Number)
+    return h >= 12 ? `${h === 12 ? 12 : h - 12}:00 PM` : `${h}:00 AM`
+  }
 
   const filtered = countryCodes.filter(
     (c) =>
@@ -152,21 +164,50 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
     return () => document.removeEventListener("mousedown", handler)
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Step 1: Save user details
+  const handleStep1 = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus("loading")
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
-      const res = await fetch(`${apiUrl}/api/contact`, {
+      const res = await fetch(`${apiUrl}/api/book-consultation/initiate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: `${dialCode} ${phone}`, email }),
+        body: JSON.stringify({ name, phone: `${dialCode} ${phone}`, email }),
       })
-      if (res.ok) {
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setBookingId(data.data.bookingId)
+        setStep(2)
+        setStatus("idle")
+      } else {
+        setStatus("error")
+      }
+    } catch {
+      setStatus("error")
+    }
+  }
+
+  // Step 2: Confirm with date & time
+  const handleStep2 = async () => {
+    if (!selectedDate || !selectedTime || !bookingId) return
+    setStatus("loading")
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+      const res = await fetch(`${apiUrl}/api/book-consultation/${bookingId}/confirm`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          preferredDate: selectedDate,
+          preferredTime: selectedTime,
+          timezone: "Asia/Kolkata",
+          duration: 30,
+        }),
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setConfirmData({ date: selectedDate, time: selectedTime })
         setStatus("success")
-        setPhone("")
-        setEmail("")
-        setSearch("")
       } else {
         setStatus("error")
       }
@@ -177,9 +218,33 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
 
   const handleClose = () => {
     setStatus("idle")
+    setStep(1)
+    setBookingId(null)
+    setName("")
+    setPhone("")
+    setEmail("")
+    setSelectedDate("")
+    setSelectedTime("")
+    setConfirmData(null)
     setDropdownOpen(false)
     setSearch("")
     onClose()
+  }
+
+  // Generate next 30 days for date picker
+  const getAvailableDates = () => {
+    const dates: { value: string; label: string }[] = []
+    const today = new Date()
+    for (let i = 1; i <= 30; i++) {
+      const d = new Date(today)
+      d.setDate(today.getDate() + i)
+      if (d.getDay() === 0) continue // skip Sundays
+      dates.push({
+        value: d.toISOString().split("T")[0],
+        label: d.toLocaleDateString("en-IN", { weekday: "short", month: "short", day: "numeric" }),
+      })
+    }
+    return dates
   }
 
   const inputClass =
@@ -225,7 +290,7 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
 
               {/* Body */}
               <div className="px-8 py-8">
-                {status === "success" ? (
+                {status === "success" && confirmData ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -236,8 +301,11 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-3">Got it!</h3>
-                    <p className="text-lg text-gray-400 mb-8">We&apos;ll get back to you within 24 hours.</p>
+                    <h3 className="text-2xl font-bold text-white mb-3">Consultation Booked!</h3>
+                    <p className="text-lg text-gray-400 mb-2">
+                      {new Date(confirmData.date).toLocaleDateString("en-IN", { weekday: "long", month: "long", day: "numeric" })} at {formatTime(confirmData.time)}
+                    </p>
+                    <p className="text-base text-gray-500 mb-8">Check your email for the calendar invite.</p>
                     <button
                       onClick={handleClose}
                       className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold text-base"
@@ -245,13 +313,25 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                       Done
                     </button>
                   </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                ) : step === 1 ? (
+                  <form onSubmit={handleStep1} className="space-y-5">
+                    {/* Name */}
+                    <div>
+                      <label className="block text-base text-gray-400 mb-2">Full Name *</label>
+                      <input
+                        required
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="John Doe"
+                        className={inputClass}
+                      />
+                    </div>
+
                     {/* Mobile Number */}
                     <div>
                       <label className="block text-base text-gray-400 mb-2">Mobile Number *</label>
                       <div className="flex gap-3">
-                        {/* Country code dropdown */}
                         <div className="relative" ref={dropdownRef}>
                           <button
                             type="button"
@@ -273,7 +353,6 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                                 transition={{ duration: 0.15 }}
                                 className="absolute top-full left-0 mt-1 w-72 bg-gray-900 border border-gray-700 rounded-xl shadow-xl z-[80] overflow-hidden"
                               >
-                                {/* Search */}
                                 <div className="p-3 border-b border-gray-800">
                                   <input
                                     autoFocus
@@ -284,7 +363,6 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                                     className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-base placeholder-gray-500 focus:outline-none focus:border-emerald-500/50"
                                   />
                                 </div>
-                                {/* List */}
                                 <div className="max-h-60 overflow-y-auto">
                                   {filtered.length === 0 ? (
                                     <div className="px-4 py-3 text-base text-gray-500">No results</div>
@@ -307,7 +385,6 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                           </AnimatePresence>
                         </div>
 
-                        {/* Phone input */}
                         <input
                           required
                           type="tel"
@@ -349,11 +426,85 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                           </svg>
-                          Sending...
+                          Saving...
                         </span>
-                      ) : "Book Consultation"}
+                      ) : "Next — Pick a Time"}
                     </button>
                   </form>
+                ) : (
+                  <div className="space-y-5">
+                    <div>
+                      <label className="block text-base text-gray-400 mb-2">Select a Date *</label>
+                      <div className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto pr-1">
+                        {getAvailableDates().map((d) => (
+                          <button
+                            key={d.value}
+                            type="button"
+                            onClick={() => setSelectedDate(d.value)}
+                            className={`py-2.5 px-3 rounded-xl text-sm font-medium border transition-all ${selectedDate === d.value
+                                ? "bg-emerald-500 border-emerald-500 text-white shadow-md shadow-emerald-500/25"
+                                : "border-gray-700/60 text-gray-400 hover:border-emerald-500/50 hover:text-white bg-gray-800/50"
+                              }`}
+                          >
+                            {d.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {selectedDate && (
+                      <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+                        <label className="block text-base text-gray-400 mb-2">Select a Time *</label>
+                        <div className="grid grid-cols-4 gap-2">
+                          {timeSlots.map((t) => (
+                            <button
+                              key={t}
+                              type="button"
+                              onClick={() => setSelectedTime(t)}
+                              className={`py-3 rounded-xl text-sm font-medium border transition-all ${selectedTime === t
+                                  ? "bg-emerald-500 border-emerald-500 text-white shadow-md shadow-emerald-500/25"
+                                  : "border-gray-700/60 text-gray-400 hover:border-emerald-500/50 hover:text-white bg-gray-800/50"
+                                }`}
+                            >
+                              {formatTime(t)}
+                            </button>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {status === "error" && (
+                      <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-base">
+                        Something went wrong. Please try again.
+                      </div>
+                    )}
+
+                    <div className="flex gap-3 mt-3">
+                      <button
+                        type="button"
+                        onClick={() => { setStep(1); setStatus("idle") }}
+                        className="px-6 py-4 rounded-xl border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-all"
+                      >
+                        Back
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleStep2}
+                        disabled={!selectedDate || !selectedTime || status === "loading"}
+                        className="flex-1 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 disabled:opacity-50 text-white text-lg font-semibold transition-all duration-200 shadow-lg shadow-emerald-500/20"
+                      >
+                        {status === "loading" ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                            </svg>
+                            Booking...
+                          </span>
+                        ) : "Confirm Booking"}
+                      </button>
+                    </div>
+                  </div>
                 )}
               </div>
             </motion.div>

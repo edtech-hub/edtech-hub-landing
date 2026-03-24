@@ -1,101 +1,348 @@
-import type { Metadata } from "next"
+"use client"
+
 import Link from "next/link"
+import { useState } from "react"
+import { motion } from "framer-motion"
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Insights on web development, mobile apps, AI, and cloud engineering from the Ed-Astra team.",
-}
-
+// SEO-optimized real blog data
 const posts = [
-  { slug: "building-scalable-apis-nodejs", title: "Building Scalable APIs with Node.js & Express", excerpt: "A deep dive into designing production-ready REST APIs with authentication, rate limiting, and automated testing.", date: "Jan 2025", tags: ["Backend", "Node.js"], featured: true },
-  { slug: "flutter-vs-react-native-2025", title: "Flutter vs React Native in 2025", excerpt: "Which cross-platform framework should you choose? We compare performance, DX, and ecosystem maturity.", date: "Dec 2024", tags: ["Mobile"], featured: false },
-  { slug: "ai-transforming-software-dev", title: "How AI is Transforming Software Development", excerpt: "From code generation to automated testing — how AI tools are reshaping the way we build software.", date: "Nov 2024", tags: ["AI", "Dev Tools"], featured: false },
-  { slug: "aws-deployment-best-practices", title: "AWS Deployment Best Practices for Startups", excerpt: "A practical guide to deploying Node.js and Next.js apps on AWS EC2 with S3, CloudFront, and CI/CD.", date: "Oct 2024", tags: ["Cloud", "AWS"], featured: false },
-  { slug: "nextjs-app-router-guide", title: "Next.js App Router: Complete Guide", excerpt: "Everything you need to know about the App Router — layouts, loading states, server components, and more.", date: "Sep 2024", tags: ["Frontend", "Next.js"], featured: false },
-  { slug: "mongodb-schema-design", title: "MongoDB Schema Design for High-Traffic Apps", excerpt: "Practical patterns for schema design, indexing strategies, and query optimization in MongoDB.", date: "Aug 2024", tags: ["Database", "MongoDB"], featured: false },
+  {
+    slug: "nextjs-14-server-components-performance-optimization",
+    title: "Next.js 14 Server Components: The Ultimate Guide to Performance Optimization",
+    excerpt: "Learn how React Server Components in Next.js 14 can reduce your JavaScript bundle by up to 70%, improve Core Web Vitals, and deliver lightning-fast user experiences. We cover streaming, suspense boundaries, and real-world implementation patterns.",
+    date: "March 2026",
+    readTime: "12 min read",
+    author: "Ed-Astra Team",
+    tags: ["Next.js", "React", "Performance"],
+    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&q=80&fit=crop",
+    featured: true,
+    category: "FRONTEND"
+  },
+  {
+    slug: "building-ai-powered-saas-applications-2026",
+    title: "Building AI-Powered SaaS Applications: A Complete Technical Guide for 2026",
+    excerpt: "From integrating OpenAI GPT-4 and Claude APIs to building custom ML pipelines, discover how to architect scalable AI-first SaaS products. Includes cost optimization strategies, prompt engineering best practices, and production deployment patterns.",
+    date: "March 2026",
+    readTime: "18 min read",
+    author: "Ed-Astra Team",
+    tags: ["AI", "SaaS", "Machine Learning"],
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&fit=crop",
+    featured: false,
+    category: "AI & ML"
+  },
+  {
+    slug: "flutter-vs-react-native-cross-platform-development-2026",
+    title: "Flutter vs React Native in 2026: Which Cross-Platform Framework Should You Choose?",
+    excerpt: "An in-depth comparison of Flutter 4.0 and React Native's New Architecture. We analyze performance benchmarks, developer experience, ecosystem maturity, and help you make the right choice for your mobile app project.",
+    date: "February 2026",
+    readTime: "15 min read",
+    author: "Ed-Astra Team",
+    tags: ["Flutter", "React Native", "Mobile Development"],
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80&fit=crop",
+    featured: false,
+    category: "MOBILE"
+  },
+  {
+    slug: "aws-serverless-architecture-cost-optimization",
+    title: "AWS Serverless Architecture: How We Reduced Cloud Costs by 60% for Our Clients",
+    excerpt: "A detailed case study on migrating from traditional EC2 infrastructure to a serverless architecture using AWS Lambda, API Gateway, DynamoDB, and EventBridge. Learn our cost optimization strategies and performance tuning techniques.",
+    date: "February 2026",
+    readTime: "14 min read",
+    author: "Ed-Astra Team",
+    tags: ["AWS", "Serverless", "Cloud Architecture"],
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80&fit=crop",
+    featured: false,
+    category: "CLOUD"
+  },
+  {
+    slug: "typescript-design-patterns-enterprise-applications",
+    title: "TypeScript Design Patterns for Enterprise Applications: A Practical Guide",
+    excerpt: "Master advanced TypeScript patterns including dependency injection, repository pattern, CQRS, and event sourcing. Real code examples from production applications serving millions of users with clean, maintainable architecture.",
+    date: "January 2026",
+    readTime: "20 min read",
+    author: "Ed-Astra Team",
+    tags: ["TypeScript", "Design Patterns", "Architecture"],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&fit=crop",
+    featured: false,
+    category: "BACKEND"
+  },
+  {
+    slug: "postgresql-performance-tuning-high-traffic-applications",
+    title: "PostgreSQL Performance Tuning: Handling 100K+ Queries Per Second",
+    excerpt: "Deep dive into PostgreSQL optimization including query planning, index strategies, connection pooling with PgBouncer, read replicas, and partitioning. Based on our experience scaling databases for high-traffic fintech applications.",
+    date: "January 2026",
+    readTime: "16 min read",
+    author: "Ed-Astra Team",
+    tags: ["PostgreSQL", "Database", "Performance"],
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&q=80&fit=crop",
+    featured: false,
+    category: "DATABASE"
+  },
+  {
+    slug: "ux-design-principles-conversion-optimization",
+    title: "UX Design Principles That Increased Our Client's Conversion Rate by 340%",
+    excerpt: "A comprehensive breakdown of the UX redesign process that transformed an e-commerce platform. Learn about user research methodologies, A/B testing frameworks, micro-interactions, and the psychology behind high-converting interfaces.",
+    date: "December 2025",
+    readTime: "13 min read",
+    author: "Ed-Astra Team",
+    tags: ["UX Design", "Conversion", "Case Study"],
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80&fit=crop",
+    featured: false,
+    category: "DESIGN"
+  },
+  {
+    slug: "microservices-kubernetes-deployment-guide",
+    title: "Microservices on Kubernetes: A Production-Ready Deployment Guide",
+    excerpt: "Everything you need to know about deploying microservices to Kubernetes including service mesh with Istio, observability with Prometheus and Grafana, CI/CD pipelines with ArgoCD, and zero-downtime deployment strategies.",
+    date: "December 2025",
+    readTime: "22 min read",
+    author: "Ed-Astra Team",
+    tags: ["Kubernetes", "Microservices", "DevOps"],
+    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80&fit=crop",
+    featured: false,
+    category: "DEVOPS"
+  },
+  {
+    slug: "startup-mvp-development-lean-methodology",
+    title: "From Idea to MVP in 6 Weeks: Our Lean Development Methodology for Startups",
+    excerpt: "Discover the exact process we use to help startups validate their ideas and launch MVPs quickly. Includes our tech stack recommendations, sprint planning templates, user feedback loops, and post-launch iteration strategies.",
+    date: "November 2025",
+    readTime: "11 min read",
+    author: "Ed-Astra Team",
+    tags: ["Startup", "MVP", "Agile"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&fit=crop",
+    featured: false,
+    category: "BUSINESS"
+  },
 ]
 
-const allTags = ["All", "Backend", "Frontend", "Mobile", "AI", "Cloud", "Database"]
+const allTags = ["All", "Frontend", "Backend", "Mobile", "AI & ML", "Cloud", "DevOps", "Design", "Database", "Business"]
 
 export default function BlogsPage() {
+  const [activeTag, setActiveTag] = useState("All")
   const featured = posts.find((p) => p.featured)
-  const rest = posts.filter((p) => !p.featured)
+  const filteredPosts = activeTag === "All"
+    ? posts.filter((p) => !p.featured)
+    : posts.filter((p) => !p.featured && (p.tags.some(t => t.toLowerCase().includes(activeTag.toLowerCase())) || p.category.toLowerCase().includes(activeTag.toLowerCase())))
 
   return (
-    <div className="min-h-screen bg-gray-950 pt-24">
-      <section className="py-20 text-center px-4">
-        <span className="text-sm text-blue-400 font-medium uppercase tracking-widest">Insights</span>
-        <h1 className="mt-3 text-4xl sm:text-5xl font-bold text-white">
-          The Ed-Astra{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Blog</span>
-        </h1>
-        <p className="mt-4 text-gray-400 max-w-xl mx-auto">
-          Engineering insights, tutorials, and case studies from our team.
-        </p>
+    <div className="min-h-screen bg-[#070b12] pt-24">
+      {/* Hero Section */}
+      <section className="py-24 text-center px-4 relative overflow-hidden">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 via-transparent to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-3xl" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="relative z-10"
+        >
+          <span className="inline-block px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-400 font-semibold uppercase tracking-[0.2em] mb-6">
+            Insights & Resources
+          </span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
+            The Ed-Astra{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">Blog</span>
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Engineering insights, technical deep-dives, and case studies from our team.
+            Learn how we build scalable software for startups and enterprises.
+          </p>
+        </motion.div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        {/* Tag filter */}
-        <div className="flex flex-wrap gap-2 mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+        {/* Tag Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap gap-3 mb-14 justify-center"
+        >
           {allTags.map((tag) => (
-            <button key={tag} className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${tag === "All" ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white"}`}>
+            <button
+              key={tag}
+              onClick={() => setActiveTag(tag)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${tag === activeTag
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25"
+                  : "bg-gray-800/60 text-gray-400 hover:text-white hover:bg-gray-700/60 border border-gray-700/50"
+                }`}
+            >
               {tag}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Featured post */}
-        {featured && (
-          <div className="mb-10 p-8 rounded-2xl bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-500/20 hover:border-blue-500/40 transition-all">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {featured.tags.map((t) => (
-                <span key={t} className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-xs">{t}</span>
-              ))}
-              <span className="px-2 py-0.5 rounded bg-yellow-500/10 text-yellow-400 text-xs">Featured</span>
-            </div>
-            <h2 className="text-2xl font-bold text-white mb-3">{featured.title}</h2>
-            <p className="text-gray-400 mb-4">{featured.excerpt}</p>
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-500">{featured.date}</span>
-              <Link href={`/blogs/${featured.slug}`} className="text-sm text-blue-400 hover:text-blue-300 font-medium">
-                Read More →
-              </Link>
-            </div>
-          </div>
+        {/* Featured Post */}
+        {featured && activeTag === "All" && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-16"
+          >
+            <Link href={`/blogs/${featured.slug}`}>
+              <div className="group relative rounded-3xl overflow-hidden border border-gray-800/60 hover:border-emerald-500/40 transition-all duration-500">
+                <div className="grid lg:grid-cols-2 gap-0">
+                  {/* Image */}
+                  <div className="relative h-[300px] lg:h-[480px] overflow-hidden">
+                    <img
+                      src={featured.image}
+                      alt={featured.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#070b12] hidden lg:block" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070b12] via-transparent to-transparent lg:hidden" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative p-8 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-gray-900/80 to-gray-900/40">
+                    <div className="flex flex-wrap items-center gap-3 mb-6">
+                      <span className="px-4 py-1.5 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-bold tracking-wider border border-emerald-500/30">
+                        {featured.category}
+                      </span>
+                      <span className="px-3 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 text-xs font-bold tracking-wider border border-yellow-500/30">
+                        ✦ FEATURED
+                      </span>
+                    </div>
+                    <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-emerald-400 transition-colors duration-300">
+                      {featured.title}
+                    </h2>
+                    <p className="text-gray-400 text-lg mb-6 leading-relaxed line-clamp-3">
+                      {featured.excerpt}
+                    </p>
+                    <div className="flex items-center gap-6 text-sm text-gray-500">
+                      <span className="flex items-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        {featured.date}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {featured.readTime}
+                      </span>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="absolute bottom-8 right-8 w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500 transition-all duration-300">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
         )}
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rest.map((post) => (
-            <div key={post.slug} className="p-6 rounded-2xl bg-gray-900/60 border border-gray-800/60 hover:border-gray-700 transition-all flex flex-col">
-              <div className="flex flex-wrap gap-1.5 mb-3">
-                {post.tags.map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs">{t}</span>
-                ))}
-              </div>
-              <h3 className="text-base font-semibold text-white mb-2 flex-1">{post.title}</h3>
-              <p className="text-sm text-gray-500 mb-4 line-clamp-2">{post.excerpt}</p>
-              <div className="flex items-center justify-between pt-4 border-t border-gray-800/60">
-                <span className="text-xs text-gray-600">{post.date}</span>
-                <Link href={`/blogs/${post.slug}`} className="text-xs text-blue-400 hover:text-blue-300 font-medium">
-                  Read More →
-                </Link>
-              </div>
-            </div>
+        {/* Blog Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredPosts.map((post, index) => (
+            <motion.div
+              key={post.slug}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+            >
+              <Link href={`/blogs/${post.slug}`}>
+                <div className="group h-full rounded-2xl overflow-hidden border border-gray-800/60 bg-gray-900/30 hover:border-gray-700 hover:shadow-2xl hover:shadow-emerald-500/5 transition-all duration-300 flex flex-col">
+                  {/* Image */}
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1.5 rounded-full text-xs font-bold tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                        {post.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-1">
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} className="px-2.5 py-1 rounded-lg bg-gray-800/80 text-gray-400 text-xs font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <h3 className="text-xl font-bold text-white mb-3 leading-tight group-hover:text-emerald-400 transition-colors line-clamp-2 flex-shrink-0">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-6 line-clamp-3 leading-relaxed flex-1">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Footer */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-800/60">
+                      <div className="flex items-center gap-4 text-xs text-gray-500">
+                        <span>{post.date}</span>
+                        <span>•</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
 
-        {/* Newsletter */}
-        <div className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/20 text-center">
-          <h3 className="text-xl font-bold text-white mb-2">Stay Updated</h3>
-          <p className="text-gray-400 text-sm mb-6">Get the latest engineering insights delivered to your inbox.</p>
-          <div className="flex gap-3 max-w-sm mx-auto">
-            <input type="email" placeholder="your@email.com" className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:border-blue-500" />
-            <button className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium">
-              Subscribe
-            </button>
+        {/* Newsletter Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-24 relative"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-emerald-500/10 rounded-3xl blur-xl" />
+          <div className="relative p-12 lg:p-16 rounded-3xl bg-gradient-to-br from-gray-900/90 to-gray-900/70 border border-emerald-500/20 backdrop-blur-sm">
+            <div className="max-w-2xl mx-auto text-center">
+              <span className="inline-block px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold tracking-wider mb-6">
+                NEWSLETTER
+              </span>
+              <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                Stay Ahead of the Curve
+              </h3>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                Get weekly insights on software development, AI trends, and engineering best practices delivered to your inbox.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-6 py-4 rounded-xl bg-gray-800/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                />
+                <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300">
+                  Subscribe
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-4">
+                No spam, unsubscribe anytime. Join 2,500+ developers.
+              </p>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import Portfolio from "@/components/sections/Portfolio"
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection"
 import TechStack from "@/components/sections/TechStack"
 import Contact from "@/components/sections/Contact"
+import { BlogsSection } from "@/components/sections/BlogsSection"
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <TechStack />
       <TestimonialsSection />
       <Contact />
+      <BlogsSection />
     </>
   )
 }
