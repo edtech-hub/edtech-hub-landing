@@ -37,20 +37,20 @@ const socials = [
     ),
   },
   {
-    label: "GitHub",
-    href: "https://github.com",
+    label: "Instagram",
+    href: "https://www.instagram.com/edastra.in/",
     icon: (
       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
       </svg>
     ),
   },
   {
-    label: "Twitter",
-    href: "https://twitter.com",
+    label: "Facebook",
+    href: "https://facebook.com",
     icon: (
       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
       </svg>
     ),
   },
@@ -68,66 +68,67 @@ const socials = [
 export default function Footer() {
   const { openModal } = useConsultation()
   return (
-    <footer className="bg-black relative">
-      <div className="border-t border-white/10">
+    <footer className="bg-black relative overflow-hidden">
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+        backgroundSize: '40px 40px'
+      }} />
+
+      <div className="border-t border-white/10 relative">
         <div className="w-full px-8 pt-[1.2rem] pb-8">
 
-          {/* Main grid: Brand+Contact left | Link columns right */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* Main grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0">
 
             {/* Left — Brand + Contact info */}
-            <div className="lg:col-span-4">
-              <Link href="/" className="inline-block mb-4">
+            <div className="lg:col-span-4 lg:pr-10 lg:border-r lg:border-white/[0.06]">
+              <Link href="/" className="inline-block mb-3">
                 <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400 tracking-tight">
                   Ed-Astra
                 </span>
               </Link>
-              <p className="text-base text-gray-400 leading-relaxed mb-5">
+              <p className="text-sm text-gray-500 leading-relaxed mb-5">
                 AI-powered web & mobile development agency building production-ready software faster.
               </p>
 
-              {/* Contact details with icons */}
-              <div className="space-y-3">
-                {/* Address */}
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              {/* Contact details — clean compact list */}
+              <div className="space-y-2.5">
+                <div className="flex items-start gap-2.5">
+                  <svg className="w-4 h-4 text-emerald-400/70 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <p className="text-base text-gray-400 leading-relaxed">
-                    Sai Ankura, 13/1, 2nd Cross Rd, IDBI Layout,<br />
-                    Sapthagiri Layout, Kalena Agrahara, Bengaluru,<br />
-                    Kothnur, Karnataka 560083
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    Sai Ankura, 13/1, 2nd Cross Rd,<br />
+                    Bengaluru, Karnataka 560083
                   </p>
                 </div>
 
-                {/* Email */}
-                <a href="mailto:contact@edastra.in" className="flex items-center gap-3 group">
-                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <a href="mailto:contact@edastra.in" className="flex items-center gap-2.5 group">
+                  <svg className="w-4 h-4 text-emerald-400/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span className="text-base text-gray-400 group-hover:text-white transition-colors">contact@edastra.in</span>
+                  <span className="text-sm text-gray-400 group-hover:text-emerald-400 transition-colors">contact@edastra.in</span>
                 </a>
 
-                {/* Phone / WhatsApp */}
-                <a href="https://wa.me/917305716684" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
-                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                <a href="https://wa.me/917305716684" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 group">
+                  <svg className="w-4 h-4 text-emerald-400/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <span className="text-base text-gray-400 group-hover:text-white transition-colors">+91 73057 16684</span>
+                  <span className="text-sm text-gray-400 group-hover:text-emerald-400 transition-colors">+91 73057 16684</span>
                 </a>
 
-                {/* Book Consultation */}
-                <button onClick={openModal} className="flex items-center gap-3 group">
-                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <button onClick={openModal} className="flex items-center gap-2.5 group">
+                  <svg className="w-4 h-4 text-emerald-400/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span className="text-base text-gray-400 group-hover:text-white transition-colors">Book a Consultation</span>
+                  <span className="text-sm text-gray-400 group-hover:text-emerald-400 transition-colors">Book a Consultation</span>
                 </button>
               </div>
 
               {/* Socials */}
-              <div className="flex gap-3 mt-5">
+              <div className="flex gap-2 mt-5">
                 {socials.map((s) => (
                   <a
                     key={s.label}
@@ -135,7 +136,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 text-gray-400 flex items-center justify-center transition-all duration-200 border border-white/10 hover:border-emerald-500/30"
+                    className="w-8 h-8 rounded-lg bg-white/[0.04] hover:bg-emerald-500/15 hover:text-emerald-400 text-gray-500 flex items-center justify-center transition-all duration-200 border border-white/[0.06] hover:border-emerald-500/20"
                   >
                     {s.icon}
                   </a>
@@ -143,20 +144,21 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Right — Link columns */}
-            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-12">
+            {/* Right — Link columns with consistent spacing */}
+            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:pl-12">
               {Object.entries(footerLinks).map(([section, links]) => (
                 <div key={section}>
-                  <h3 className="text-base font-semibold text-white mb-4 uppercase tracking-wider">
+                  <h3 className="text-xs font-semibold text-emerald-400/60 mb-4 uppercase tracking-[0.15em]">
                     {section}
                   </h3>
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-2">
                     {links.map((link) => (
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="text-base text-gray-400 hover:text-white transition-colors duration-200"
+                          className="text-sm text-gray-400 hover:text-white transition-colors duration-200 inline-flex items-center gap-1.5 group"
                         >
+                          <span className="w-0 group-hover:w-2 h-px bg-emerald-400 transition-all duration-200" />
                           {link.label}
                         </Link>
                       </li>
@@ -170,14 +172,15 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="w-full px-8 pt-[1.2rem] pb-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-base text-gray-500">
+      <div className="border-t border-white/[0.06] relative">
+        <div className="w-full px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-gray-600">
             &copy; {new Date().getFullYear()} Ed-Astra. Building the future, one line of code at a time.
           </p>
-          <div className="flex gap-5 text-base text-gray-500">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+          <div className="flex gap-5 text-xs text-gray-600">
+            <Link href="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy</Link>
+            <span className="text-white/10">|</span>
+            <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms</Link>
           </div>
         </div>
       </div>
