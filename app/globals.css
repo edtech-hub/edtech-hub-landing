@@ -48,11 +48,19 @@ html {
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #0a0a0f;
+  background: #1f2937;
+  border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #10b981;
   border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
 }

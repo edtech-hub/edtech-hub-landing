@@ -36,7 +36,7 @@ const blogs = [
         id: 4,
         category: "CLOUD",
         title: "AWS Serverless: How We Cut Cloud Costs by 60%",
-        description: "A case study on migrating to serverless with Lambda, API Gateway, and DynamoDB.",
+        description: "A case study on migrating to serverless with Lambda, API Gateway, and DynamoDB for massive savings.",
         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80&fit=crop",
         slug: "/blogs/aws-serverless-architecture-cost-optimization",
         readTime: "14 min",
@@ -61,66 +61,84 @@ const blogs = [
     },
 ]
 
+// Group blogs into pages of 3
+const totalPages = Math.ceil(blogs.length / 3)
+const PAGE_SLICES = Array.from({ length: totalPages }, (_, i) => blogs.slice(i * 3, i * 3 + 3))
+
 export function BlogsSection() {
     const scrollRef = useRef<HTMLDivElement>(null)
-    const [canScrollLeft, setCanScrollLeft] = useState(false)
-    const [canScrollRight, setCanScrollRight] = useState(true)
+    const [page, setPage] = useState(0)
+    const pageRef = useRef(0)
+    const autoRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-    const checkScroll = useCallback(() => {
+    const goTo = useCallback((p: number) => {
         const el = scrollRef.current
         if (!el) return
-        setCanScrollLeft(el.scrollLeft > 0)
-        setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10)
+        el.scrollTo({ left: p * el.clientWidth, behavior: "smooth" })
+        setPage(p)
+        pageRef.current = p
     }, [])
 
-    useEffect(() => {
-        checkScroll()
-        const el = scrollRef.current
-        if (el) {
-            el.addEventListener("scroll", checkScroll)
-            return () => el.removeEventListener("scroll", checkScroll)
-        }
-    }, [checkScroll])
+    const stepForward = useCallback(() => {
+        goTo((pageRef.current + 1) % totalPages)
+    }, [goTo])
 
-    const scroll = (direction: "left" | "right") => {
+    // Auto-play
+    useEffect(() => {
+        autoRef.current = setInterval(stepForward, 5000)
+        return () => { if (autoRef.current) clearInterval(autoRef.current) }
+    }, [stepForward])
+
+    // Sync page on manual scroll
+    useEffect(() => {
         const el = scrollRef.current
         if (!el) return
-        const cardWidth = 560
-        el.scrollBy({ left: direction === "left" ? -cardWidth : cardWidth, behavior: "smooth" })
+        const onScroll = () => {
+            const p = Math.round(el.scrollLeft / el.clientWidth)
+            setPage(p)
+            pageRef.current = p
+        }
+        el.addEventListener("scroll", onScroll, { passive: true })
+        return () => el.removeEventListener("scroll", onScroll)
+    }, [])
+
+    const handleArrow = (dir: 1 | -1) => {
+        const next = (pageRef.current + dir + totalPages) % totalPages
+        goTo(next)
+        if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 5000) }
     }
 
     return (
-        <section className="py-24 bg-[#070b12] overflow-hidden">
-            <div className="w-full" style={{ padding: "0 clamp(24px,5vw,72px)" }}>
+        <section className="py-24 bg-[#070b12]">
+            <div className="max-w-7xl mx-auto px-6">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
-                    className="text-center mb-14"
+                    className="text-center mb-16"
                 >
                     <span className="text-sm text-emerald-400 font-semibold uppercase tracking-[0.2em] mb-4 block">
-                        Know More
+                        Latest Insights
                     </span>
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-6">
-                        Blogs
+                    <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+                        From Our{" "}
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">
+                            Blog
+                        </span>
                     </h2>
                     <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                        From our desk to yours — real talk on design, development, and everything in between.
+                        Insights on design, development, and building products that matter.
                     </p>
                 </motion.div>
 
-                {/* Carousel */}
-                <div className="relative">
+                {/* Page-based Scroll Container */}
+                <div className="relative px-12">
                     {/* Left Arrow */}
                     <button
-                        onClick={() => scroll("left")}
-                        disabled={!canScrollLeft}
-                        className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-gray-900/90 border border-gray-700/80 flex items-center justify-center transition-all duration-200 ${canScrollLeft
-                            ? "text-gray-300 hover:text-white hover:border-emerald-500/60 hover:bg-gray-800"
-                            : "text-gray-600 cursor-not-allowed opacity-50"
-                            }`}
+                        onClick={() => handleArrow(-1)}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors bg-gray-900/80 border border-gray-700/80 hover:border-emerald-500/60"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -129,98 +147,110 @@ export function BlogsSection() {
 
                     {/* Right Arrow */}
                     <button
-                        onClick={() => scroll("right")}
-                        disabled={!canScrollRight}
-                        className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-gray-900/90 border border-gray-700/80 flex items-center justify-center transition-all duration-200 ${canScrollRight
-                            ? "text-gray-300 hover:text-white hover:border-emerald-500/60 hover:bg-gray-800"
-                            : "text-gray-600 cursor-not-allowed opacity-50"
-                            }`}
+                        onClick={() => handleArrow(1)}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors bg-gray-900/80 border border-gray-700/80 hover:border-emerald-500/60"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
 
-                    {/* Cards Container */}
+                    {/* Scrollable Pages - 3 cards per page */}
                     <div
                         ref={scrollRef}
-                        className="flex gap-6 overflow-x-auto scrollbar-hide px-14 pb-4"
-                        style={{ scrollSnapType: "x mandatory" }}
+                        className="flex overflow-x-auto pb-4"
+                        style={{ scrollSnapType: "x mandatory", scrollbarWidth: "thin", scrollbarColor: "#10b981 #1f2937" }}
                     >
-                        {blogs.map((blog, index) => (
-                            <motion.div
-                                key={blog.id}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="flex-shrink-0 w-[520px] group"
+                        {PAGE_SLICES.map((pageBlogs, pageIndex) => (
+                            <div
+                                key={pageIndex}
+                                className="flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                                 style={{ scrollSnapAlign: "start" }}
                             >
-                                <Link href={blog.slug}>
-                                    <div className="relative h-[420px] rounded-2xl overflow-hidden border border-gray-800/60 bg-gray-900/40 transition-all duration-300 hover:border-gray-700 hover:shadow-2xl hover:shadow-emerald-500/5">
-                                        {/* Image */}
-                                        <img
-                                            src={blog.image}
-                                            alt={blog.title}
-                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                        />
+                                {pageBlogs.map((blog, index) => (
+                                    <motion.div
+                                        key={blog.id}
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    >
+                                        <Link href={blog.slug}>
+                                            <article className="group h-full rounded-2xl overflow-hidden bg-gray-900/40 border border-gray-800/60 hover:border-emerald-500/30 transition-all duration-300 flex flex-col">
+                                                {/* Image */}
+                                                <div className="relative h-48 overflow-hidden">
+                                                    <img
+                                                        src={blog.image}
+                                                        alt={blog.title}
+                                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
 
-                                        {/* Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
+                                                    {/* Category & Read Time */}
+                                                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                                                        <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                                                            {blog.category}
+                                                        </span>
+                                                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-black/40 text-gray-300 backdrop-blur-sm flex items-center gap-1.5">
+                                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                            {blog.readTime}
+                                                        </span>
+                                                    </div>
+                                                </div>
 
-                                        {/* Category Badge & Read Time */}
-                                        <div className="absolute top-5 left-5 right-5 flex items-center justify-between">
-                                            <span className="px-4 py-2 rounded-full text-xs font-bold tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
-                                                {blog.category}
-                                            </span>
-                                            <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-black/40 text-gray-300 backdrop-blur-sm flex items-center gap-1.5">
-                                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                                {blog.readTime}
-                                            </span>
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="absolute bottom-0 left-0 right-0 p-6">
-                                            <div className="flex items-end justify-between gap-4">
-                                                <div className="flex-1">
-                                                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors line-clamp-2">
+                                                {/* Content */}
+                                                <div className="p-5 flex flex-col flex-1">
+                                                    <h3 className="text-base font-semibold text-white mb-2 leading-snug group-hover:text-emerald-400 transition-colors line-clamp-2">
                                                         {blog.title}
                                                     </h3>
-                                                    <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed">
+                                                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 flex-1">
                                                         {blog.description}
                                                     </p>
+
+                                                    {/* Arrow button */}
+                                                    <div className="mt-4 flex items-center justify-end">
+                                                        <div className="w-9 h-9 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-400 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                {/* Arrow Button */}
-                                                <div className="flex-shrink-0 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white group-hover:bg-emerald-500 group-hover:border-emerald-500 transition-all duration-300">
-                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </motion.div>
+                                            </article>
+                                        </Link>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Page Dots */}
+                    <div className="flex justify-center gap-2 mt-8">
+                        {PAGE_SLICES.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => { goTo(i); if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 5000) } }}
+                                className={`w-2 h-2 rounded-full transition-all duration-300 ${page === i ? "bg-emerald-400 w-6" : "bg-gray-600 hover:bg-gray-500"}`}
+                            />
                         ))}
                     </div>
                 </div>
 
-                {/* View All Blogs Link */}
+                {/* View All Button */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="text-center mt-10"
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="text-center mt-12"
                 >
                     <Link
                         href="/blogs"
-                        className="inline-flex items-center gap-2 px-8 py-3.5 text-base rounded-xl border border-gray-700 hover:border-emerald-500/50 text-gray-300 hover:text-white transition-all duration-200"
+                        className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-gray-700 text-white font-medium hover:bg-white hover:text-black hover:border-white transition-all duration-300"
                     >
-                        View All Blogs
+                        View All Articles
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
