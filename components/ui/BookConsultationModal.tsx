@@ -442,8 +442,8 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                             type="button"
                             onClick={() => setSelectedDate(d.value)}
                             className={`py-2.5 px-3 rounded-xl text-sm font-medium border transition-all ${selectedDate === d.value
-                                ? "bg-emerald-500 border-emerald-500 text-white shadow-md shadow-emerald-500/25"
-                                : "border-gray-700/60 text-gray-400 hover:border-emerald-500/50 hover:text-white bg-gray-800/50"
+                              ? "bg-emerald-500 border-emerald-500 text-white shadow-md shadow-emerald-500/25"
+                              : "border-gray-700/60 text-gray-400 hover:border-emerald-500/50 hover:text-white bg-gray-800/50"
                               }`}
                           >
                             {d.label}
@@ -462,8 +462,8 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                               type="button"
                               onClick={() => setSelectedTime(t)}
                               className={`py-3 rounded-xl text-sm font-medium border transition-all ${selectedTime === t
-                                  ? "bg-emerald-500 border-emerald-500 text-white shadow-md shadow-emerald-500/25"
-                                  : "border-gray-700/60 text-gray-400 hover:border-emerald-500/50 hover:text-white bg-gray-800/50"
+                                ? "bg-emerald-500 border-emerald-500 text-white shadow-md shadow-emerald-500/25"
+                                : "border-gray-700/60 text-gray-400 hover:border-emerald-500/50 hover:text-white bg-gray-800/50"
                                 }`}
                             >
                               {formatTime(t)}
