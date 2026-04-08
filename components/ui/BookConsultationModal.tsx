@@ -323,7 +323,7 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="John Doe"
+                        placeholder="Enter your full name"
                         className={inputClass}
                       />
                     </div>
