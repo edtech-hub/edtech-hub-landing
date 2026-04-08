@@ -120,7 +120,7 @@ export default function Contact() {
     setFormError(false)
     setBookingStatus("loading")
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+      const apiUrl = "https://apiweb.edastra.in"
 
       // Initiate lets-talk booking with form data
       const res = await fetch(`${apiUrl}/api/lets-talk/initiate`, {
@@ -169,7 +169,7 @@ export default function Contact() {
     if (!selectedDate || !selectedTime || !bookingId) return
     setBookingStatus("loading")
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+      const apiUrl = "https://apiweb.edastra.in"
       const timeMap: Record<string, string> = {
         "9:00 AM": "09:00", "10:00 AM": "10:00", "11:00 AM": "11:00", "12:00 PM": "12:00",
         "2:00 PM": "14:00", "3:00 PM": "15:00", "4:00 PM": "16:00", "5:00 PM": "17:00",

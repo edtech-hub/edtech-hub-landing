@@ -169,7 +169,7 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
     e.preventDefault()
     setStatus("loading")
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+      const apiUrl = "https://apiweb.edastra.in"
       const res = await fetch(`${apiUrl}/api/book-consultation/initiate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -193,7 +193,7 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
     if (!selectedDate || !selectedTime || !bookingId) return
     setStatus("loading")
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+      const apiUrl = "https://apiweb.edastra.in"
       const res = await fetch(`${apiUrl}/api/book-consultation/${bookingId}/confirm`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
