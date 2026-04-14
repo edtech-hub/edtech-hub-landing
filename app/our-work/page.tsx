@@ -5,196 +5,114 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
-const filterTags = [
-  "ALL",
-  "NEW PROJECTS",
-  "CREATIVE",
-  "ONLINE STORE",
-  "WEB SOLUTION",
-  "LANDING PAGE",
-  "INTERIOR DESIGN / ARCHITECTURE",
-  "ENTERTAINMENT / LEISURE",
-]
-
-// Projects organized for the grid layout
-// Each row: 2 horizontal cards on left + 1 vertical card on right
+// Projects data for the bento grid
 const projects = [
-  // Row 1 - Left horizontal 1
   {
     id: 1,
     title: "Reno Research",
     category: "Website",
     description: "Less stress, better spaces — renovation done right in Singapore.",
     fullDescription: "A comprehensive renovation platform connecting homeowners with trusted contractors across Singapore. The platform features advanced project management tools, real-time progress tracking, and a curated marketplace for interior design inspiration that helps users visualize their dream spaces before construction begins.\n\nWe built an intuitive dashboard that allows homeowners to compare quotes, track milestones, and communicate directly with contractors. The integrated review system and verified contractor badges ensure transparency and trust throughout the renovation journey.",
-    image: "/projects/renoproject.png",
-    tags: ["ALL", "WEB SOLUTION", "INTERIOR DESIGN / ARCHITECTURE"],
-    layout: "horizontal" as const,
+    image: "/assets/RenoResearch.png",
     stack: ["Next.js", "Node.js", "MongoDB"],
     results: ["Centralized data management", "Real-time collaboration tools", "Custom reporting dashboards"],
     client: "Reno Research Pte Ltd",
     purpose: "Streamline the renovation journey for homeowners in Singapore",
     liveUrl: "#",
   },
-  // Row 1 - Left horizontal 2
   {
     id: 2,
-    title: "Ticgetz",
-    category: "Website",
-    description: "Browse, book, and go — it's all here. Everything You Need in One Place.",
-    fullDescription: "A modern event ticketing platform that revolutionizes how people discover and attend events. From concerts and festivals to workshops and conferences, users can seamlessly browse, purchase, and manage their tickets with integrated QR code verification for hassle-free entry.\n\nThe platform features smart recommendations based on user preferences, social sharing capabilities, and a robust backend for event organizers to manage sales, track attendance, and analyze audience demographics in real-time.",
-    image: "/projects/ticgetz_project.jpg",
-    tags: ["ALL", "WEB SOLUTION", "ENTERTAINMENT / LEISURE"],
-    layout: "horizontal" as const,
-    stack: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    results: ["10K+ tickets sold", "QR code check-in system", "Real-time analytics dashboard"],
-    client: "Ticgetz Entertainment",
-    purpose: "Create a seamless event discovery and ticketing experience",
-    liveUrl: "#",
-  },
-  // Row 1 - Right vertical
-  {
-    id: 3,
-    title: "Reno Research",
-    category: "Mobile App",
-    description: "One stop solution for your renovation needs at your fingertips.",
-    fullDescription: "A mobile-first solution empowering users to browse designer portfolios, get instant quotes, and manage renovation projects entirely from their smartphones. The app features cutting-edge AR room visualization that lets homeowners see how different designs would look in their actual space.\n\nWith in-app communication tools, push notifications for project updates, and secure payment integration, users can manage every aspect of their renovation without ever needing to switch platforms or make phone calls.",
-    image: "/projects/renoproject2.png",
-    tags: ["ALL", "NEW PROJECTS", "INTERIOR DESIGN / ARCHITECTURE"],
-    layout: "vertical" as const,
-    stack: ["Next.js", "Node.js", "MongoDB", "AWS S3"],
-    results: ["200+ designers onboarded", "3D portfolio visualization", "In-app project management"],
-    client: "Reno Research Pte Ltd",
-    purpose: "Mobile companion app for renovation management",
-    liveUrl: "#",
-  },
-  // Row 2 - Left horizontal 1
-  {
-    id: 4,
-    title: "WeddingClickz",
-    category: "Quotation Generator",
-    description: "From inquiry to quote — painlessly simple.",
-    fullDescription: "An intelligent quotation system designed specifically for wedding photographers and videographers. The platform automatically generates professional, branded quotes based on package selections, venue details, event duration, and special requirements—eliminating hours of manual work.\n\nClients receive beautifully formatted proposals via email with clear pricing breakdowns, package comparisons, and one-click booking confirmation. The system also tracks follow-ups and sends automated reminders to maximize conversion rates.",
-    image: "/projects/weddingclickzproject.png",
-    tags: ["ALL", "CREATIVE", "WEB SOLUTION"],
-    layout: "horizontal" as const,
-    stack: ["Flutter", "Firebase", "Node.js"],
-    results: ["Streamlined vendor booking", "Live event timeline", "In-app messaging & payments"],
-    client: "WeddingClickz Studio",
-    purpose: "Automate quotation and booking for wedding photography",
-    liveUrl: "#",
-  },
-  // Row 2 - Left horizontal 2
-  {
-    id: 5,
-    title: "Reno Research",
-    category: "Designer App",
-    description: "Accessing made easy for how designers can update their information at fingertips.",
-    fullDescription: "A dedicated portal built for interior designers to professionally showcase their work, manage incoming client inquiries, and maintain up-to-date profiles. The platform includes comprehensive portfolio management with drag-and-drop organization and automatic image optimization.\n\nDesigners benefit from lead tracking dashboards, analytics on profile views and engagement, and tools to quickly respond to client requests. The app also features a scheduling system for consultations and automatic invoice generation.",
-    image: "/projects/RenoResearch.png",
-    tags: ["ALL", "NEW PROJECTS", "INTERIOR DESIGN / ARCHITECTURE"],
-    layout: "horizontal" as const,
-    stack: ["Next.js", "Node.js", "MongoDB"],
-    results: ["Centralized data management", "Real-time collaboration tools", "Custom reporting dashboards"],
-    client: "Reno Research Pte Ltd",
-    purpose: "Empower designers with professional portfolio management",
-    liveUrl: "#",
-  },
-  // Row 2 - Right vertical
-  {
-    id: 6,
-    title: "FLOW",
-    category: "Website",
-    description: "Website crafted for the dynamic concept that they are.",
-    fullDescription: "A visually stunning website for a creative fitness studio that seamlessly blends yoga, dance, and holistic wellness programs. The design captures their dynamic philosophy through fluid animations, immersive imagery, and an intuitive class booking system that makes scheduling effortless.\n\nThe platform includes membership management, instructor profiles, virtual class streaming integration, and a community forum where members can connect. Every element was crafted to reflect the studio's commitment to movement and mindfulness.",
-    image: "/projects/flowproject.jpg",
-    tags: ["ALL", "CREATIVE", "LANDING PAGE"],
-    layout: "vertical" as const,
-    stack: ["Next.js", "Node.js", "PostgreSQL"],
-    results: ["Unified campaign dashboard", "Automated budget allocation", "Cross-channel performance analytics"],
-    client: "FLOW Studio",
-    purpose: "Create an immersive digital presence for wellness brand",
-    liveUrl: "#",
-  },
-  // Row 3 - Left horizontal 1
-  {
-    id: 7,
-    title: "Reno Research",
-    category: "Mobile App",
-    description: "One stop solution for your renovation needs at your fingertips specialized for Singapore.",
-    fullDescription: "A localized version of the renovation app tailored specifically for the Singapore market, addressing unique requirements like HDB renovation guidelines and BCA compliance. The app connects homeowners with a vetted network of local contractors who understand Singapore's building regulations.\n\nFeatures include permit application tracking, neighborhood noise restriction reminders, and integration with local suppliers for materials pricing. The app has become an essential tool for Singapore homeowners embarking on their renovation journey.",
-    image: "/projects/renoproject2.png",
-    tags: ["ALL", "INTERIOR DESIGN / ARCHITECTURE"],
-    layout: "horizontal" as const,
-    stack: ["Flutter", "Node.js", "MongoDB"],
-    results: ["60% reduction in manual work", "Automated reports & invoicing", "Scalable multi-branch backend"],
-    client: "Reno Research Pte Ltd",
-    purpose: "Singapore-focused renovation management solution",
-    liveUrl: "#",
-  },
-  // Row 3 - Left horizontal 2
-  {
-    id: 8,
-    title: "Reno Research",
-    category: "Website",
-    description: "Less stress, better spaces — renovation done right in Singapore.",
-    fullDescription: "The flagship website for Reno Research featuring comprehensive service listings, stunning project showcases, and an intuitive inquiry system designed to convert visitors into clients. Built with performance in mind and fully optimized for local SEO to capture Singapore's renovation market.\n\nThe site includes interactive before/after galleries, detailed case studies, cost calculators, and a blog section with renovation tips. Integration with the mobile app ensures a seamless experience across all touchpoints.",
-    image: "/projects/renoproject.png",
-    tags: ["ALL", "WEB SOLUTION", "INTERIOR DESIGN / ARCHITECTURE"],
-    layout: "horizontal" as const,
-    stack: ["Next.js", "Node.js", "MongoDB"],
-    results: ["Centralized data management", "Real-time collaboration tools", "Custom reporting dashboards"],
-    client: "Reno Research Pte Ltd",
-    purpose: "Establish strong digital presence for renovation services",
-    liveUrl: "#",
-  },
-  // Row 3 - Right vertical
-  {
-    id: 9,
     title: "WeddingClickz",
     category: "Website",
     description: "Every client has a story. Ours is telling yours to life.",
     fullDescription: "A portfolio-driven website that transforms how wedding photographers showcase their artistry. The platform features stunning full-screen galleries with lazy loading, heartfelt client testimonials with video integration, and seamless booking capabilities that make it easy for couples to secure their special day.\n\nEvery design element was crafted to evoke emotion and tell a story. From the elegant typography to the smooth transitions between galleries, the website reflects the studio's commitment to capturing love stories and creates an immersive experience that converts visitors into clients.",
-    image: "/projects/weddingclickzproject.png",
-    tags: ["ALL", "CREATIVE", "WEB SOLUTION"],
-    layout: "vertical" as const,
+    image: "/assets/weddingclickzproject.png",
     stack: ["Flutter", "Firebase", "Node.js"],
     results: ["Streamlined vendor booking", "Live event timeline", "In-app messaging & payments"],
     client: "WeddingClickz Studio",
     purpose: "Showcase wedding photography portfolio and drive bookings",
     liveUrl: "#",
   },
+  {
+    id: 3,
+    title: "Book Your Perfect Wedding Coverage",
+    category: "Quotation Generator",
+    description: "From inquiry to quote — painlessly simple.",
+    fullDescription: "An intelligent quotation system designed specifically for wedding photographers and videographers. The platform automatically generates professional, branded quotes based on package selections, venue details, event duration, and special requirements—eliminating hours of manual work.\n\nClients receive beautifully formatted proposals via email with clear pricing breakdowns, package comparisons, and one-click booking confirmation. The system also tracks follow-ups and sends automated reminders to maximize conversion rates.",
+    image: "/assets/weddingclickztestimonials.jpg",
+    stack: ["Flutter", "Firebase", "Node.js"],
+    results: ["Streamlined vendor booking", "Live event timeline", "In-app messaging & payments"],
+    client: "WeddingClickz Studio",
+    purpose: "Automate quotation and booking for wedding photography",
+    liveUrl: "#",
+  },
+  {
+    id: 4,
+    title: "FLOW",
+    category: "Website",
+    description: "Website crafted for the dynamic concept that they are.",
+    fullDescription: "A visually stunning website for a creative fitness studio that seamlessly blends yoga, dance, and holistic wellness programs. The design captures their dynamic philosophy through fluid animations, immersive imagery, and an intuitive class booking system that makes scheduling effortless.\n\nThe platform includes membership management, instructor profiles, virtual class streaming integration, and a community forum where members can connect. Every element was crafted to reflect the studio's commitment to movement and mindfulness.",
+    image: "/assets/flowproject.jpg",
+    stack: ["Next.js", "Node.js", "PostgreSQL"],
+    results: ["Unified campaign dashboard", "Automated budget allocation", "Cross-channel performance analytics"],
+    client: "FLOW Studio",
+    purpose: "Create an immersive digital presence for wellness brand",
+    liveUrl: "#",
+  },
+  {
+    id: 5,
+    title: "Reno Research",
+    category: "Mobile App",
+    description: "One stop solution for your renovation needs at your fingertips.",
+    fullDescription: "A mobile-first solution empowering users to browse designer portfolios, get instant quotes, and manage renovation projects entirely from their smartphones. The app features cutting-edge AR room visualization that lets homeowners see how different designs would look in their actual space.\n\nWith in-app communication tools, push notifications for project updates, and secure payment integration, users can manage every aspect of their renovation without ever needing to switch platforms or make phone calls.",
+    image: "/assets/renoproject2.png",
+    stack: ["Next.js", "Node.js", "MongoDB", "AWS S3"],
+    results: ["200+ designers onboarded", "3D portfolio visualization", "In-app project management"],
+    client: "Reno Research Pte Ltd",
+    purpose: "Mobile companion app for renovation management",
+    liveUrl: "#",
+  },
+  {
+    id: 6,
+    title: "Ticgetz",
+    category: "Website",
+    description: "Browse, book, and go — it's all here.",
+    fullDescription: "A modern event ticketing platform that revolutionizes how people discover and attend events. From concerts and festivals to workshops and conferences, users can seamlessly browse, purchase, and manage their tickets with integrated QR code verification for hassle-free entry.\n\nThe platform features smart recommendations based on user preferences, social sharing capabilities, and a robust backend for event organizers to manage sales, track attendance, and analyze audience demographics in real-time.",
+    image: "/assets/ticgetz_project.jpg",
+    stack: ["React", "Node.js", "PostgreSQL", "Stripe"],
+    results: ["10K+ tickets sold", "QR code check-in system", "Real-time analytics dashboard"],
+    client: "Ticgetz Entertainment",
+    purpose: "Create a seamless event discovery and ticketing experience",
+    liveUrl: "#",
+  },
+  {
+    id: 7,
+    title: "WeddingClickz",
+    category: "Portfolio",
+    description: "Capturing moments that last forever.",
+    fullDescription: "A comprehensive gallery and portfolio system for WeddingClickz to showcase their finest work. The platform features stunning full-screen galleries with lazy loading and heartfelt client testimonials.",
+    image: "/assets/weddingclickzproject.png",
+    stack: ["Flutter", "Firebase", "Node.js"],
+    results: ["Beautiful gallery system", "Client testimonials", "Easy booking flow"],
+    client: "WeddingClickz Studio",
+    purpose: "Showcase wedding photography in stunning detail",
+    liveUrl: "#",
+  },
 ]
 
-// Group projects into rows of 3 (2 horizontal + 1 vertical)
-function groupProjectsIntoRows(projectList: typeof projects) {
-  const rows: (typeof projects)[] = []
-  for (let i = 0; i < projectList.length; i += 3) {
-    rows.push(projectList.slice(i, i + 3))
-  }
-  return rows
-}
-
 export default function OurWorkPage() {
-  const [activeFilter, setActiveFilter] = useState("ALL")
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null)
-
-  const filteredProjects =
-    activeFilter === "ALL"
-      ? projects
-      : projects.filter((p) => p.tags.includes(activeFilter))
-
-  const rows = groupProjectsIntoRows(filteredProjects)
 
   return (
     <main className="min-h-screen bg-black pt-28 pb-20">
       {/* Header Section */}
-      <section className="max-w-7xl mx-auto px-6 mb-12">
+      <section className="max-w-[1400px] mx-auto px-6 mb-10">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-emerald-400"
+            className="text-5xl sm:text-6xl lg:text-7xl text-emerald-400 font-playfair italic"
           >
             Our Works
           </motion.h1>
@@ -211,84 +129,445 @@ export default function OurWorkPage() {
         </div>
       </section>
 
-      {/* Filter Tags */}
-      <section className="max-w-7xl mx-auto px-6 mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap gap-3"
-        >
-          {filterTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setActiveFilter(tag)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${activeFilter === tag
-                ? "bg-white text-black border-white"
-                : "bg-transparent text-white border-white/30 hover:border-white/60"
-                }`}
-            >
-              {tag}
-            </button>
-          ))}
-        </motion.div>
-      </section>
+      {/* Bento Grid Layout */}
+      <section className="max-w-[1400px] mx-auto px-6 mb-16">
+        <div className="flex flex-col gap-5">
 
-      {/* Grid Layout - 2 horizontal stacked on left + 1 vertical right per row */}
-      <section className="max-w-7xl mx-auto px-6 mb-20">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeFilter}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="flex flex-col gap-4"
-          >
-            {rows.map((row, rowIndex) => (
-              <div
-                key={rowIndex}
-                className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4"
-              >
-                {/* Left side - 2 horizontal cards stacked */}
-                <div className="flex flex-col gap-4">
-                  {row[0] && (
-                    <ProjectCard
-                      key={row[0].id}
-                      project={row[0]}
-                      index={rowIndex * 3}
-                      onClick={() => setSelectedProject(row[0])}
-                      variant="horizontal"
-                    />
-                  )}
-                  {row[1] && (
-                    <ProjectCard
-                      key={row[1].id}
-                      project={row[1]}
-                      index={rowIndex * 3 + 1}
-                      onClick={() => setSelectedProject(row[1])}
-                      variant="horizontal"
-                    />
-                  )}
+          {/* Row 1: 2 Horizontal + 1 Vertical */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            {/* Reno Research - with full background image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[0])}
+              className="lg:col-span-4 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/RenoResearch.png"
+                alt="Reno Research"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-5 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <span className="text-amber-400 font-bold">R</span>
+                  </div>
+                  <span className="text-white text-sm font-medium">Reno Research</span>
                 </div>
-                {/* Right side - 1 tall vertical card */}
-                {row[2] && (
-                  <ProjectCard
-                    key={row[2].id}
-                    project={row[2]}
-                    index={rowIndex * 3 + 2}
-                    onClick={() => setSelectedProject(row[2])}
-                    variant="vertical"
-                  />
-                )}
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium text-lg">Reno Research</p>
+                    <p className="text-gray-400 text-sm">Less stress, better spaces — renovation done right.</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
               </div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+
+            {/* WeddingClickz - Horizontal card with full background image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[1])}
+              className="lg:col-span-5 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/weddingclickzproject.png"
+                alt="WeddingClickz"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-5 flex flex-col">
+                {/* Header with logo */}
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <span className="text-amber-400 font-serif">W</span>
+                  </div>
+                  <span className="text-white text-sm font-medium">WeddingClickz</span>
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium text-lg">WeddingClickz</p>
+                    <p className="text-gray-400 text-sm">Every client has a story. Ours is telling yours to life.</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Reno Research Mobile - Vertical tall card with full background */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[4])}
+              className="lg:col-span-3 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/renoproject2.png"
+                alt="Reno Research Mobile"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-4 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <span className="text-amber-400 font-bold text-xs">R</span>
+                  </div>
+                  <span className="text-white text-sm">Reno Research</span>
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium">Reno Research</p>
+                    <p className="text-gray-400 text-xs">Mobile App</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Row 2: 1 Horizontal + 1 Vertical + 1 Horizontal */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            {/* Book Your Perfect Wedding Coverage - with full background image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[2])}
+              className="lg:col-span-4 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer"
+            >
+              <Image
+                src="/assets/weddingclickztestimonials.jpg"
+                alt="Wedding Coverage"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-6 flex flex-col">
+                <div className="flex items-center gap-2 text-white/70 text-sm">
+                  <span>WeddingClickz</span>
+                  <span className="ml-auto text-xs">CONTACT</span>
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium text-lg">WeddingClickz</p>
+                    <p className="text-gray-400 text-sm">Book Your Perfect Wedding Coverage</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Ticgetz - with full background image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[5])}
+              className="lg:col-span-3 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/ticgetz_project.jpg"
+                alt="Ticgetz"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-4 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center gap-2 text-xs text-white/70">
+                  <span>TICGETZ</span>
+                  <span className="ml-auto">TICKETING</span>
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium">Ticgetz</p>
+                    <p className="text-gray-400 text-xs">Browse, book, and go — it&apos;s all here.</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* FLOW Card - Horizontal */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[3])}
+              className="lg:col-span-5 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/flowproject.jpg"
+                alt="FLOW"
+                fill
+                className="object-cover opacity-60"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-5 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center">
+                    <span className="text-white text-xs">◆</span>
+                  </div>
+                  <span className="text-white/70 text-xs">FLOW</span>
+                </div>
+
+                {/* Main content */}
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="text-center">
+                    <h3 className="text-white text-5xl font-light">Find</h3>
+                    <h3 className="text-white text-5xl font-light">Your</h3>
+                    <h3 className="text-amber-400 text-5xl font-playfair italic">Flow</h3>
+                  </div>
+
+                  {/* Phone mockup */}
+                  <div className="ml-6 hidden lg:block">
+                    <div className="w-[70px] h-[140px] bg-black rounded-xl border-2 border-gray-700 p-0.5 shadow-2xl">
+                      <div className="w-full h-full bg-gradient-to-b from-purple-900 to-purple-950 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/assets/flowproject.jpg"
+                          alt="FLOW mobile"
+                          fill
+                          className="object-cover opacity-80"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium">FLOW</p>
+                    <p className="text-gray-400 text-xs">Website curated for the dynamic concept that they are!</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Row 3: 3 cards with full background images */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            {/* Reno Research Website - with full background */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[0])}
+              className="lg:col-span-3 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/renoproject.png"
+                alt="Reno Research Website"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-4 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <span className="text-amber-400 font-bold text-xs">R</span>
+                  </div>
+                  <span className="text-white text-sm">Reno Research</span>
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium">Reno Research</p>
+                    <p className="text-gray-400 text-xs">Website</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Reno Research Dashboard - with full background */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[0])}
+              className="lg:col-span-5 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/renoproject2.png"
+                alt="Reno Research Dashboard"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-5 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <span className="text-amber-400 font-bold text-xs">R</span>
+                  </div>
+                  <span className="text-white text-sm">Reno Research</span>
+                  <span className="ml-auto text-gray-400 text-xs">Dashboard</span>
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium">Reno Research</p>
+                    <p className="text-gray-400 text-xs">Centralized management dashboard</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* WeddingClickz Portfolio - with full background */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              whileHover={{ y: -4 }}
+              onClick={() => setSelectedProject(projects[6])}
+              className="lg:col-span-4 h-[480px] relative rounded-2xl overflow-hidden group cursor-pointer bg-[#1a1a1a]"
+            >
+              <Image
+                src="/assets/weddingclickzproject.png"
+                alt="WeddingClickz Portfolio"
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute inset-0 p-4 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <span className="text-amber-400 font-serif text-sm">W</span>
+                  </div>
+                  <span className="text-white text-sm">WeddingClickz</span>
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Bottom label */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-medium">WeddingClickz</p>
+                    <p className="text-gray-400 text-xs">Portfolio & Gallery</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+        </div>
       </section>
 
       {/* Let's Connect Button */}
-      <section className="max-w-7xl mx-auto px-6 flex justify-center">
+      <section className="max-w-[1400px] mx-auto px-6 flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -329,91 +608,6 @@ export default function OurWorkPage() {
         )}
       </AnimatePresence>
     </main>
-  )
-}
-
-function ProjectCard({
-  project,
-  index,
-  onClick,
-  variant,
-}: {
-  project: (typeof projects)[0]
-  index: number
-  onClick: () => void
-  variant: "horizontal" | "vertical"
-}) {
-  // Horizontal cards have fixed height, vertical card spans full height
-  const heightClass = variant === "vertical"
-    ? "h-[300px] lg:h-full" // On mobile fixed, on desktop fills container
-    : "h-[240px]" // Horizontal cards are shorter
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.05,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      whileHover={{ y: -4 }}
-      onClick={onClick}
-      className={`relative ${heightClass} w-full rounded-2xl overflow-hidden group cursor-pointer`}
-    >
-      {/* Background Image */}
-      <Image
-        src={project.image}
-        alt={project.title}
-        fill
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-      />
-
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent transition-opacity duration-500" />
-
-      {/* Shine sweep on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%]" style={{ transition: "opacity 0.7s, transform 0.9s ease-out" }} />
-
-      {/* Default bottom bar */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="bg-black/85 backdrop-blur-sm px-5 py-4">
-          <div className="flex items-end justify-between gap-3">
-            <div className="flex-1 min-w-0">
-              <h3 className="text-white font-semibold text-lg mb-1 transition-transform duration-500 group-hover:translate-x-1">
-                {project.title}{" "}
-                <span className="text-gray-400 font-normal">- {project.category}</span>
-              </h3>
-              <p className="text-gray-400 text-sm line-clamp-1 transition-all duration-500 group-hover:text-gray-300">
-                {project.description}
-              </p>
-            </div>
-            <motion.div
-              whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center flex-shrink-0 hover:bg-white hover:text-black transition-all duration-300 text-white"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 17L17 7M17 7H7M17 7v10"
-                />
-              </svg>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-
-      {/* Border glow on hover */}
-      <div className="absolute inset-0 rounded-2xl border border-white/0 group-hover:border-white/10 transition-all duration-500 pointer-events-none" />
-    </motion.div>
   )
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import { Playfair_Display } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
 import Navbar from "@/components/layout/Navbar"
@@ -12,6 +13,13 @@ const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 })
 
 export const metadata: Metadata = {
@@ -94,7 +102,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${geistSans.variable} antialiased bg-gray-950 text-gray-100`}>
+      <body className={`${geistSans.variable} ${playfairDisplay.variable} antialiased bg-gray-950 text-gray-100`}>
         {/* Meta Pixel noscript fallback */}
         <noscript>
           <img
