@@ -11,6 +11,7 @@ export interface BlogPost {
   image: string
   category: string
   featured: boolean
+  _apiId?: string
 }
 
 // ─── Seed posts (always available — no API needed) ──────────────────────────

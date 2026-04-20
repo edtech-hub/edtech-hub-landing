@@ -3,10 +3,11 @@
 import { useRef, useState, useCallback, useEffect } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { fetchVisibleBlogs } from "@/lib/blog-api"
 
-const blogs = [
+const fallbackBlogs = [
     {
-        id: 1,
+        id: "1",
         category: "FRONTEND",
         title: "Next.js 14 Server Components: The Ultimate Performance Guide",
         description: "Learn how React Server Components can reduce your JavaScript bundle by 70% and improve Core Web Vitals significantly.",
@@ -15,7 +16,7 @@ const blogs = [
         readTime: "12 min",
     },
     {
-        id: 2,
+        id: "2",
         category: "AI & ML",
         title: "Building AI-Powered SaaS Applications in 2026",
         description: "From GPT-4 integration to custom ML pipelines — how to architect scalable AI-first products.",
@@ -24,7 +25,7 @@ const blogs = [
         readTime: "18 min",
     },
     {
-        id: 3,
+        id: "3",
         category: "MOBILE",
         title: "Flutter vs React Native: Which to Choose in 2026?",
         description: "An in-depth comparison of performance, DX, and ecosystem maturity for cross-platform development.",
@@ -33,7 +34,7 @@ const blogs = [
         readTime: "15 min",
     },
     {
-        id: 4,
+        id: "4",
         category: "CLOUD",
         title: "AWS Serverless: How We Cut Cloud Costs by 60%",
         description: "A case study on migrating to serverless with Lambda, API Gateway, and DynamoDB for massive savings.",
@@ -42,7 +43,7 @@ const blogs = [
         readTime: "14 min",
     },
     {
-        id: 5,
+        id: "5",
         category: "DESIGN",
         title: "UX Principles That Increased Conversions by 340%",
         description: "A breakdown of the UX redesign process that transformed an e-commerce platform's performance.",
@@ -51,7 +52,7 @@ const blogs = [
         readTime: "13 min",
     },
     {
-        id: 6,
+        id: "6",
         category: "DEVOPS",
         title: "Microservices on Kubernetes: Production Guide",
         description: "Everything about deploying microservices with Istio, Prometheus, and zero-downtime strategies.",
@@ -61,35 +62,65 @@ const blogs = [
     },
 ]
 
-// Group blogs into pages of 3
-const totalPages = Math.ceil(blogs.length / 3)
-const PAGE_SLICES = Array.from({ length: totalPages }, (_, i) => blogs.slice(i * 3, i * 3 + 3))
+interface BlogCard {
+    id: string
+    category: string
+    title: string
+    description: string
+    image: string
+    slug: string
+    readTime: string
+}
 
 export function BlogsSection() {
     const scrollRef = useRef<HTMLDivElement>(null)
     const [page, setPage] = useState(0)
     const pageRef = useRef(0)
     const autoRef = useRef<ReturnType<typeof setInterval> | null>(null)
+    const [blogs, setBlogs] = useState<BlogCard[]>(fallbackBlogs)
+
+    useEffect(() => {
+        fetchVisibleBlogs()
+            .then((apiBlogs) => {
+                if (apiBlogs.length > 0) {
+                    const mapped: BlogCard[] = apiBlogs.map((b) => ({
+                        id: b._apiId || b.slug,
+                        category: b.category,
+                        title: b.title,
+                        description: b.excerpt,
+                        image: b.image,
+                        slug: b._apiId ? `/blogs?id=${b._apiId}` : `/blogs/${b.slug}`,
+                        readTime: b.readTime.replace(" read", ""),
+                    }))
+                    setBlogs(mapped.slice(0, 9))
+                }
+            })
+            .catch(() => {})
+    }, [])
+
+    const totalPages = Math.ceil(blogs.length / 3)
+    const pageSlices = Array.from({ length: totalPages }, (_, i) => blogs.slice(i * 3, i * 3 + 3))
 
     const goTo = useCallback((p: number) => {
         const el = scrollRef.current
         if (!el) return
-        el.scrollTo({ left: p * el.clientWidth, behavior: "smooth" })
-        setPage(p)
-        pageRef.current = p
-    }, [])
+        const tp = Math.ceil(blogs.length / 3)
+        const clamped = Math.min(p, tp - 1)
+        el.scrollTo({ left: clamped * el.clientWidth, behavior: "smooth" })
+        setPage(clamped)
+        pageRef.current = clamped
+    }, [blogs.length])
 
     const stepForward = useCallback(() => {
-        goTo((pageRef.current + 1) % totalPages)
-    }, [goTo])
+        const tp = Math.ceil(blogs.length / 3)
+        goTo((pageRef.current + 1) % tp)
+    }, [goTo, blogs.length])
 
-    // Auto-play
     useEffect(() => {
         autoRef.current = setInterval(stepForward, 5000)
         return () => { if (autoRef.current) clearInterval(autoRef.current) }
     }, [stepForward])
 
-    // Sync page on manual scroll
     useEffect(() => {
         const el = scrollRef.current
         if (!el) return
@@ -103,7 +134,8 @@ export function BlogsSection() {
     }, [])
 
     const handleArrow = (dir: 1 | -1) => {
-        const next = (pageRef.current + dir + totalPages) % totalPages
+        const tp = Math.ceil(blogs.length / 3)
+        const next = (pageRef.current + dir + tp) % tp
         goTo(next)
         if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 5000) }
     }
@@ -161,7 +193,7 @@ export function BlogsSection() {
                         className="flex overflow-x-auto pb-4"
                         style={{ scrollSnapType: "x mandatory", scrollbarWidth: "thin", scrollbarColor: "#10b981 #1f2937" }}
                     >
-                        {PAGE_SLICES.map((pageBlogs, pageIndex) => (
+                        {pageSlices.map((pageBlogs, pageIndex) => (
                             <div
                                 key={pageIndex}
                                 className="flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -228,7 +260,7 @@ export function BlogsSection() {
 
                     {/* Page Dots */}
                     <div className="flex justify-center gap-2 mt-8">
-                        {PAGE_SLICES.map((_, i) => (
+                        {pageSlices.map((_, i) => (
                             <button
                                 key={i}
                                 onClick={() => { goTo(i); if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 5000) } }}
