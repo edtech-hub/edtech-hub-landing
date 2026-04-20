@@ -57,20 +57,27 @@ export default function BlogPostClient({ post, relatedPosts }: { post: BlogPost;
 
           {hasContent ? (
             <div
-              className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-300 prose-p:leading-relaxed prose-a:text-emerald-400 prose-strong:text-white prose-code:text-emerald-400 prose-code:bg-gray-800/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800 prose-blockquote:border-emerald-500 prose-blockquote:text-gray-400 prose-li:text-gray-300 prose-img:rounded-xl"
+              className="prose prose-invert max-w-none 
+                prose-base:text-lg prose-p:text-lg prose-p:leading-8 prose-p:mb-6
+                prose-headings:text-white prose-h1:text-5xl prose-h1:mb-8 prose-h1:mt-12 prose-h1:font-bold
+                prose-h2:text-4xl prose-h2:mt-14 prose-h2:mb-6 prose-h2:font-bold prose-h2:border-b prose-h2:border-emerald-500/30 prose-h2:pb-4
+                prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:font-bold
+                prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3 prose-h4:font-semibold
+                prose-a:text-emerald-400 prose-a:font-semibold hover:prose-a:text-emerald-300
+                prose-strong:text-white prose-strong:font-bold
+                prose-em:text-gray-200 prose-em:italic
+                prose-code:text-emerald-300 prose-code:bg-gray-800/70 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:font-semibold prose-code:text-sm
+                prose-pre:bg-gray-900/80 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-xl prose-pre:p-6 prose-pre:shadow-lg prose-pre:overflow-x-auto
+                prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-gray-900/40 prose-blockquote:pl-6 prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-gray-300
+                prose-li:text-lg prose-li:leading-relaxed prose-li:mb-3 prose-li:text-gray-300
+                prose-ul:my-6 prose-ol:my-6
+                prose-img:rounded-2xl prose-img:shadow-xl prose-img:my-8 prose-img:border prose-img:border-gray-700
+                prose-hr:border-gray-700 prose-hr:my-8"
               dangerouslySetInnerHTML={{ __html: post.content! }}
             />
           ) : (
             <div className="space-y-8">
-              <p className="text-xl text-gray-300 leading-relaxed">{post.excerpt}</p>
-              <div className="p-8 rounded-2xl bg-gradient-to-br from-gray-900/80 to-gray-900/40 border border-emerald-500/20">
-                <p className="text-gray-400 text-center mb-4">Full article coming soon. Interested in this topic?</p>
-                <div className="flex justify-center">
-                  <Link href="/contact" className="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all">
-                    Let&apos;s Talk
-                  </Link>
-                </div>
-              </div>
+              <p className="text-2xl text-gray-300 leading-8 font-light">{post.excerpt}</p>
             </div>
           )}
         </motion.div>

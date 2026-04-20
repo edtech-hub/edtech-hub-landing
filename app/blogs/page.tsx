@@ -144,7 +144,7 @@ function BlogsPageInner() {
   const viewId = searchParams.get("id")
 
   const [activeTag, setActiveTag] = useState("All")
-  const [posts, setPosts] = useState<BlogPost[]>(SEED_POSTS)
+  const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
   const [singlePost, setSinglePost] = useState<BlogPost | null>(null)
   const [singleLoading, setSingleLoading] = useState(false)
@@ -159,9 +159,23 @@ function BlogsPageInner() {
           merged[0] = { ...merged[0], featured: true }
         }
         setPosts(merged)
+      } else {
+        // Only use SEED_POSTS if API returns nothing
+        let seedData = SEED_POSTS
+        if (seedData.length > 0 && !seedData.some((p) => p.featured)) {
+          seedData = [...seedData]
+          seedData[0] = { ...seedData[0], featured: true }
+        }
+        setPosts(seedData)
       }
     } catch {
-      // keep seed posts
+      // Only use seed posts on error
+      let seedData = SEED_POSTS
+      if (seedData.length > 0 && !seedData.some((p) => p.featured)) {
+        seedData = [...seedData]
+        seedData[0] = { ...seedData[0], featured: true }
+      }
+      setPosts(seedData)
     } finally {
       setLoading(false)
     }

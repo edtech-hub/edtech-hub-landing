@@ -106,7 +106,7 @@ export default function OurWorkPage() {
   return (
     <main className="min-h-screen bg-black pt-28 pb-20">
       {/* Header Section */}
-      <section className="max-w-[1400px] mx-auto px-6 mb-10">
+      <section className="w-full px-6 mb-10">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -130,7 +130,7 @@ export default function OurWorkPage() {
       </section>
 
       {/* Bento Grid Layout */}
-      <section className="max-w-[1400px] mx-auto px-6 mb-16">
+      <section className="w-full px-6 mb-16">
         <div className="flex flex-col gap-5">
 
           {/* Row 1: 2 Horizontal + 1 Vertical */}
@@ -567,7 +567,7 @@ export default function OurWorkPage() {
       </section>
 
       {/* Let's Connect Button */}
-      <section className="max-w-[1400px] mx-auto px-6 flex justify-center">
+      <section className="w-full px-6 flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

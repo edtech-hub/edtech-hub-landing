@@ -77,7 +77,8 @@ export function BlogsSection() {
     const [page, setPage] = useState(0)
     const pageRef = useRef(0)
     const autoRef = useRef<ReturnType<typeof setInterval> | null>(null)
-    const [blogs, setBlogs] = useState<BlogCard[]>(fallbackBlogs)
+    const [blogs, setBlogs] = useState<BlogCard[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         fetchVisibleBlogs()
@@ -93,9 +94,15 @@ export function BlogsSection() {
                         readTime: b.readTime.replace(" read", ""),
                     }))
                     setBlogs(mapped.slice(0, 9))
+                } else {
+                    setBlogs(fallbackBlogs)
                 }
+                setIsLoading(false)
             })
-            .catch(() => {})
+            .catch(() => {
+                setBlogs(fallbackBlogs)
+                setIsLoading(false)
+            })
     }, [])
 
     const totalPages = Math.ceil(blogs.length / 3)
@@ -140,6 +147,11 @@ export function BlogsSection() {
         if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = setInterval(stepForward, 5000) }
     }
 
+    // Hide entire section if no data and not loading from API
+    if (blogs.length === 0 && !isLoading) {
+        return null
+    }
+
     return (
         <section className="py-24 bg-[#070b12]">
             <div className="max-w-7xl mx-auto px-6">
@@ -165,8 +177,29 @@ export function BlogsSection() {
                     </p>
                 </motion.div>
 
+                {/* Loading Skeleton */}
+                {isLoading && (
+                    <div className="relative px-12">
+                        <div className="flex overflow-x-auto pb-4">
+                            <div className="flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {[1, 2, 3].map((i) => (
+                                    <div key={i} className="rounded-2xl overflow-hidden bg-gray-900/40 border border-gray-800/60 h-96 animate-pulse">
+                                        <div className="h-48 bg-gray-800/50" />
+                                        <div className="p-5 space-y-3">
+                                            <div className="h-4 bg-gray-800/50 rounded w-3/4" />
+                                            <div className="h-3 bg-gray-800/50 rounded w-full" />
+                                            <div className="h-3 bg-gray-800/50 rounded w-5/6" />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* Page-based Scroll Container */}
-                <div className="relative px-12">
+                {!isLoading && (
+                    <div className="relative px-12">
                     {/* Left Arrow */}
                     <button
                         onClick={() => handleArrow(-1)}
@@ -268,26 +301,29 @@ export function BlogsSection() {
                             />
                         ))}
                     </div>
-                </div>
+                    </div>
+                )}
 
                 {/* View All Button */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="text-center mt-12"
-                >
-                    <Link
-                        href="/blogs"
-                        className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-gray-700 text-white font-medium hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                {!isLoading && blogs.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="text-center mt-12"
                     >
-                        View All Articles
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </Link>
-                </motion.div>
+                        <Link
+                            href="/blogs"
+                            className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-gray-700 text-white font-medium hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                        >
+                            View All Articles
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </Link>
+                    </motion.div>
+                )}
             </div>
         </section>
     )
