@@ -270,9 +270,10 @@ export function BlogsSection() {
                                                     <h3 className="text-base font-semibold text-white mb-2 leading-snug group-hover:text-emerald-400 transition-colors line-clamp-2">
                                                         {blog.title}
                                                     </h3>
-                                                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 flex-1">
-                                                        {blog.description}
-                                                    </p>
+                                                    <div
+                                                        className="blog-content text-gray-500 text-sm leading-relaxed line-clamp-2 flex-1"
+                                                        dangerouslySetInnerHTML={{ __html: blog.description }}
+                                                    />
 
                                                     {/* Arrow button */}
                                                     <div className="mt-4 flex items-center justify-end">

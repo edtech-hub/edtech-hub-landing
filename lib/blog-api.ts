@@ -5,10 +5,9 @@ const API_BASE = "https://adminapi.edastra.in/api"
 interface APIBlog {
   _id: string
   title: string
+  subtitle?: string
   description: string
   image: string
-  authorName: string
-  authorCompany: string
   readingTime: string
   mainTag: string
   additionalTags: { name: string; isVisible: boolean }[]
@@ -29,10 +28,11 @@ function mapToBlogPost(blog: APIBlog): BlogPost {
   return {
     slug: toSlug(blog.title, blog._id),
     title: blog.title,
+    subtitle: blog.subtitle,
     excerpt: blog.description,
     date: blog.createdAt,
     readTime: blog.readingTime.includes("min") ? blog.readingTime : `${blog.readingTime} min read`,
-    author: blog.authorName,
+    author: "Ed-Astra Team",
     tags: blog.additionalTags
       .filter((t) => t.isVisible)
       .map((t) => t.name),

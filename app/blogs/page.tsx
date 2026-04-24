@@ -320,9 +320,10 @@ function BlogsPageInner() {
                         <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-emerald-400 transition-colors duration-300">
                           {featured.title}
                         </h2>
-                        <p className="text-gray-400 text-lg mb-6 leading-relaxed line-clamp-3">
-                          {featured.excerpt}
-                        </p>
+                        <div
+                          className="blog-content text-gray-400 text-lg mb-6 leading-relaxed line-clamp-3"
+                          dangerouslySetInnerHTML={{ __html: featured.excerpt }}
+                        />
                         <div className="flex items-center gap-6 text-sm text-gray-500">
                           <span className="flex items-center gap-2">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -387,9 +388,10 @@ function BlogsPageInner() {
                         <h3 className="text-xl font-bold text-white mb-3 leading-tight group-hover:text-emerald-400 transition-colors line-clamp-2 flex-shrink-0">
                           {post.title}
                         </h3>
-                        <p className="text-gray-500 text-sm mb-6 line-clamp-3 leading-relaxed flex-1">
-                          {post.excerpt}
-                        </p>
+                        <div
+                          className="blog-content text-gray-500 text-sm mb-6 line-clamp-3 leading-relaxed flex-1"
+                          dangerouslySetInnerHTML={{ __html: post.excerpt }}
+                        />
 
                         <div className="flex items-center justify-between pt-4 border-t border-gray-800/60">
                           <div className="flex items-center gap-4 text-xs text-gray-500">

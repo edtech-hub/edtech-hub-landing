@@ -31,12 +31,15 @@ export default function BlogPostClient({ post, relatedPosts }: { post: BlogPost;
                 <span className="text-gray-400 text-sm">{post.readTime}</span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">{post.title}</h1>
+              {post.subtitle && (
+                <p className="text-lg text-gray-400 leading-relaxed mb-4">{post.subtitle}</p>
+              )}
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
                   <span className="text-emerald-400 font-bold text-sm">EA</span>
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold">{post.author}</p>
+                  <p className="text-white text-sm font-semibold">Ed-Astra Team</p>
                   <p className="text-gray-500 text-xs">Ed-Astra Engineering</p>
                 </div>
               </div>
@@ -77,7 +80,10 @@ export default function BlogPostClient({ post, relatedPosts }: { post: BlogPost;
             />
           ) : (
             <div className="space-y-8">
-              <p className="text-2xl text-gray-300 leading-8 font-light">{post.excerpt}</p>
+              <div
+                className="blog-content prose prose-invert max-w-none text-2xl text-gray-300 leading-8 font-light"
+                dangerouslySetInnerHTML={{ __html: post.excerpt }}
+              />
             </div>
           )}
         </motion.div>

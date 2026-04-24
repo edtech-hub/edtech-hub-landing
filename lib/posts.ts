@@ -2,6 +2,7 @@
 export interface BlogPost {
   slug: string
   title: string
+  subtitle?: string
   excerpt: string
   content?: string
   date: string

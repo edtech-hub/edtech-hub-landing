@@ -45,6 +45,30 @@ html {
   }
 }
 
+/* Blog content HTML rendering */
+.blog-content p {
+  margin-bottom: 1rem;
+}
+
+.blog-content strong {
+  font-weight: 700;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-content a {
+  color: #10b981;
+  text-decoration: underline;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
