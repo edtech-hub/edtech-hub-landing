@@ -13,7 +13,6 @@ const TESTIMONIALS = [
     name: "Karthik",
     role: "Founder",
     company: "WeddingClickz",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
     cardImage: "/assets/weddingclickzproject.png",
     cardTitle: "WeddingClickz — Premium Studio Website",
     cardTagline: "Every frame tells a story. Every click, a memory.",
@@ -28,7 +27,6 @@ const TESTIMONIALS = [
     name: "Aditya",
     role: "Founder",
     company: "Flow Hydration",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
     cardImage: "/assets/flowproject.jpg",
     cardTitle: "Flow Hydration — Website",
     cardTagline: "One site. Every sip. Zero compromise.",
@@ -43,7 +41,6 @@ const TESTIMONIALS = [
     name: "Trishar",
     role: "Founder",
     company: "Ticgetz",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
     cardImage: "/assets/ticgetz_project.jpg",
     cardTitle: "Ticgetz — Event Booking Platform",
     cardTagline: "Browse, book, and go — it's all here.",
@@ -58,7 +55,6 @@ const TESTIMONIALS = [
     name: "Yashas",
     role: "Co-Founder",
     company: "WeddingClickz",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face",
     cardImage: "/assets/weddingclickztestimonials.jpg",
     cardTitle: "WeddingClickz — Quotation Tool",
     cardTagline: "From inquiry to quote — painlessly simple.",
@@ -73,7 +69,6 @@ const TESTIMONIALS = [
     name: "Zeon",
     role: "Founder",
     company: "Reno Research",
-    image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=200&h=200&fit=crop&crop=face",
     cardImage: "/assets/renoproject.png",
     cardTitle: "Reno Research — Website",
     cardTagline: "Less stress, better spaces — renovation done right in Singapore.",
@@ -323,8 +318,20 @@ export function TestimonialsSection() {
                 transition={{ duration: 0.45, delay: 0.08 }}
                 style={{ display: "flex", alignItems: "center", gap: 12 }}
               >
-                <div style={{ width: 42, height: 42, borderRadius: "50%", overflow: "hidden", border: `2px solid ${EMERALD_DIM}0.32)`, flexShrink: 0 }}>
-                  <ImageWithFallback src={t.image} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <div style={{ 
+                  width: 42, 
+                  height: 42, 
+                  borderRadius: "50%", 
+                  background: `linear-gradient(135deg, ${EMERALD}, ${TEAL})`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  flexShrink: 0 
+                }}>
+                  {t.name[0]}
                 </div>
                 <div>
                   <p style={{ fontSize: 13, fontWeight: 700, color: "#fff", margin: 0 }}>{t.name}</p>
