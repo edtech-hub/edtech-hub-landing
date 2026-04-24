@@ -23,6 +23,7 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://edastra.in"),
   title: {
     default: "Ed-Astra | AI-Powered Web & Mobile App Development",
     template: "%s | Ed-Astra",
@@ -49,19 +50,27 @@ export const metadata: Metadata = {
     title: "Ed-Astra | AI-Powered Web & Mobile App Development",
     description:
       "Build scalable web and mobile apps faster with Ed-Astra's AI-powered development process.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ed-Astra — AI-Powered Web & Mobile App Development",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ed-Astra | AI-Powered Web & Mobile App Development",
     description: "Build scalable web and mobile apps faster with Ed-Astra.",
+    images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
   verification: {
     google: "b6uPOYbZRZwEMz_ag1IIsnIXCMaSLdVUdF13kA7AJ2s",
-    // Replace with actual codes from Google Search Console and Bing Webmaster Tools
-    other: { "msvalidate.01": "YOUR_BING_VERIFICATION_CODE" },
   },
   alternates: {
+    canonical: "https://edastra.in",
     types: { "application/rss+xml": "https://edastra.in/feed.xml" },
   },
 }

@@ -198,71 +198,25 @@ export default function Hero() {
       {/* Canvas animation */}
       <HeroCanvas />
 
-      {/* Gradient blobs */}
+      {/* Gradient blobs — softer, pulled inward */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-40 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-teal-600/10 rounded-full blur-3xl" />
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage:
-              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <div className="absolute top-1/3 -left-20 w-[600px] h-[600px] bg-emerald-600/[0.07] rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/3 -right-20 w-[600px] h-[600px] bg-teal-600/[0.06] rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-32 pb-24">
-        <div className="text-center max-w-5xl mx-auto">
-
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-medium mb-8 tracking-wide"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            AI-Powered Development Agency
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold text-white leading-[1.08] tracking-tight mb-7"
-          >
-            Empowering the ideas that{" "}
-            <span className="relative inline-block">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-300">
-                shape your vision
-              </span>
-              <span className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-emerald-400/0 via-emerald-400/60 to-emerald-400/0" />
-            </span>
-          </motion.h1>
-
-          {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.22 }}
-            className="max-w-2xl mx-auto text-base sm:text-lg text-gray-400 mb-10 leading-relaxed"
-          >
-            We combine deep technical expertise with AI-accelerated workflows to ship production-ready mobile apps, web applications and scalable software —{" "}
-            <span className="text-emerald-400 font-medium">in weeks, not months.</span>
-          </motion.p>
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-36 pb-28">
+        <div className="text-center max-w-4xl mx-auto">
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.34 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center mb-12"
           >
             <button
               onClick={openModal}
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 text-sm rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold transition-all duration-200 shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 text-sm rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5"
             >
               Book Free Consultation
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,12 +225,46 @@ export default function Hero() {
             </button>
             <Link
               href="/our-work"
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 text-sm rounded-xl border border-gray-700 hover:border-emerald-500/50 text-gray-300 hover:text-white font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-500/5"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm rounded-full border border-white/10 hover:border-emerald-500/40 text-gray-300 hover:text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/[0.03]"
             >
               View Our Work
             </Link>
           </motion.div>
 
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="text-4xl sm:text-5xl lg:text-[66px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
+          >
+            Building High Performing
+            <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-300">
+              Websites & Apps
+            </span>
+            <br />
+            <span className="text-gray-200">That Power Your Business</span>
+          </motion.h1>
+
+          {/* Divider accent */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="mx-auto w-16 h-px bg-gradient-to-r from-emerald-400/0 via-emerald-400/60 to-emerald-400/0 mb-6"
+          />
+
+          {/* Subtext */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="max-w-xl mx-auto text-base sm:text-lg text-gray-400/90 leading-relaxed"
+          >
+            Deep technical expertise meets AI-accelerated workflows — production-ready apps{" "}
+            <span className="text-emerald-400 font-medium">in weeks, not months.</span>
+          </motion.p>
 
         </div>
       </div>
@@ -284,14 +272,14 @@ export default function Hero() {
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10"
+        animate={{ opacity: 0.5 }}
+        transition={{ delay: 1.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10"
       >
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-0.5 h-6 bg-gradient-to-b from-gray-600 to-transparent"
+          animate={{ y: [0, 5, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="w-px h-7 bg-gradient-to-b from-gray-500 to-transparent"
         />
       </motion.div>
     </section>

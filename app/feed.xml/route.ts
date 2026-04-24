@@ -16,7 +16,7 @@ export function GET() {
       <pubDate>${new Date(p.date).toUTCString()}</pubDate>
       <category>${esc(p.category)}</category>
       ${p.tags.map((t) => `<category>${esc(t)}</category>`).join("\n      ")}
-      <author>contact@edastra.in (${esc(p.author)})</author>
+      <author>shreya.anand@edastra.in (${esc(p.author)})</author>
     </item>`)
     .join("\n")
 

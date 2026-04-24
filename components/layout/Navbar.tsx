@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { useConsultation } from "@/components/ui/ConsultationProvider"
@@ -46,9 +47,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl font-bold text-white tracking-tight">
-              Ed-Astra
-            </span>
+            <Image src="/logo.png" alt="Ed-Astra" width={140} height={24} className="h-6 w-auto" priority />
           </Link>
 
           {/* Desktop Nav */}

@@ -42,11 +42,11 @@ export default function PrivacyPolicyPage() {
             },
             {
               title: "7. Your Rights",
-              content: "You have the right to access, correct, or delete your personal data. You may opt-out of marketing communications at any time. To exercise your rights, contact us at contact@edastra.in.",
+              content: "You have the right to access, correct, or delete your personal data. You may opt-out of marketing communications at any time. To exercise your rights, contact us at shreya.anand@edastra.in.",
             },
             {
               title: "8. Contact Us",
-              content: "If you have questions about this Privacy Policy, please contact us at: contact@edastra.in",
+              content: "If you have questions about this Privacy Policy, please contact us at: shreya.anand@edastra.in",
             },
           ].map((section) => (
             <section key={section.title}>

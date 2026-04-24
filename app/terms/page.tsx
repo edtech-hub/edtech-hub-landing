@@ -50,7 +50,7 @@ export default function TermsPage() {
             },
             {
               title: "9. Contact",
-              content: "For questions about these Terms, contact us at: contact@edastra.in",
+              content: "For questions about these Terms, contact us at: shreya.anand@edastra.in",
             },
           ].map((section) => (
             <section key={section.title}>

@@ -336,7 +336,7 @@ export default function Contact() {
 
                 {formError && (
                   <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 text-xs">
-                    Something went wrong. Email us at contact@edastra.in
+                    Something went wrong. Email us at shreya.anand@edastra.in
                   </div>
                 )}
 

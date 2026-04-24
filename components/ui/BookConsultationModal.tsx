@@ -411,7 +411,7 @@ export default function BookConsultationModal({ isOpen, onClose }: Props) {
 
                     {status === "error" && (
                       <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-base">
-                        Something went wrong. Email us at contact@edastra.in
+                        Something went wrong. Email us at shreya.anand@edastra.in
                       </div>
                     )}
 
