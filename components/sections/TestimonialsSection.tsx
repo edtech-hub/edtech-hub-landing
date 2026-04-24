@@ -318,10 +318,10 @@ export function TestimonialsSection() {
                 transition={{ duration: 0.45, delay: 0.08 }}
                 style={{ display: "flex", alignItems: "center", gap: 12 }}
               >
-                <div style={{ 
-                  width: 42, 
-                  height: 42, 
-                  borderRadius: "50%", 
+                <div style={{
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50%",
                   background: `linear-gradient(135deg, ${EMERALD}, ${TEAL})`,
                   display: "flex",
                   alignItems: "center",
@@ -329,7 +329,7 @@ export function TestimonialsSection() {
                   color: "#fff",
                   fontWeight: 700,
                   fontSize: 16,
-                  flexShrink: 0 
+                  flexShrink: 0
                 }}>
                   {t.name[0]}
                 </div>
